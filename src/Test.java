@@ -4,9 +4,9 @@
 public final class Test {
     private CustomerDAO customerDao = CustomerDAO.getInstance();
     private ManagerDAO managerDao = ManagerDAO.getInstance();
+    BankTimer timer = BankTimer.getInstance();
 
     public Test() {
-
     }
 
     public void testCreateCustomer() {
@@ -29,10 +29,15 @@ public final class Test {
         System.out.println(m.getID() + " " + m.getName() + " " + m.getType() + " " + m.getPassword());
     }
 
+    public void testTimer() {
+        new Thread(timer).start();  // timer 会每隔一秒输出当前时间和时间戳
+    }
+
     public void testAll() {
         testCreateCustomer();
         testQueryCustomer();
         testCreateManager();
         testQueryManager();
+        testTimer();
     }
 }

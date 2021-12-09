@@ -12,17 +12,13 @@ public class ManagerDAO extends UserDAO {
     private static ManagerDAO managerDao = new ManagerDAO();
 
     private ManagerDAO() {
-        setFileProxy();
+        setFileProxy(new DatabaseFileProxy(path + "managers.csv"));
         userList = readFromDatabase();
         maxID = recoverMaxIdFromDatabase();
     }
 
     public static ManagerDAO getInstance() {
         return managerDao;
-    }
-
-    public void setFileProxy() {
-        fileProxy = new DatabaseFileProxy(path + "managers.csv");
     }
 
     @Override

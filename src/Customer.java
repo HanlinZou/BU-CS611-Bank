@@ -17,7 +17,7 @@ public final class Customer extends User {
      */
     public Customer(String name, String password) {
         super("customer", name, password);
-        loanArrayList = new ArrayList<>();
+        loanArrayList = new ArrayList<>();  // creates a new loan list
         setID(customerDao.getNewID());  // generates a new id
         customerDao.addToDatabase(this);   // add to database
     }
@@ -31,7 +31,7 @@ public final class Customer extends User {
      */
     public Customer(String id, String name, String password) {
         super("customer", id, name, password);
-        // TODO we have to load loan array from database.
+        // TODO we have to load loan list from database.
         loanArrayList = new ArrayList<>();
     }
 

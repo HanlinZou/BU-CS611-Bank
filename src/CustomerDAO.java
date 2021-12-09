@@ -12,17 +12,13 @@ public final class CustomerDAO extends UserDAO {
     private static CustomerDAO customerDao = new CustomerDAO();
 
     private CustomerDAO() {
-        setFileProxy();
+        setFileProxy(new DatabaseFileProxy(path + "customers.csv"));
         userList = readFromDatabase();
         maxID = recoverMaxIdFromDatabase();
     }
 
     public static CustomerDAO getInstance() {
         return customerDao;
-    }
-
-    public void setFileProxy() {
-        fileProxy = new DatabaseFileProxy(path + "customers.csv");
     }
 
     @Override

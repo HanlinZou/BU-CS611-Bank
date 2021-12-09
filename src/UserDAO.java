@@ -10,11 +10,10 @@ import java.io.File;
  */
 public abstract class UserDAO {
     protected String path = System.getProperty("user.dir") + "/src/database/";
-    protected DatabaseFileProxy fileProxy;
     protected int maxID = 0;
     protected List<User> userList;
+    protected DatabaseFileProxy fileProxy;
 
-    public abstract void setFileProxy();
     public abstract List<User> readFromDatabase();
 
     protected int recoverMaxIdFromDatabase() {
@@ -24,6 +23,10 @@ public abstract class UserDAO {
             if (curID > id) id = curID;
         }
         return id;
+    }
+
+    protected void setFileProxy(DatabaseFileProxy fileProxy) {
+        this.fileProxy = fileProxy;
     }
 
     public String getNewID() {
