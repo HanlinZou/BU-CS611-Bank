@@ -147,7 +147,6 @@ public class Account {
 
     /**
      * Deposit money into an account. Checking account takes 3% fee.
-     * Accounts with high balance receive 0.3% interest.
      */
     public void deposit(){
         Scanner sc = new Scanner(System.in);
@@ -168,8 +167,6 @@ public class Account {
                 setCNYBalance(Double.parseDouble(choice));
                 if(isCheckingAcc)
                     setCNYBalance(0.97 * getCNYBalance());
-                else if(getCNYBalance() > 30000)
-                    setCNYBalance(1.003 * getCNYBalance());
                 System.out.println("Deposit successful. You current have " + getCNYBalance() + " CNY.");
                 break;
             case "2":
@@ -179,8 +176,6 @@ public class Account {
                 setUSDBalance(Double.parseDouble(choice));
                 if(isCheckingAcc)
                     setUSDBalance(0.97 * getUSDBalance());
-                else if(getUSDBalance() > 5000)
-                    setUSDBalance(1.003 * getUSDBalance());
                 System.out.println("Deposit successful. You current have " + getUSDBalance() + " USD.");
                 break;
             case "3":
@@ -190,8 +185,6 @@ public class Account {
                 setHKDBalance(Double.parseDouble(choice));
                 if(isCheckingAcc)
                     setHKDBalance(0.97 * getHKDBalance());
-                else if(getHKDBalance() > 35000)
-                    setHKDBalance(1.003 * getHKDBalance());
                 System.out.println("Deposit successful. You current have " + getHKDBalance() + " HKD.");
         }
     }
