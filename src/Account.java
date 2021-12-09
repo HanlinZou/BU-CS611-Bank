@@ -28,22 +28,21 @@ public class Account {
         return CNYBalance.getAmount();
     }
 
-    /** Using CNY to purchase USD
-     *
+    /** Using CNY to purchase USD, 5% fee
      * @param USDAmt Amount of USD customer wants to purchase
      */
     public void CNY2USD(double USDAmt){
         setUSDBalance(USDAmt);
-        setCNYBalance(-1.0 * USDAmt * USDBalance.getExchangeRate2CNY());
+        setCNYBalance(-1.05 * USDAmt * USDBalance.getExchangeRate2CNY());
     }
 
     /**
-     * Using CNY to purchase HKD
+     * Using CNY to purchase HKD, 5% fee
      * @param HKDAmt Amount of HKD customer wants to purchase
      */
     public void CNY2HKD(double HKDAmt){
         setHKDBalance(HKDAmt);
-        setCNYBalance(-1.0 * HKDAmt * HKDBalance.getExchangeRate2CNY());
+        setCNYBalance(-1.05 * HKDAmt * HKDBalance.getExchangeRate2CNY());
     }
 
     public void setUSDBalance(double amt){
@@ -55,21 +54,21 @@ public class Account {
     }
 
     /**
-     * Using USD to purchase CNY
+     * Using USD to purchase CNY, 5% fee
      * @param CNYAmt Amount of CNY customer wants to purchase
      */
     public void USD2CNY(double CNYAmt){
         setCNYBalance(CNYAmt);
-        setUSDBalance(-1.0 * CNYAmt * CNYBalance.getExchangeRate2USD());
+        setUSDBalance(-1.05 * CNYAmt * CNYBalance.getExchangeRate2USD());
     }
 
     /**
-     * Using USD to purchase HKD
+     * Using USD to purchase HKD, 5% fee
      * @param HKDAmt Amount of HKD customer wants to purchase
      */
     public void USD2HKD(double HKDAmt){
         setHKDBalance(HKDAmt);
-        setUSDBalance(-1.0 * HKDAmt * HKDBalance.getExchangeRate2USD());
+        setUSDBalance(-1.05 * HKDAmt * HKDBalance.getExchangeRate2USD());
     }
 
     public void setHKDBalance(double amt){
@@ -81,23 +80,26 @@ public class Account {
     }
 
     /**
-     * Using HKD to purchase CNY
+     * Using HKD to purchase CNY, 5% fee
      * @param CNYAmt Amount of CNY customer wants to purchase
      */
     public void HKD2CNY(double CNYAmt){
         setCNYBalance(CNYAmt);
-        setHKDBalance(-1.0 * CNYAmt * CNYBalance.getExchangeRate2HKD());
+        setHKDBalance(-1.05 * CNYAmt * CNYBalance.getExchangeRate2HKD());
     }
 
     /**
-     * Using HKD to purchase USD
+     * Using HKD to purchase USD, 5% fee
      * @param USDAmt Amount of USD customer wants to purchase
      */
     public void HKD2USD(double USDAmt){
         setHKDBalance(USDAmt);
-        setUSDBalance(-1.0 * USDAmt * USDBalance.getExchangeRate2HKD());
+        setUSDBalance(-1.05 * USDAmt * USDBalance.getExchangeRate2HKD());
     }
 
+    /**
+     * Withdraw from an account, 3% fee
+     */
     public void withdraw(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Which currency you want to withdraw: 1. CNY 2. USD 3. HKD");
@@ -112,8 +114,8 @@ public class Account {
                 System.out.println("You current have " + getCNYBalance() + " CNY.");
                 System.out.print("How much you want to withdraw: ");
                 choice = sc.next();
-                if(Integer.parseInt(choice) <= getCNYBalance()) {
-                    setCNYBalance(-1.0 * Double.parseDouble(choice));
+                if(Double.parseDouble(choice) * 1.03 <= getCNYBalance()) {
+                    setCNYBalance(-1.03 * Double.parseDouble(choice));
                     System.out.println("Withdraw successful. You current have " + getCNYBalance() + " CNY.");
                 }
                 else
@@ -123,8 +125,8 @@ public class Account {
                 System.out.println("You current have " + getUSDBalance() + " USD.");
                 System.out.print("How much you want to withdraw: ");
                 choice = sc.next();
-                if(Integer.parseInt(choice) <= getUSDBalance()) {
-                    setUSDBalance(-1.0 * Double.parseDouble(choice));
+                if(Double.parseDouble(choice) * 1.03 <= getUSDBalance()) {
+                    setUSDBalance(-1.03 * Double.parseDouble(choice));
                     System.out.println("Withdraw successful. You current have " + getUSDBalance() + " USD.");
                 }
                 else
@@ -134,8 +136,8 @@ public class Account {
                 System.out.println("You current have " + getHKDBalance() + " HKD.");
                 System.out.print("How much you want to withdraw: ");
                 choice = sc.next();
-                if(Integer.parseInt(choice) <= getHKDBalance()) {
-                    setHKDBalance(-1.0 * Double.parseDouble(choice));
+                if(Double.parseDouble(choice) * 1.03 <= getHKDBalance()) {
+                    setHKDBalance(-1.03 * Double.parseDouble(choice));
                     System.out.println("Withdraw successful. You current have " + getHKDBalance() + " HKD.");
                 }
                 else
@@ -143,6 +145,10 @@ public class Account {
         }
     }
 
+    /**
+     * Deposit money into an account. Checking account takes 3% fee.
+     * Accounts with high balance receive 0.3% interest.
+     */
     public void deposit(){
         Scanner sc = new Scanner(System.in);
         System.out.print("Which currency you want to withdraw: 1. CNY 2. USD 3. HKD");
@@ -152,12 +158,18 @@ public class Account {
             choice = sc.next();
         }
 
+        boolean isCheckingAcc = type.equals("Checking");
+
         switch (choice){
             case "1":
                 System.out.println("You current have " + getCNYBalance() + " CNY.");
                 System.out.print("How much you want to deposit: ");
                 choice = sc.next();
                 setCNYBalance(Double.parseDouble(choice));
+                if(isCheckingAcc)
+                    setCNYBalance(0.97 * getCNYBalance());
+                else if(getCNYBalance() > 30000)
+                    setCNYBalance(1.003 * getCNYBalance());
                 System.out.println("Deposit successful. You current have " + getCNYBalance() + " CNY.");
                 break;
             case "2":
@@ -165,6 +177,10 @@ public class Account {
                 System.out.print("How much you want to withdraw: ");
                 choice = sc.next();
                 setUSDBalance(Double.parseDouble(choice));
+                if(isCheckingAcc)
+                    setUSDBalance(0.97 * getUSDBalance());
+                else if(getUSDBalance() > 5000)
+                    setUSDBalance(1.003 * getUSDBalance());
                 System.out.println("Deposit successful. You current have " + getUSDBalance() + " USD.");
                 break;
             case "3":
@@ -172,6 +188,10 @@ public class Account {
                 System.out.print("How much you want to withdraw: ");
                 choice = sc.next();
                 setHKDBalance(Double.parseDouble(choice));
+                if(isCheckingAcc)
+                    setHKDBalance(0.97 * getHKDBalance());
+                else if(getHKDBalance() > 35000)
+                    setHKDBalance(1.003 * getHKDBalance());
                 System.out.println("Deposit successful. You current have " + getHKDBalance() + " HKD.");
         }
     }
