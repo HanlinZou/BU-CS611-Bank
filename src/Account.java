@@ -33,7 +33,10 @@ public class Account {
      */
     public void CNY2USD(double USDAmt){
         setUSDBalance(USDAmt);
-        setCNYBalance(-1.05 * USDAmt * USDBalance.getExchangeRate2CNY());
+        if(getType().equals("Manager"))
+            setCNYBalance(-1.0 * USDAmt * USDBalance.getExchangeRate2CNY());
+        else
+            setCNYBalance(-1.05 * USDAmt * USDBalance.getExchangeRate2CNY());
     }
 
     /**
@@ -42,7 +45,10 @@ public class Account {
      */
     public void CNY2HKD(double HKDAmt){
         setHKDBalance(HKDAmt);
-        setCNYBalance(-1.05 * HKDAmt * HKDBalance.getExchangeRate2CNY());
+        if(getType().equals("Manager"))
+            setCNYBalance(-1.0 * HKDAmt * HKDBalance.getExchangeRate2CNY());
+        else
+            setCNYBalance(-1.05 * HKDAmt * HKDBalance.getExchangeRate2CNY());
     }
 
     public void setUSDBalance(double amt){
@@ -59,7 +65,10 @@ public class Account {
      */
     public void USD2CNY(double CNYAmt){
         setCNYBalance(CNYAmt);
-        setUSDBalance(-1.05 * CNYAmt * CNYBalance.getExchangeRate2USD());
+        if(getType().equals("Manager"))
+            setUSDBalance(-1.0 * CNYAmt * CNYBalance.getExchangeRate2USD());
+        else
+            setUSDBalance(-1.05 * CNYAmt * CNYBalance.getExchangeRate2USD());
     }
 
     /**
@@ -68,7 +77,10 @@ public class Account {
      */
     public void USD2HKD(double HKDAmt){
         setHKDBalance(HKDAmt);
-        setUSDBalance(-1.05 * HKDAmt * HKDBalance.getExchangeRate2USD());
+        if(getType().equals("Manager"))
+            setUSDBalance(-1.0 * HKDAmt * HKDBalance.getExchangeRate2USD());
+        else
+            setUSDBalance(-1.05 * HKDAmt * HKDBalance.getExchangeRate2USD());
     }
 
     public void setHKDBalance(double amt){
@@ -85,7 +97,10 @@ public class Account {
      */
     public void HKD2CNY(double CNYAmt){
         setCNYBalance(CNYAmt);
-        setHKDBalance(-1.05 * CNYAmt * CNYBalance.getExchangeRate2HKD());
+        if(getType().equals("Manager"))
+            setHKDBalance(-1.0 * CNYAmt * CNYBalance.getExchangeRate2HKD());
+        else
+            setHKDBalance(-1.05 * CNYAmt * CNYBalance.getExchangeRate2HKD());
     }
 
     /**
@@ -93,8 +108,11 @@ public class Account {
      * @param USDAmt Amount of USD customer wants to purchase
      */
     public void HKD2USD(double USDAmt){
-        setHKDBalance(USDAmt);
-        setUSDBalance(-1.05 * USDAmt * USDBalance.getExchangeRate2HKD());
+        setUSDBalance(USDAmt);
+        if(getType().equals("Manager"))
+            setHKDBalance(-1.0 * USDAmt * USDBalance.getExchangeRate2HKD());
+        else
+            setHKDBalance(-1.05 * USDAmt * USDBalance.getExchangeRate2HKD());
     }
 
     /**
@@ -157,7 +175,7 @@ public class Account {
             choice = sc.next();
         }
 
-        boolean isCheckingAcc = type.equals("Checking");
+        boolean isCheckingAcc = getType().equals("Checking");
 
         switch (choice){
             case "1":
