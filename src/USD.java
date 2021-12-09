@@ -2,8 +2,8 @@ public class USD extends Currency{
 
     USD(){}
 
-    USD(String name, double amt){
-        setName(name);
+    USD(double amt){
+        setName("United States Dollar");
         setAmount(amt);
         setExchangeRate2CNY(6.3444);
         setExchangeRate2USD(1.0);

@@ -2,8 +2,8 @@ public class CNY extends Currency{
 
     CNY(){}
 
-    CNY(String name, double amt){
-        setName(name);
+    CNY(double amt){
+        setName("Chinese Yuan");
         setAmount(amt);
         setExchangeRate2CNY(1.00);
         setExchangeRate2USD(0.1576);

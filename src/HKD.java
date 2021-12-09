@@ -2,8 +2,8 @@ public class HKD extends Currency{
 
     HKD(){}
 
-    HKD(String name, double amt){
-        setName(name);
+    HKD(double amt){
+        setName("Hong Kong Dollar");
         setAmount(amt);
         setExchangeRate2CNY(0.8135);
         setExchangeRate2USD(0.1282);
