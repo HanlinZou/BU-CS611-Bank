@@ -1,24 +1,38 @@
 import java.util.ArrayList;
 
-public class Customer {
-    private String name;
+public final class Customer extends User {
     private ArrayList<Loan> loanArrayList;
     private Saving savingAcc;
     private Checking checkingAcc;
+    private CustomerDAO customerDao = CustomerDAO.getInstance();
 
-    Customer(){}
+    public Customer() {
+    }
 
-    Customer(String name){
-        setName(name);
+    /**
+     * Creates a new customer and add it to database.
+     *
+     * @param name Customer name.
+     * @param password Customer password.
+     */
+    public Customer(String name, String password) {
+        super("customer", name, password);
         loanArrayList = new ArrayList<>();
+        setID(customerDao.getNewID());  // generates a new id
+        customerDao.addToDatabase(this);   // add to database
     }
 
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public String getName(){
-        return name;
+    /**
+     * Loads a customer from database.
+     *
+     * @param id Customer ID.
+     * @param name Customer name.
+     * @param password Customer password.
+     */
+    public Customer(String id, String name, String password) {
+        super("customer", id, name, password);
+        // TODO we have to load loan array from database.
+        loanArrayList = new ArrayList<>();
     }
 
     /**
