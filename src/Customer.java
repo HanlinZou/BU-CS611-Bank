@@ -1,9 +1,11 @@
 import java.util.ArrayList;
+import java.util.Scanner;
 
 public final class Customer extends User {
     private ArrayList<Loan> loanArrayList;
     private Saving savingAcc;
     private Checking checkingAcc;
+    private StockAccount stockAccount = null;
     private CustomerDao customerDao = CustomerDao.getInstance();
 
     public Customer() {
@@ -78,4 +80,35 @@ public final class Customer extends User {
         else
             System.out.println("You don't have any USD. I can't let you close your account.");
     }
+
+    public void accountInquiry(){
+        if(savingAcc != null)
+            System.out.println("Saving Account Balance: \nUSD: " + savingAcc.getUSDBalance() +
+                "\nCNY: " + savingAcc.getCNYBalance() + "\nHKD: " + savingAcc.getHKDBalance());
+        if(checkingAcc != null)
+            System.out.println("Saving Account Balance: \nUSD: " + checkingAcc.getUSDBalance() +
+                "\nCNY: " + checkingAcc.getCNYBalance() + "\nHKD: " + checkingAcc.getHKDBalance());
+    }
+
+    //TODO: read data to provide transaction history
+
+    public void openStockAccount() {
+        if (savingAcc.getUSDBalance() >= 5000.0){
+            Scanner sc = new Scanner(System.in);
+            System.out.println("Min: 1000.0 Max: " + (savingAcc.getUSDBalance() - 2500.0) +
+                " How much you want to deposit into your stocking account: ");
+            String choice = sc.next();
+            while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 1000.0 ||
+                Double.parseDouble(choice) > savingAcc.getUSDBalance() - 2500.0){
+                System.out.print("Your selection is invalid, try again: ");
+                choice = sc.next();
+            }
+            stockAccount = new StockAccount(Double.parseDouble(choice));
+        }
+        else
+            System.out.println("You need to have at least $5000.0 in Saving to open a stock account.");
+    }
+
+    public void depositStockAccount(){}
+    public void withdrawStockAccount(){}
 }

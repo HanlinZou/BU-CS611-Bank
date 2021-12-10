@@ -26,4 +26,14 @@ public final class Manager extends User {
     public Manager(String id, String name, String password) {
         super("manager", id, name, password);
     }
+
+    //TODO: check information of a specific customer
+
+    //TODO: view daily report on transaction
+
+    //TODO: add new stock
+
+    //TODO: adjust stock price
+
+    //TODO: add new loans
 }

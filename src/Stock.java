@@ -1,5 +1,5 @@
 public final class Stock extends BankObject {
-    private int price;
+    private double price;
     private StockDao stockDao = StockDao.getInstance();
 
     /**
@@ -9,7 +9,7 @@ public final class Stock extends BankObject {
      * @param name Stock name.
      * @param price Stock price.
      */
-    public Stock(String id, String name, int price) {
+    public Stock(String id, String name, double price) {
         super(id, name);
         setPrice(price);
     }
@@ -20,7 +20,7 @@ public final class Stock extends BankObject {
      * @param name Stock name.
      * @param price Stock price.
      */
-    public Stock(String name, int price) {
+    public Stock(String name, double price) {
         super(name);
         setPrice(price);
         setID(stockDao.getNewId());  // generates a new id
@@ -30,9 +30,9 @@ public final class Stock extends BankObject {
     /**
      * Sets price for this stock.
      *
-     * @param id Stock's price.
+     * @param price Stock's price.
      */
-    public void setPrice(int price){
+    public void setPrice(double price){
         this.price = price;
     }
 
@@ -41,7 +41,7 @@ public final class Stock extends BankObject {
      *
      * @return Stock's price.
      */
-    public int getPrice(){
+    public double getPrice(){
         return price;
     }
 
