@@ -4,7 +4,7 @@ public final class Customer extends User {
     private ArrayList<Loan> loanArrayList;
     private Saving savingAcc;
     private Checking checkingAcc;
-    private CustomerDAO customerDao = CustomerDAO.getInstance();
+    private CustomerDao customerDao = CustomerDao.getInstance();
 
     public Customer() {
     }

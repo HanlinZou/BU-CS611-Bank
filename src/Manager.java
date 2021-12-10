@@ -1,5 +1,5 @@
 public final class Manager extends User {
-    private ManagerDAO managerDao = ManagerDAO.getInstance();
+    private ManagerDao managerDao = ManagerDao.getInstance();
 
     public Manager() {
     }

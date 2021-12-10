@@ -2,8 +2,8 @@
  * 测试样例，提交的时候可以删掉
  */
 public final class Test {
-    private CustomerDAO customerDao = CustomerDAO.getInstance();
-    private ManagerDAO managerDao = ManagerDAO.getInstance();
+    private CustomerDao customerDao = CustomerDao.getInstance();
+    private ManagerDao managerDao = ManagerDao.getInstance();
     BankTimer timer = BankTimer.getInstance();
 
     public Test() {
@@ -15,7 +15,7 @@ public final class Test {
     }
 
     public void testQueryCustomer() {
-        Customer c = (Customer) customerDao.query("customer2");
+        Customer c = customerDao.query("customer2");
         System.out.println(c.getID() + " " + c.getName() + " " + c.getType() + " " + c.getPassword());
     }
 
@@ -25,7 +25,7 @@ public final class Test {
     }
 
     public void testQueryManager() {
-        Manager m = (Manager) managerDao.query("manager1");
+        Manager m = managerDao.query("manager1");
         System.out.println(m.getID() + " " + m.getName() + " " + m.getType() + " " + m.getPassword());
     }
 

@@ -4,5 +4,5 @@
  * notice when time changes.
  */
 public interface TimerObserver {
-    void timeChange();
+    void onTimeChange();
 }

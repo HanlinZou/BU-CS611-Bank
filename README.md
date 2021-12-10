@@ -23,9 +23,9 @@
     new Thread(timer).start()
     ```
 
-    然后 timer 就会每隔一秒输出当前时间和时间戳（用于测试），并调用每个依赖它的对象的 `timeChange()`。
+    然后 timer 就会每隔一秒输出当前时间和时间戳（用于测试），并调用每个依赖它的对象的 `onTimeChange()`。
 
-    需要处理时间的对象应该 implements TimerObserver 的 `timeChange()`，并在 `timeChange()` 里处理加利息之类的操作，比如：
+    需要处理时间的对象应该 implements TimerObserver 的 `onTimeChange()`，并在 `onTimeChange()` 里处理加利息之类的操作，比如：
 
     ```java
     public class Account implements TimerObserver {
@@ -36,7 +36,7 @@
         }
 
         @Override
-        public void timeChange() {
+        public void onTimeChange() {
             // 加利息
         }
     }

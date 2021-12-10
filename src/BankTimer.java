@@ -54,7 +54,7 @@ public class BankTimer implements Runnable {
             System.out.println(getDateStr() + " " + getTimeStamp());
 
             for(TimerObserver observer : observers){
-                observer.timeChange();
+                observer.onTimeChange();
             }
         }
     }
