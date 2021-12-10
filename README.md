@@ -1,6 +1,16 @@
 # Bank
 
-目前用到的设计模式：
+## 读写
+
+- `src/configs/config.csv` 是配置文件，里面有货币汇率和时钟更新周期（目前是 1 秒）。
+
+- `src/database/` 下的 `csv` 是数据库，目前有 customer、manager 和 stock，每个都有对应的负责读写操作的 DAO 类。
+
+    还需要写账户、贷款之类的读写
+
+
+
+## 设计模式
 
 - Proxy Pattern
 
@@ -12,7 +22,7 @@
 
 - Data Access Object (DAO) Pattern
 
-    客户和行长的数据库读写，之后还要写账户之类的读写
+    负责数据库读写操作
 
 - Observer Pattern（Timer）
 
