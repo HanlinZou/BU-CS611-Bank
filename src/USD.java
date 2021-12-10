@@ -1,13 +1,14 @@
-public class USD extends Currency{
+public class USD extends Currency {
 
-    USD(){}
+    USD() {
+    }
 
-    USD(double amt){
+    USD(double amt) {
         setName("United States Dollar");
         setAmount(amt);
-        setExchangeRate2CNY(6.3444);
+        setExchangeRate2CNY(configDao.getConfigDouble("USD2CNY", 1.0));
         setExchangeRate2USD(1.0);
-        setExchangeRate2HKD(7.7981);
+        setExchangeRate2HKD(configDao.getConfigDouble("USD2HKD", 1.0));
     }
 
     public void setExchangeRate2CNY(double rate) {

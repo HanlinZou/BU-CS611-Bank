@@ -1,13 +1,13 @@
-public class CNY extends Currency{
+public class CNY extends Currency {
+    CNY() {
+    }
 
-    CNY(){}
-
-    CNY(double amt){
+    CNY(double amt) {
         setName("Chinese Yuan");
         setAmount(amt);
         setExchangeRate2CNY(1.00);
-        setExchangeRate2USD(0.1576);
-        setExchangeRate2HKD(1.2293);
+        setExchangeRate2USD(configDao.getConfigDouble("CNY2USD", 1.0));
+        setExchangeRate2HKD(configDao.getConfigDouble("CNY2HKD", 1.0));
     }
 
     public void setExchangeRate2CNY(double rate) {

@@ -29,7 +29,7 @@ public class ManagerDao extends UserDao<Manager> {
 
         for (int i = 1; i < lines.size(); i++) {  // skip table title
             List<String> info = lines.get(i);
-            managerList.add(new Manager(info.get(0), info.get(1), info.get(2)));
+            managerList.add(new Manager(info.get(0).trim(), info.get(1).trim(), info.get(2).trim()));
         }
 
         return managerList;

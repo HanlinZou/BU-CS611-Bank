@@ -29,7 +29,7 @@ public final class CustomerDao extends UserDao<Customer> {
 
         for (int i = 1; i < lines.size(); i++) {  // skip table title
             List<String> info = lines.get(i);
-            customerList.add(new Customer(info.get(0), info.get(1), info.get(2)));
+            customerList.add(new Customer(info.get(0).trim(), info.get(1).trim(), info.get(2).trim()));
         }
 
         return customerList;

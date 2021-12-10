@@ -14,6 +14,7 @@ public class BankTimer implements Runnable {
     private static BankTimer timer = new BankTimer();
     private List<TimerObserver> observers;
     private Date date;
+    private ConfigDao configDao = ConfigDao.getInstance();
 
     private BankTimer() {
         date = new Date();
@@ -45,7 +46,7 @@ public class BankTimer implements Runnable {
     public void run() {
         while(true){
             try {
-                Thread.sleep(1 * 1000);  // update every 1 seconds
+                Thread.sleep(configDao.getConfigInt("INTERVAL", 10) * 1000);  // update every 1 seconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
