@@ -104,11 +104,37 @@ public final class Customer extends User {
                 choice = sc.next();
             }
             stockAccount = new StockAccount(Double.parseDouble(choice));
+            savingAcc.setUSDBalance(-1.0 * Double.parseDouble(choice));
         }
         else
             System.out.println("You need to have at least $5000.0 in Saving to open a stock account.");
     }
 
-    public void depositStockAccount(){}
-    public void withdrawStockAccount(){}
+    public void depositStockAccount(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Min: 0.0 Max: " + (savingAcc.getUSDBalance() - 2500.0) +
+            " How much you want to deposit into your stocking account: ");
+        String choice = sc.next();
+        while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
+            Double.parseDouble(choice) > savingAcc.getUSDBalance() - 2500.0){
+            System.out.print("Your selection is invalid, try again: ");
+            choice = sc.next();
+        }
+        stockAccount.changeBalance(Double.parseDouble(choice));
+        savingAcc.setUSDBalance(-1.0 * Double.parseDouble(choice));
+    }
+
+    public void withdrawStockAccount(){
+        Scanner sc = new Scanner(System.in);
+        System.out.println("Min: 0.0 Max: " + stockAccount.balance +
+            " How much you want to withdraw from your stocking account: ");
+        String choice = sc.next();
+        while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
+            Double.parseDouble(choice) > stockAccount.balance){
+            System.out.print("Your selection is invalid, try again: ");
+            choice = sc.next();
+        }
+        stockAccount.changeBalance(-1.0 * Double.parseDouble(choice));
+        savingAcc.setUSDBalance(Double.parseDouble(choice));
+    }
 }

@@ -15,5 +15,7 @@ public class StockAccount {
         accumulatedEarn = 0;
     }
 
-
+    public void changeBalance(double amt){
+        balance = Double.parseDouble(String.format("%.2f", balance + amt));
+    }
 }
