@@ -18,7 +18,7 @@ public final class Customer extends User {
     public Customer(String name, String password) {
         super("customer", name, password);
         loanArrayList = new ArrayList<>();  // creates a new loan list
-        setID(customerDao.getNewID());  // generates a new id
+        setID(customerDao.getNewId());  // generates a new id
         customerDao.addToDatabase(this);   // add to database
     }
 

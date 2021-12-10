@@ -1,23 +1,20 @@
-public abstract class User {
-    private String name;
+public abstract class User extends BankObject {
     private String password;
     private String type;
-    private String id;
 
     public User() {
     }
 
     public User(String type, String name, String password) {
+        super(name);
         setType(type);
-        setName(name);
         setPassword(password);
     }
 
     public User(String type, String id, String name, String password) {
+        super(id, name);
         setType(type);
-        setName(name);
         setPassword(password);
-        setID(id);
     }
 
     /**
@@ -30,48 +27,12 @@ public abstract class User {
     }
 
     /**
-     * Sets ID for this user.
-     *
-     * @param id User's ID.
-     */
-    public void setID(String id){
-        this.id = id;
-    }
-
-    /**
-     * Returns ID of the user.
-     *
-     * @return User's ID.
-     */
-    public String getID(){
-        return id;
-    }
-
-    /**
      * Sets type for this user.
      *
      * @param name User's name.
      */
     public void setType(String type){
         this.type = type;
-    }
-
-    /**
-     * Returns this user's name.
-     *
-     * @return User's name.
-     */
-    public String getName(){
-        return name;
-    }
-
-    /**
-     * Sets name for this user.
-     *
-     * @param name User's name.
-     */
-    public void setName(String name){
-        this.name = name;
     }
 
     /**
@@ -94,10 +55,11 @@ public abstract class User {
 
     @Override
     public String toString() {
-        return type + " user: name='" + name + "', password='" + password;
+        return type + " user: id='" + getID() + "', name='" + getName() + "', password='" + password + "'";
     }
 
+    @Override
     public String saveString() {
-        return id + " " + name + " " + password;
+        return getID() + " " + getName() + " " + password;
     }
 }

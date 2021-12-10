@@ -13,8 +13,8 @@ public class ManagerDao extends UserDao<Manager> {
 
     private ManagerDao() {
         setFileProxy(new DatabaseFileProxy(path + "managers.csv"));
-        userList = readFromDatabase();
-        maxID = recoverMaxIdFromDatabase();
+        setList(readFromDatabase());
+        setMaxId(recoverMaxIdFromDatabase());
     }
 
     public static ManagerDao getInstance() {

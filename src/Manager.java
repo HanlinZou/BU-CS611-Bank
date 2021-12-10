@@ -12,7 +12,7 @@ public final class Manager extends User {
      */
     public Manager(String name, String password) {
         super("manager", name, password);
-        setID(managerDao.getNewID());  // generates a new id
+        setID(managerDao.getNewId());  // generates a new id
         managerDao.addToDatabase(this);  // add to database
     }
 

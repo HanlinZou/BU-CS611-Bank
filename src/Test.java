@@ -4,23 +4,48 @@
 public final class Test {
     private CustomerDao customerDao = CustomerDao.getInstance();
     private ManagerDao managerDao = ManagerDao.getInstance();
+    private StockDao stockDao = StockDao.getInstance();
     BankTimer timer = BankTimer.getInstance();
 
     public Test() {
     }
 
-    public void testCreateUser() {
-        Customer c = new Customer("customer2", "123456");
+    public void testUser() {
+        // create
+        Customer c = new Customer("customer2", "654321");
         System.out.println(c.getID() + " " + c.getName() + " " + c.getType() + " " + c.getPassword());
         Manager m = new Manager("manager1", "654321");
         System.out.println(m.getID() + " " + m.getName() + " " + m.getType() + " " + m.getPassword());
+
+        // query
+        c = customerDao.queryByName("customer1");
+        System.out.println(c.getID() + " " + c.getName() + " " + c.getType() + " " + c.getPassword());
+
+        c = customerDao.queryByName("customer2");
+        System.out.println(c.getID() + " " + c.getName() + " " + c.getType() + " " + c.getPassword());
+
+        m = managerDao.queryByName("manager1");
+        System.out.println(m.getID() + " " + m.getName() + " " + m.getType() + " " + m.getPassword());
+
+        // delete
+        customerDao.deleteFromDatabase(c);
+        managerDao.deleteFromDatabase(m);
     }
 
-    public void testQueryUser() {
-        Customer c = customerDao.query("customer2");
-        System.out.println(c.getID() + " " + c.getName() + " " + c.getType() + " " + c.getPassword());
-        Manager m = managerDao.query("manager1");
-        System.out.println(m.getID() + " " + m.getName() + " " + m.getType() + " " + m.getPassword());
+    public void testStock() {
+        // create
+        Stock s = new Stock("google", 1);
+        System.out.println(s.getID() + " " + s.getName() + " " + s.getPrice());
+
+        // query
+        s = stockDao.queryByName("apple");
+        System.out.println(s.getID() + " " + s.getName() + " " + s.getPrice());
+
+        s = stockDao.queryByName("google");
+        System.out.println(s.getID() + " " + s.getName() + " " + s.getPrice());
+
+        // delete
+        stockDao.deleteFromDatabase(s);
     }
 
     public void testCurrency() {
@@ -37,8 +62,8 @@ public final class Test {
     }
 
     public void testAll() {
-        testCreateUser();
-        testQueryUser();
+        testUser();
+        testStock();
         testCurrency();
         testTimer();
     }

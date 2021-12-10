@@ -13,8 +13,8 @@ public final class CustomerDao extends UserDao<Customer> {
 
     private CustomerDao() {
         setFileProxy(new DatabaseFileProxy(path + "customers.csv"));
-        userList = readFromDatabase();
-        maxID = recoverMaxIdFromDatabase();
+        setList(readFromDatabase());
+        setMaxId(recoverMaxIdFromDatabase());
     }
 
     public static CustomerDao getInstance() {
