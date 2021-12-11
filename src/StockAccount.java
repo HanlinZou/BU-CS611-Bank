@@ -47,4 +47,9 @@ public class StockAccount {
         accumulatedProfit = Double.parseDouble(String.format("%.2f", accumulatedProfit + amt));
         calculateEstimatedProfit();
     }
+
+    public String toString(){
+        return "Balance: $" + balance + "\nNum of stocks: " + stocks.size() +
+            "\nEstimated Profit: $" + estimatedProfit + "\nAccumulated Profit: $" + accumulatedProfit;
+    }
 }

@@ -264,4 +264,13 @@ public class Account {
                 break;
         }
     }
+
+    public String toString(){
+        if(type.equals("Saving"))
+            return "Saving Account Balance: \nUSD: " + getUSDBalance() + "\nCNY: " +
+                getCNYBalance() + "\nHKD: " + getHKDBalance();
+        else
+            return "Checking Account Balance: \nUSD: " + getUSDBalance() + "\nCNY: " +
+                getCNYBalance() + "\nHKD: " + getHKDBalance();
+    }
 }

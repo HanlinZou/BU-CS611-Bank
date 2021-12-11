@@ -85,11 +85,11 @@ public final class Customer extends User {
 
     public void accountInquiry(){
         if(savingAcc != null)
-            System.out.println("Saving Account Balance: \nUSD: " + savingAcc.getUSDBalance() +
-                "\nCNY: " + savingAcc.getCNYBalance() + "\nHKD: " + savingAcc.getHKDBalance());
+            System.out.println(savingAcc);
         if(checkingAcc != null)
-            System.out.println("Checking Account Balance: \nUSD: " + checkingAcc.getUSDBalance() +
-                "\nCNY: " + checkingAcc.getCNYBalance() + "\nHKD: " + checkingAcc.getHKDBalance());
+            System.out.println(checkingAcc);
+        if(stockAccount != null)
+            System.out.println(stockAccount);
     }
 
     //TODO: read data to provide transaction history
@@ -153,6 +153,12 @@ public final class Customer extends User {
         savingAcc.setUSDBalance(Double.parseDouble(choice));
     }
 
+    public void closeStockAccount(){
+        System.out.println("I don't like you leaving us. So you can't have one cent back.");
+        stockAccount = null;
+        System.out.println("Stock account closed successfully.");
+    }
+
     /**
      * Money transfer between SAVING & CHECKING
      */
@@ -172,4 +178,5 @@ public final class Customer extends User {
                 checkingAcc.transfer(savingAcc);
         }
     }
+
 }
