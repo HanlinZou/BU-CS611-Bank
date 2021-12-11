@@ -41,8 +41,13 @@ public final class Customer extends User {
      * 10 USD fee when open a saving account.
      */
     public void openSavingAccount(){
-        savingAcc = new Saving();
-        savingAcc.setUSDBalance(-10.0);
+        if(savingAcc == null) {
+            savingAcc = new Saving();
+            savingAcc.setUSDBalance(-10.0);
+            System.out.println("Successfully opened a saving account.");
+        }
+        else
+            System.out.println("You already have a saving account.");
     }
 
     /**
@@ -65,8 +70,13 @@ public final class Customer extends User {
      * 15 USD fee when open a checking account.
      */
     public void openCheckingAccount(){
-        checkingAcc = new Checking();
-        checkingAcc.setUSDBalance(-15.0);
+        if(checkingAcc == null) {
+            checkingAcc = new Checking();
+            checkingAcc.setUSDBalance(-15.0);
+            System.out.println("Successfully opened a checking account.");
+        }
+        else
+            System.out.println("You already have a checking account.");
     }
 
     /**
