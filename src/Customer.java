@@ -49,14 +49,16 @@ public final class Customer extends User {
      * 10% of total USD fee when close a saving account.
      */
     public void closeSavingAccount(){
-        if(savingAcc.getUSDBalance() > 0) {
+        if(savingAcc.getUSDBalance() >= 0 && stockAccount == null) {
             System.out.println("You have " + savingAcc.getUSDBalance() + " USD. " +
                     "10% close fee: " + String.format("%.2f", savingAcc.getUSDBalance() * 0.1) +
                     "You can have " + String.format("%.2f", savingAcc.getUSDBalance() * 0.9) + " USD back.");
             savingAcc = null;
         }
+        else if(savingAcc.getUSDBalance() < 0)
+            System.out.println("You idiot owe me money. I can't let you close your account.");
         else
-            System.out.println("You don't have any USD. I can't let you close your account.");
+            System.out.println("You need to close your stock account first");
     }
 
     /**
@@ -71,14 +73,14 @@ public final class Customer extends User {
      * 15% of total USD fee when close a saving account.
      */
     public void closeCheckingAccount(){
-        if(checkingAcc.getUSDBalance() > 0) {
+        if(checkingAcc.getUSDBalance() >= 0) {
             System.out.println("You have " + checkingAcc.getUSDBalance() + " USD. " +
                     "10% close fee: " + String.format("%.2f", checkingAcc.getUSDBalance() * 0.15) +
                     "You can have " + String.format("%.2f", checkingAcc.getUSDBalance() * 0.85) + " USD back.");
             checkingAcc = null;
         }
         else
-            System.out.println("You don't have any USD. I can't let you close your account.");
+            System.out.println("You idiot owe me money. I can't let you close your account.");
     }
 
     public void accountInquiry(){
@@ -86,44 +88,57 @@ public final class Customer extends User {
             System.out.println("Saving Account Balance: \nUSD: " + savingAcc.getUSDBalance() +
                 "\nCNY: " + savingAcc.getCNYBalance() + "\nHKD: " + savingAcc.getHKDBalance());
         if(checkingAcc != null)
-            System.out.println("Saving Account Balance: \nUSD: " + checkingAcc.getUSDBalance() +
+            System.out.println("Checking Account Balance: \nUSD: " + checkingAcc.getUSDBalance() +
                 "\nCNY: " + checkingAcc.getCNYBalance() + "\nHKD: " + checkingAcc.getHKDBalance());
     }
 
     //TODO: read data to provide transaction history
 
     public void openStockAccount() {
-        if (savingAcc.getUSDBalance() >= 5000.0){
+        if(savingAcc != null) {
+            if (savingAcc.getUSDBalance() >= 5000.0) {
+                Scanner sc = new Scanner(System.in);
+                System.out.println("Min: 1000.0 Max: " + (savingAcc.getUSDBalance() - 2500.0) +
+                    " How much you want to deposit into your stocking account: ");
+                String choice = sc.next();
+                while (!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 1000.0 ||
+                    Double.parseDouble(choice) > savingAcc.getUSDBalance() - 2500.0) {
+                    System.out.print("Your selection is invalid, try again: ");
+                    choice = sc.next();
+                }
+                stockAccount = new StockAccount(Double.parseDouble(choice));
+                savingAcc.setUSDBalance(-1.0 * Double.parseDouble(choice));
+            } else
+                System.out.println("You need to have at least $5000.0 in Saving to open a stock account.");
+        }
+        else
+            System.out.println("You idiot open your saving account first");
+    }
+
+    /**
+     * USD from SAVING to STOCK
+     */
+    public void depositStockAccount(){
+        if(savingAcc.getUSDBalance() >= 2500) {
             Scanner sc = new Scanner(System.in);
-            System.out.println("Min: 1000.0 Max: " + (savingAcc.getUSDBalance() - 2500.0) +
+            System.out.println("Min: 0.0 Max: " + (savingAcc.getUSDBalance() - 2500.0) +
                 " How much you want to deposit into your stocking account: ");
             String choice = sc.next();
-            while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 1000.0 ||
-                Double.parseDouble(choice) > savingAcc.getUSDBalance() - 2500.0){
+            while (!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
+                Double.parseDouble(choice) > savingAcc.getUSDBalance() - 2500.0) {
                 System.out.print("Your selection is invalid, try again: ");
                 choice = sc.next();
             }
-            stockAccount = new StockAccount(Double.parseDouble(choice));
+            stockAccount.changeBalance(Double.parseDouble(choice));
             savingAcc.setUSDBalance(-1.0 * Double.parseDouble(choice));
         }
         else
-            System.out.println("You need to have at least $5000.0 in Saving to open a stock account.");
+            System.out.println("You need to have at least $2500 in your saving account.");
     }
 
-    public void depositStockAccount(){
-        Scanner sc = new Scanner(System.in);
-        System.out.println("Min: 0.0 Max: " + (savingAcc.getUSDBalance() - 2500.0) +
-            " How much you want to deposit into your stocking account: ");
-        String choice = sc.next();
-        while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
-            Double.parseDouble(choice) > savingAcc.getUSDBalance() - 2500.0){
-            System.out.print("Your selection is invalid, try again: ");
-            choice = sc.next();
-        }
-        stockAccount.changeBalance(Double.parseDouble(choice));
-        savingAcc.setUSDBalance(-1.0 * Double.parseDouble(choice));
-    }
-
+    /**
+     * USD from STOCK to SAVING
+     */
     public void withdrawStockAccount(){
         Scanner sc = new Scanner(System.in);
         System.out.println("Min: 0.0 Max: " + stockAccount.balance +
@@ -136,5 +151,25 @@ public final class Customer extends User {
         }
         stockAccount.changeBalance(-1.0 * Double.parseDouble(choice));
         savingAcc.setUSDBalance(Double.parseDouble(choice));
+    }
+
+    /**
+     * Money transfer between SAVING & CHECKING
+     */
+    public void transfer(){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("1. Saving -> Checking\n2. Checking -> Saving\n3. Leave\nPick one: ");
+        String choice = sc.next();
+        while(!choice.matches("^[1-3]$")){
+            System.out.print("Your selection is invalid, try again: ");
+            choice = sc.next();
+        }
+        switch (choice) {
+            case "1":
+                savingAcc.transfer(checkingAcc);
+                break;
+            case "2":
+                checkingAcc.transfer(savingAcc);
+        }
     }
 }

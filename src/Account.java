@@ -210,4 +210,58 @@ public class Account {
                 System.out.println("Deposit successful. You current have " + getHKDBalance() + " HKD.");
         }
     }
+
+    public void transfer(Account acc){
+        Scanner sc = new Scanner(System.in);
+        System.out.print("1. CNY\n2. USD\n3. HKD\n4. Leave\nPick one: ");
+        String choice = sc.next();
+        while(!choice.matches("^[1-4]$")){
+            System.out.print("Your selection is invalid, try again: ");
+            choice = sc.next();
+        }
+        switch (choice){
+            case "1":
+                System.out.print("Min: 0.0 Max: " + getCNYBalance() + "How much you want to transfer");
+                choice = sc.next();
+                while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
+                    Double.parseDouble(choice) > getCNYBalance()){
+                    System.out.print("Your selection is invalid, try again: ");
+                    choice = sc.next();
+                }
+                if(type.equals("Checking"))
+                    setCNYBalance(-1.03 * Double.parseDouble(choice));
+                else
+                    setCNYBalance(-1.0 * Double.parseDouble(choice));
+                acc.setCNYBalance(Double.parseDouble(choice));
+                break;
+            case "2":
+                System.out.print("Min: 0.0 Max: " + getUSDBalance() + "How much you want to transfer");
+                choice = sc.next();
+                while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
+                    Double.parseDouble(choice) > getUSDBalance()){
+                    System.out.print("Your selection is invalid, try again: ");
+                    choice = sc.next();
+                }
+                if(type.equals("Checking"))
+                    setUSDBalance(-1.03 * Double.parseDouble(choice));
+                else
+                    setUSDBalance(-1.0 * Double.parseDouble(choice));
+                acc.setUSDBalance(Double.parseDouble(choice));
+                break;
+            case "3":
+                System.out.print("Min: 0.0 Max: " + getHKDBalance() + "How much you want to transfer");
+                choice = sc.next();
+                while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
+                    Double.parseDouble(choice) > getHKDBalance()){
+                    System.out.print("Your selection is invalid, try again: ");
+                    choice = sc.next();
+                }
+                if(type.equals("Checking"))
+                    setHKDBalance(-1.03 * Double.parseDouble(choice));
+                else
+                    setHKDBalance(-1.0 * Double.parseDouble(choice));
+                acc.setHKDBalance(Double.parseDouble(choice));
+                break;
+        }
+    }
 }
