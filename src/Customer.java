@@ -66,7 +66,8 @@ public final class Customer extends User {
     /**
      * 10 USD fee when open a saving account.
      */
-    public void openSavingAccount() {
+    //xiansong: changed the return type to bool
+    public boolean openSavingAccount() {
         if (savingAccount == null) {
             savingAccount = new SavingAccount(getID());
             savingAccount.setUSDBalanceAnyway(-10.0);
@@ -75,8 +76,9 @@ public final class Customer extends User {
             savingAccount.getDao().saveToDatabase();  // update savingAccount database
 
             // TODO: log
+            return true;
         }
-        else System.out.println("You already have a saving account.");
+        else System.out.println("You already have a saving account.");return false;
     }
 
     /**
@@ -103,7 +105,8 @@ public final class Customer extends User {
     /**
      * 15 USD fee when open a checking account.
      */
-    public void openCheckingAccount() {
+    //xiansong: changed the return type to bool
+    public boolean openCheckingAccount() {
         if (checkingAccount == null) {
             checkingAccount = new CheckingAccount(getID());
             checkingAccount.setUSDBalanceAnyway(-15.0);
@@ -112,8 +115,9 @@ public final class Customer extends User {
             checkingAccount.getDao().saveToDatabase();  // update checkingAccount database
 
             // TODO: log
+            return true;
         }
-        else System.out.println("You already have a checking account.");
+        else System.out.println("You already have a checking account.");return false;
     }
 
     /**
@@ -147,10 +151,15 @@ public final class Customer extends User {
     }
 
     // TODO: read data to provide transaction history
-    public boolean openStockAccount(double stockMoney) {
-        if (savingAccount != null) {
+    //xiansong: changed the return type to int, add a stockacount == null condition
+    public int openStockAccount(double stockMoney) {
+    	if(this.stockAccount != null)
+    	{
+    		return -3;
+    	}
+    	else if (savingAccount != null) {
             if (savingAccount.getUSDBalance() >= 5000.0) {
-                if (stockMoney < 1000 || stockMoney > savingAccount.getUSDBalance() - 2500.0) return false;
+                if (stockMoney < 1000 || stockMoney > savingAccount.getUSDBalance() - 2500.0) return 0;
                 stockAccount = new StockAccount(getID(), stockMoney);
                 savingAccount.setUSDBalance(-1.0 * stockMoney);
 
@@ -158,15 +167,15 @@ public final class Customer extends User {
 
                 // TODO: log
 
-                return true;
+                return 1;
             } else {
                 System.out.println("You need to have at least $5000.0 in Saving to open a stock account.");
-                return false;
+                return -2;
             }
         }
         else {
             System.out.println("You idiot open your saving account first");
-            return false;
+            return -1;
         }
     }
 

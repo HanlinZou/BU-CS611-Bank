@@ -10,6 +10,8 @@ public class GUIOpenAccount extends Frame implements GUIsetup, ActionListener
 {
 	private String uid;
 	
+	private Customer customer;
+	
 	private JButton buttonOpenSaving;
 	private JButton buttonOpenChecking;
 	private JButton buttonOpenStock;
@@ -25,6 +27,8 @@ public class GUIOpenAccount extends Frame implements GUIsetup, ActionListener
 		
 		super.addPanel();
 		super.frame.setVisible(true);
+		
+		this.customer = CustomerDao.getInstance().queryById(uid);
 		
 		this.labelTitle = new JLabel();
 		
@@ -102,14 +106,14 @@ public class GUIOpenAccount extends Frame implements GUIsetup, ActionListener
 		else if(e.getSource() == this.buttonOpenStock)
 		{
 			//open account
+			this.createStockAccount();
 		}
 	}
 	public void createSavingAccount()
 	{
-		if(SavingAccountDao.getInstance().queryByUserId(uid) == null)
+		if(this.customer.openSavingAccount())
 		{
 			//create account
-			new SavingAccount(this.uid);
 			JOptionPane.showMessageDialog(null, "<html>Saving account created!<br>We will take 10$ as service fee</html>", "Thank you", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else
@@ -119,10 +123,9 @@ public class GUIOpenAccount extends Frame implements GUIsetup, ActionListener
 	}
 	public void createCheckingAccount()
 	{
-		if(CheckingAccountDao.getInstance().queryByUserId(this.uid) == null)
+		if(this.customer.openCheckingAccount())
 		{
 			//create account
-			new CheckingAccount(this.uid);
 			JOptionPane.showMessageDialog(null, "<html>Checking account created!<br>We will take 10$ as service fee</html>", "Thank you", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else
@@ -132,6 +135,47 @@ public class GUIOpenAccount extends Frame implements GUIsetup, ActionListener
 	}
 	public void createStockAccount()
 	{
-		
+		String moneyToStock = JOptionPane.showInputDialog("<html>Enter the amount of money you want to transfer to stock account<br>"
+				+ "NOTE:<br>"
+				+ "------you must have at least $5000 in your saving account<br>"
+				+ "------you can choose to transfer any amount over $1000<br>"
+				+ "------you must maintain a $2500.00 balance in your savings account</html>");
+		double stockMoney = 0f;
+		if(moneyToStock != null)
+		{
+			try
+			{
+				stockMoney = Double.parseDouble(moneyToStock);
+				int result = this.customer.openStockAccount(stockMoney);
+				if(result == -3)
+				{
+					//stock account exist
+					JOptionPane.showMessageDialog(null, "You already have a stock account","Warning",JOptionPane.WARNING_MESSAGE);
+				}
+				else if(result == -1)
+				{
+					//dont have a saving account
+					JOptionPane.showMessageDialog(null, "<html>Message from CFO(Xiaohan):<br>You idiot open your saving accoutn first</html>","Warning",JOptionPane.WARNING_MESSAGE);
+				}
+				else if(result == -2)
+				{
+					//dont have 5k in saving account
+					JOptionPane.showMessageDialog(null, "Please make sure you have at least $5000 in your saving account","Warning",JOptionPane.WARNING_MESSAGE);
+				}
+				else if(result == 0)
+				{
+					//transfer below 1000 or saving account below 2500
+					JOptionPane.showMessageDialog(null, "Make sure your transfer is at least 1k and saving account's balance is at least 2500","Warning",JOptionPane.WARNING_MESSAGE);
+				}
+				else if(result == 1)
+				{
+					JOptionPane.showMessageDialog(null, "Stock Account created!","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			catch(NumberFormatException e)
+			{
+				JOptionPane.showMessageDialog(null, "Please enter a valid number","Warning",JOptionPane.WARNING_MESSAGE);
+			}
+		}
 	}
 }
