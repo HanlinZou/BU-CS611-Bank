@@ -30,7 +30,7 @@ public final class StockDao extends Dao<Stock> {
 
         for (int i = 1; i < lines.size(); i++) {  // skip table title
             List<String> info = lines.get(i);
-            stockList.add(new Stock(info.get(0).trim(), info.get(1).trim(), Integer.valueOf(info.get(2).trim())));
+            stockList.add(new Stock(info.get(0).trim(), info.get(1).trim(), Double.valueOf(info.get(2).trim())));
         }
 
         return stockList;

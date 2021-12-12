@@ -34,7 +34,7 @@ public final class Test {
 
     public void testStock() {
         // create
-        Stock s = new Stock("google", 1);
+        Stock s = new Stock("google", 1.5);
         System.out.println(s.getID() + " " + s.getName() + " " + s.getPrice());
 
         // query

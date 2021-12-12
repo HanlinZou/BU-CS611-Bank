@@ -116,7 +116,7 @@ public final class Customer extends User {
                     System.out.print("Your selection is invalid, try again: ");
                     choice = sc.next();
                 }
-                stockAccount = new StockAccount(Double.parseDouble(choice));
+                stockAccount = new StockAccount(getID(), Double.parseDouble(choice));
                 savingAcc.setUSDBalance(-1.0 * Double.parseDouble(choice));
             } else
                 System.out.println("You need to have at least $5000.0 in Saving to open a stock account.");
@@ -139,7 +139,7 @@ public final class Customer extends User {
                 System.out.print("Your selection is invalid, try again: ");
                 choice = sc.next();
             }
-            stockAccount.changeBalance(Double.parseDouble(choice));
+            stockAccount.deposit(Double.parseDouble(choice));
             savingAcc.setUSDBalance(-1.0 * Double.parseDouble(choice));
         }
         else
@@ -159,7 +159,7 @@ public final class Customer extends User {
             System.out.print("Your selection is invalid, try again: ");
             choice = sc.next();
         }
-        stockAccount.changeBalance(-1.0 * Double.parseDouble(choice));
+        stockAccount.withdraw(Double.parseDouble(choice));
         savingAcc.setUSDBalance(Double.parseDouble(choice));
     }
 

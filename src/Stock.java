@@ -1,6 +1,5 @@
 public final class Stock extends BankObject {
     private double price;
-    private double share;
     private StockDao stockDao = StockDao.getInstance();
 
     /**
@@ -10,10 +9,9 @@ public final class Stock extends BankObject {
      * @param name Stock name.
      * @param price Stock price.
      */
-    public Stock(String id, String name, double price, double share) {
+    public Stock(String id, String name, double price) {
         super(id, name);
         setPrice(price);
-        setShare(share);
     }
 
     /**
@@ -45,14 +43,6 @@ public final class Stock extends BankObject {
      */
     public double getPrice(){
         return price;
-    }
-
-    public void setShare(double share){
-        this.share = share;
-    }
-
-    public double getShare(){
-        return share;
     }
 
     @Override
