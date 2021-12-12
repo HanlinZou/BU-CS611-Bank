@@ -20,7 +20,7 @@ public class StockAccountDao extends AccountDao<StockAccount> {
 
     @Override
     public String getTableTitle() {
-        return "id userid balance stockinfo";
+        return "id,userid,balance,stockinfo";
     }
 
     @Override
@@ -44,7 +44,7 @@ public class StockAccountDao extends AccountDao<StockAccount> {
             if (info.size() > 4) {
                 String stockInfo = info.get(4).trim();
 
-                String[] stockList = stockInfo.split(",");
+                String[] stockList = stockInfo.split(";");
                 for (String stockString : stockList) {
                     String stockId = stockString.split(":")[0];
                     int share = Integer.parseInt(stockString.split(":")[1].split("\\$")[0]);

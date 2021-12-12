@@ -7,6 +7,6 @@
 public abstract class UserDao<T extends User> extends Dao<T> {
     @Override
     public String getTableTitle() {
-        return "id name password";
+        return "id,name,password";
     }
 }

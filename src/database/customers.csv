@@ -1,2 +1,2 @@
-id name password
-1 customer1 123456
+id,name,password
+1,customer1,123456

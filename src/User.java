@@ -60,6 +60,6 @@ public abstract class User extends BankObject {
 
     @Override
     public String saveString() {
-        return getID() + " " + getName() + " " + password;
+        return getID() + "," + getName() + "," + password;
     }
 }

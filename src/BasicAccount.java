@@ -198,7 +198,7 @@ public abstract class BasicAccount extends Account {
 
     @Override
     public String saveString() {
-        return getID() + " " + getUserId() + " " + getCNYBalance() + " " + getUSDBalance() + " " + getHKDBalance();
+        return getID() + "," + getUserId() + "," + getCNYBalance() + "," + getUSDBalance() + "," + getHKDBalance();
     }
 
     /**

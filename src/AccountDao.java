@@ -3,7 +3,7 @@ import java.util.List;
 public abstract class AccountDao<T extends Account> extends Dao<T> {
     @Override
     public String getTableTitle() {
-        return "id userid cny usd hkd";
+        return "id,userid,cny,usd,hkd";
     }
 
     public T queryByUserId(String userId) {

@@ -38,6 +38,6 @@ public final class StockDao extends Dao<Stock> {
 
     @Override
     public String getTableTitle() {
-        return "id name price";
+        return "id,name,price";
     }
 }

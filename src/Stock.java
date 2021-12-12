@@ -52,6 +52,6 @@ public final class Stock extends BankObject {
 
     @Override
     public String saveString() {
-        return getID() + " " + getName() + " " + price;
+        return getID() + "," + getName() + "," + price;
     }
 }
