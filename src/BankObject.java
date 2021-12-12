@@ -25,8 +25,6 @@ public abstract class BankObject {
         setName(name);
     }
 
-    // public abstract
-
     /**
      * Returns information to save to database.
      */

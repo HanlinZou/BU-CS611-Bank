@@ -6,7 +6,7 @@ public abstract class Currency {
     protected double exchangeRate2HKD;
     protected ConfigDao configDao = ConfigDao.getInstance();
 
-    Currency() {
+    public Currency() {
     }
 
     public void setName(String name) {
@@ -17,17 +17,31 @@ public abstract class Currency {
         return name;
     }
 
-    public void setAmount(double amt) {
+    public boolean setAmountAnyway(double amt) {
         amount = Double.parseDouble(String.format("%.2f", amt));
+        return true;
+    }
+
+    public boolean setAmount(double amt) {
+        if (amt < 0) return false;
+        return setAmountAnyway(amt);
     }
 
     public double getAmount() {
         return amount;
     }
 
-    public abstract void setExchangeRate2CNY(double rate);
-    public abstract void setExchangeRate2USD(double rate);
-    public abstract void setExchangeRate2HKD(double rate);
+    public void setExchangeRate2CNY(double rate) {
+        this.exchangeRate2CNY = rate;
+    }
+
+    public void setExchangeRate2USD(double rate) {
+        this.exchangeRate2USD = rate;
+    }
+
+    public void setExchangeRate2HKD(double rate) {
+        this.exchangeRate2HKD = rate;
+    }
 
     public double getExchangeRate2CNY() {
         return exchangeRate2CNY;

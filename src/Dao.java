@@ -50,7 +50,7 @@ public abstract class Dao<T extends BankObject> {
 
     public T queryByName(String name) {
         for (T obj : objectList) {
-            if (obj.getName().equals(name)) return obj;
+            if (obj.getName() != null && obj.getName().equals(name)) return obj;
         }
         return null;
     }
@@ -74,10 +74,11 @@ public abstract class Dao<T extends BankObject> {
         FileIo.writeDatabaseFile(file, getTableTitle(), infoList);
     }
 
-    public void addToDatabase(T object) {
-        if (queryByName(object.getName()) != null) return;  // avoid duplicate name
+    public boolean addToDatabase(T object) {
+        if (queryByName(object.getName()) != null) return false;  // avoid duplicate name
         objectList.add(object);  // update object list
         saveToDatabase();  // save to database
+        return true;
     }
 
     /**

@@ -210,4 +210,23 @@ public class StockAccount {
         return "Balance: $" + balance + "\nNum of stocks: " + getStockNum() +
             "\nEstimated Profit: $" + calculateEstimatedProfit() + "\nAccumulated Profit: $" + accumulatedProfit;
     }
+
+    public String saveString() {
+        String str = "";
+
+        str += balance;
+        str += "|";
+
+        for (Stock stock : stock2share.keySet()) {
+            int share = stock2share.get(stock);
+            double money = stock2money.get(stock);
+
+            str += stock.getID() + ":";
+            str += share + "$";
+            str += money + ",";
+        }
+
+        str = str.substring(0, str.length() - 1);
+        return str;
+    }
 }

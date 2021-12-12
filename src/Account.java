@@ -1,15 +1,30 @@
-import java.util.Scanner;
+public abstract class Account extends BankObject {
+    private String type;
+    private String userId;
 
-public class Account {
-    protected String type;
-    protected CNY CNYBalance;
-    protected USD USDBalance;
-    protected HKD HKDBalance;
+    /**
+     * Loads an account from database (with ID).
+     *
+     * @param type Account type.
+     * @param id Stock id.
+     * @param userId ID of the user this account belongs to.
+     */
+    public Account(String type, String id, String userId) {
+        super(id, userId + "-" + id);
+        setType(type);
+        setUserId(userId);
+    }
 
-    Account() {
-        CNYBalance = new CNY(0.0);
-        USDBalance = new USD(0.0);
-        HKDBalance = new HKD(0.0);
+    /**
+     * Creates a new account (no ID).
+     *
+     * @param type Account type.
+     * @param userId ID of the user this account belongs to.
+     */
+    public Account(String type, String userId) {
+        super();
+        setType(type);
+        setUserId(userId);
     }
 
     public void setType(String type) {
@@ -20,257 +35,29 @@ public class Account {
         return type;
     }
 
-    public void setCNYBalance(double amt) {
-        CNYBalance.setAmount(CNYBalance.getAmount() + amt);
+    public void setUserId(String userId) {
+        this.userId = userId;
     }
 
-    public double getCNYBalance() {
-        return CNYBalance.getAmount();
+    public String getUserId() {
+        return userId;
     }
+
+    public abstract AccountDao<?> getDao();
 
     /**
-     * Using CNY to purchase USD, 5% fee
+     * Withdraws money from an account.
      *
-     * @param USDAmt Amount of USD customer wants to purchase
+     * @param money Money to be saved.
+     * @param currencyType Currency type.
      */
-    public void CNY2USD(double USDAmt) {
-        setUSDBalance(USDAmt);
-        if (getType().equals("Manager"))
-            setCNYBalance(-1.0 * USDAmt * USDBalance.getExchangeRate2CNY());
-        else
-            setCNYBalance(-1.05 * USDAmt * USDBalance.getExchangeRate2CNY());
-    }
+    public abstract boolean withdraw(double money, String currencyType);
 
     /**
-     * Using CNY to purchase HKD, 5% fee
+     * Deposits money into an account.
      *
-     * @param HKDAmt Amount of HKD customer wants to purchase
+     * @param money Money to be saved.
+     * @param currencyType Currency type.
      */
-    public void CNY2HKD(double HKDAmt) {
-        setHKDBalance(HKDAmt);
-        if (getType().equals("Manager"))
-            setCNYBalance(-1.0 * HKDAmt * HKDBalance.getExchangeRate2CNY());
-        else
-            setCNYBalance(-1.05 * HKDAmt * HKDBalance.getExchangeRate2CNY());
-    }
-
-    public void setUSDBalance(double amt) {
-        USDBalance.setAmount(USDBalance.getAmount() + amt);
-    }
-
-    public double getUSDBalance() {
-        return USDBalance.getAmount();
-    }
-
-    /**
-     * Using USD to purchase CNY, 5% fee
-     *
-     * @param CNYAmt Amount of CNY customer wants to purchase
-     */
-    public void USD2CNY(double CNYAmt) {
-        setCNYBalance(CNYAmt);
-        if (getType().equals("Manager"))
-            setUSDBalance(-1.0 * CNYAmt * CNYBalance.getExchangeRate2USD());
-        else
-            setUSDBalance(-1.05 * CNYAmt * CNYBalance.getExchangeRate2USD());
-    }
-
-    /**
-     * Using USD to purchase HKD, 5% fee
-     *
-     * @param HKDAmt Amount of HKD customer wants to purchase
-     */
-    public void USD2HKD(double HKDAmt) {
-        setHKDBalance(HKDAmt);
-        if (getType().equals("Manager"))
-            setUSDBalance(-1.0 * HKDAmt * HKDBalance.getExchangeRate2USD());
-        else
-            setUSDBalance(-1.05 * HKDAmt * HKDBalance.getExchangeRate2USD());
-    }
-
-    public void setHKDBalance(double amt) {
-        HKDBalance.setAmount(HKDBalance.getAmount() + amt);
-    }
-
-    public double getHKDBalance() {
-        return HKDBalance.getAmount();
-    }
-
-    /**
-     * Using HKD to purchase CNY, 5% fee
-     *
-     * @param CNYAmt Amount of CNY customer wants to purchase
-     */
-    public void HKD2CNY(double CNYAmt) {
-        setCNYBalance(CNYAmt);
-        if (getType().equals("Manager"))
-            setHKDBalance(-1.0 * CNYAmt * CNYBalance.getExchangeRate2HKD());
-        else
-            setHKDBalance(-1.05 * CNYAmt * CNYBalance.getExchangeRate2HKD());
-    }
-
-    /**
-     * Using HKD to purchase USD, 5% fee
-     *
-     * @param USDAmt Amount of USD customer wants to purchase
-     */
-    public void HKD2USD(double USDAmt) {
-        setUSDBalance(USDAmt);
-        if (getType().equals("Manager"))
-            setHKDBalance(-1.0 * USDAmt * USDBalance.getExchangeRate2HKD());
-        else
-            setHKDBalance(-1.05 * USDAmt * USDBalance.getExchangeRate2HKD());
-    }
-
-    /**
-     * Withdraw from an account, 3% fee
-     */
-    public void withdraw() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Which currency you want to withdraw: 1. CNY 2. USD 3. HKD");
-        String choice = sc.next();
-        while (!choice.matches("^[1-3]$")) {
-            System.out.print("Your selection is invalid, try again: ");
-            choice = sc.next();
-        }
-
-        switch (choice) {
-            case "1":
-                System.out.println("You current have " + getCNYBalance() + " CNY.");
-                System.out.print("How much you want to withdraw: ");
-                choice = sc.next();
-                if (Double.parseDouble(choice) * 1.03 <= getCNYBalance()) {
-                    setCNYBalance(-1.03 * Double.parseDouble(choice));
-                    System.out.println("Withdraw successful. You current have " + getCNYBalance() + " CNY.");
-                } else
-                    System.out.print("You don't have enough.");
-                break;
-            case "2":
-                System.out.println("You current have " + getUSDBalance() + " USD.");
-                System.out.print("How much you want to withdraw: ");
-                choice = sc.next();
-                if (Double.parseDouble(choice) * 1.03 <= getUSDBalance()) {
-                    setUSDBalance(-1.03 * Double.parseDouble(choice));
-                    System.out.println("Withdraw successful. You current have " + getUSDBalance() + " USD.");
-                } else
-                    System.out.print("You don't have enough.");
-                break;
-            case "3":
-                System.out.println("You current have " + getHKDBalance() + " HKD.");
-                System.out.print("How much you want to withdraw: ");
-                choice = sc.next();
-                if (Double.parseDouble(choice) * 1.03 <= getHKDBalance()) {
-                    setHKDBalance(-1.03 * Double.parseDouble(choice));
-                    System.out.println("Withdraw successful. You current have " + getHKDBalance() + " HKD.");
-                } else
-                    System.out.print("You don't have enough.");
-        }
-    }
-
-    /**
-     * Deposit money into an account. Checking account takes 3% fee.
-     */
-    public void deposit() {
-        Scanner sc = new Scanner(System.in);
-        System.out.print("Which currency you want to withdraw: 1. CNY 2. USD 3. HKD");
-        String choice = sc.next();
-        while (!choice.matches("^[1-3]$")) {
-            System.out.print("Your selection is invalid, try again: ");
-            choice = sc.next();
-        }
-
-        boolean isCheckingAcc = getType().equals("Checking");
-
-        switch (choice) {
-            case "1":
-                System.out.println("You current have " + getCNYBalance() + " CNY.");
-                System.out.print("How much you want to deposit: ");
-                choice = sc.next();
-                setCNYBalance(Double.parseDouble(choice));
-                if (isCheckingAcc)
-                    setCNYBalance(0.97 * getCNYBalance());
-                System.out.println("Deposit successful. You current have " + getCNYBalance() + " CNY.");
-                break;
-            case "2":
-                System.out.println("You current have " + getUSDBalance() + " USD.");
-                System.out.print("How much you want to withdraw: ");
-                choice = sc.next();
-                setUSDBalance(Double.parseDouble(choice));
-                if (isCheckingAcc)
-                    setUSDBalance(0.97 * getUSDBalance());
-                System.out.println("Deposit successful. You current have " + getUSDBalance() + " USD.");
-                break;
-            case "3":
-                System.out.println("You current have " + getHKDBalance() + " HKD.");
-                System.out.print("How much you want to withdraw: ");
-                choice = sc.next();
-                setHKDBalance(Double.parseDouble(choice));
-                if (isCheckingAcc)
-                    setHKDBalance(0.97 * getHKDBalance());
-                System.out.println("Deposit successful. You current have " + getHKDBalance() + " HKD.");
-        }
-    }
-
-    public void transfer(Account acc){
-        Scanner sc = new Scanner(System.in);
-        System.out.print("1. CNY\n2. USD\n3. HKD\n4. Leave\nPick one: ");
-        String choice = sc.next();
-        while(!choice.matches("^[1-4]$")){
-            System.out.print("Your selection is invalid, try again: ");
-            choice = sc.next();
-        }
-        switch (choice){
-            case "1":
-                System.out.print("Min: 0.0 Max: " + getCNYBalance() + "How much you want to transfer");
-                choice = sc.next();
-                while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
-                    Double.parseDouble(choice) > getCNYBalance()){
-                    System.out.print("Your selection is invalid, try again: ");
-                    choice = sc.next();
-                }
-                if(type.equals("Checking"))
-                    setCNYBalance(-1.03 * Double.parseDouble(choice));
-                else
-                    setCNYBalance(-1.0 * Double.parseDouble(choice));
-                acc.setCNYBalance(Double.parseDouble(choice));
-                break;
-            case "2":
-                System.out.print("Min: 0.0 Max: " + getUSDBalance() + "How much you want to transfer");
-                choice = sc.next();
-                while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
-                    Double.parseDouble(choice) > getUSDBalance()){
-                    System.out.print("Your selection is invalid, try again: ");
-                    choice = sc.next();
-                }
-                if(type.equals("Checking"))
-                    setUSDBalance(-1.03 * Double.parseDouble(choice));
-                else
-                    setUSDBalance(-1.0 * Double.parseDouble(choice));
-                acc.setUSDBalance(Double.parseDouble(choice));
-                break;
-            case "3":
-                System.out.print("Min: 0.0 Max: " + getHKDBalance() + "How much you want to transfer");
-                choice = sc.next();
-                while(!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
-                    Double.parseDouble(choice) > getHKDBalance()){
-                    System.out.print("Your selection is invalid, try again: ");
-                    choice = sc.next();
-                }
-                if(type.equals("Checking"))
-                    setHKDBalance(-1.03 * Double.parseDouble(choice));
-                else
-                    setHKDBalance(-1.0 * Double.parseDouble(choice));
-                acc.setHKDBalance(Double.parseDouble(choice));
-                break;
-        }
-    }
-
-    public String toString(){
-        if(type.equals("Saving"))
-            return "Saving Account Balance: \nUSD: " + getUSDBalance() + "\nCNY: " +
-                getCNYBalance() + "\nHKD: " + getHKDBalance();
-        else
-            return "Checking Account Balance: \nUSD: " + getUSDBalance() + "\nCNY: " +
-                getCNYBalance() + "\nHKD: " + getHKDBalance();
-    }
+    public abstract boolean deposit(double money, String currencyType);
 }
