@@ -146,7 +146,7 @@ public class GUILoginPage extends Frame implements GUIsetup, ActionListener
 				else
 				{
 					super.frame.dispose();
-					//new GUIMainMenu(result);
+					new GUIMainMenu(result);
 				}
 			}
 		}
@@ -171,9 +171,18 @@ public class GUILoginPage extends Frame implements GUIsetup, ActionListener
 	public String userVerify()
 	{
 		//check database for this user info
+		Customer c = CustomerDao.getInstance().queryByName(this.userName);
 		if(this.userName.equals(this.backDoor)&&this.passward.equals(this.backDoor))
 		{
 			return "root-001";
+		}
+		if(c != null)
+		{
+			//user exist
+			if(c.getPassword().equals(this.passward))
+			{
+				return c.getID();
+			}
 		}
 		return "failed";
 	}

@@ -137,9 +137,6 @@ public class GUICreateAccount extends Frame implements GUIsetup, ActionListener
 			if(this.validateInput())
 			{
 				this.recordInformation();
-				JOptionPane.showMessageDialog(null, "Information has been saved", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-				super.frame.dispose();
-				new GUIATM_MainPage();
 			}
 		}
 	}
@@ -169,6 +166,31 @@ public class GUICreateAccount extends Frame implements GUIsetup, ActionListener
 	
 	public void recordInformation()
 	{
-		//save user information
+		String userName = this.firstName + " " + this.lastName;
+		//check duplicate user name
+		if(!this.checkDuplicateUserName(userName))
+		{	
+			new Customer(userName, this.passward);
+			JOptionPane.showMessageDialog(null,
+					"<html>Information has been saved<br> Your user name is: " + userName + "</html>",
+					"Confirmation", 
+					JOptionPane.INFORMATION_MESSAGE);
+			super.frame.dispose();
+			new GUIATM_MainPage();
+			
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null,
+					"<html>This user name has been taken<br>Try another one</html>",
+					"Warning", 
+					JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	
+	public boolean checkDuplicateUserName(String userName)
+	{
+		if(CustomerDao.getInstance().queryByName(userName) == null) {return false;}
+		return true;
 	}
 }
