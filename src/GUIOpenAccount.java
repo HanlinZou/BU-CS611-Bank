@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class GUIOpenAccount extends Frame implements GUIsetup, ActionListener 
 {
@@ -91,15 +92,46 @@ public class GUIOpenAccount extends Frame implements GUIsetup, ActionListener
 		else if(e.getSource() == this.buttonOpenSaving)
 		{
 			//open account
+			this.createSavingAccount();
 		}
 		else if(e.getSource() == this.buttonOpenChecking)
 		{
 			//open account
+			this.createCheckingAccount();
 		}
 		else if(e.getSource() == this.buttonOpenStock)
 		{
 			//open account
 		}
 	}
-
+	public void createSavingAccount()
+	{
+		if(SavingAccountDao.getInstance().queryByUserId(uid) == null)
+		{
+			//create account
+			new SavingAccount(this.uid);
+			JOptionPane.showMessageDialog(null, "<html>Saving account created!<br>We will take 10$ as service fee</html>", "Thank you", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "You already have a saving account", "Warning", JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	public void createCheckingAccount()
+	{
+		if(CheckingAccountDao.getInstance().queryByUserId(this.uid) == null)
+		{
+			//create account
+			new CheckingAccount(this.uid);
+			JOptionPane.showMessageDialog(null, "<html>Checking account created!<br>We will take 10$ as service fee</html>", "Thank you", JOptionPane.INFORMATION_MESSAGE);
+		}
+		else
+		{
+			JOptionPane.showMessageDialog(null, "You already have a checking account", "Warning", JOptionPane.WARNING_MESSAGE);
+		}
+	}
+	public void createStockAccount()
+	{
+		
+	}
 }

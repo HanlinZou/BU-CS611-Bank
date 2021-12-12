@@ -123,14 +123,29 @@ public class GUIMainMenu extends Frame implements GUIsetup, ActionListener
 		this.up.add(this.buttonGoBack);
 		
 		this.down.add(this.buttonOpenAccount);
-		this.down.add(this.buttonCheckBalance);
-		this.down.add(this.buttonSavingAccount);
-		this.down.add(this.buttonCheckingAccount);
-		this.down.add(this.buttonStocks);
-		this.down.add(this.buttonTransfer);
-		this.down.add(this.buttonCloseAccount);
+		this.setButtonAppear();
 	}
-
+	public void setButtonAppear()
+	{
+		if(SavingAccountDao.getInstance().queryByUserId(uid) != null||CheckingAccountDao.getInstance().queryByUserId(uid) != null)
+		{
+			if(SavingAccountDao.getInstance().queryByUserId(uid) != null)
+			{
+				this.down.add(this.buttonSavingAccount);
+			}
+			if(CheckingAccountDao.getInstance().queryByUserId(uid) != null)
+			{
+				this.down.add(this.buttonCheckingAccount);
+			}
+			if(StockAccountDao.getInstance().queryByUserId(uid) != null)
+			{
+				this.down.add(this.buttonStocks);
+			}
+			this.down.add(this.buttonCheckBalance);
+			this.down.add(this.buttonTransfer);
+			this.down.add(this.buttonCloseAccount);
+		}
+	}
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
