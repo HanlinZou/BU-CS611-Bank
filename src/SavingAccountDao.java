@@ -2,7 +2,7 @@ import java.util.List;
 import java.util.ArrayList;
 import java.io.File;
 
-public class SavingAccountDao extends AccountDao<SavingAccount> {
+public final class SavingAccountDao extends AccountDao<SavingAccount> {
     private static SavingAccountDao savingAccountDao = new SavingAccountDao();
 
     private SavingAccountDao() {

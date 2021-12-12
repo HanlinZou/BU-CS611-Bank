@@ -4,7 +4,7 @@ public class CheckingAccount extends BasicAccount {
     /**
      * Loads a checkings account from database (with ID).
      *
-     * @param id Stock id.
+     * @param id Account id.
      * @param userId ID of the user this account belongs to.
      */
     public CheckingAccount(String id, String userId, double cny, double usd, double hkd) {

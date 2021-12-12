@@ -6,7 +6,11 @@ public final class Customer extends User {
     private SavingAccount savingAccount;
     private CheckingAccount checkingAccount;
     private StockAccount stockAccount;
+
     private CustomerDao customerDao = CustomerDao.getInstance();
+    private StockAccountDao stockAccountDao = StockAccountDao.getInstance();
+    private SavingAccountDao savingAccountDao = SavingAccountDao.getInstance();
+    private CheckingAccountDao checkingAccountDao = CheckingAccountDao.getInstance();
 
     public Customer() {
     }
@@ -37,9 +41,26 @@ public final class Customer extends User {
      */
     public Customer(String id, String name, String password) {
         super("customer", id, name, password);
+
         // TODO we have to load loan list from database.
         loanArrayList = new ArrayList<>();
-        // TODO read accounts from database.
+
+        // read accounts from database
+        savingAccount = savingAccountDao.queryByUserId(getID());
+        checkingAccount = checkingAccountDao.queryByUserId(getID());
+        stockAccount = stockAccountDao.queryByUserId(getID());
+    }
+
+    public SavingAccount getSavingAccount() {
+        return savingAccount;
+    }
+
+    public StockAccount getStockAccount() {
+        return stockAccount;
+    }
+
+    public CheckingAccount getCheckingAccount() {
+        return checkingAccount;
     }
 
     /**
@@ -105,6 +126,7 @@ public final class Customer extends User {
                 "10% close fee: " + String.format("%.2f", checkingAccount.getUSDBalance() * 0.15) +
                 "You can have " + String.format("%.2f", checkingAccount.getUSDBalance() * 0.85) + " USD back."
             );
+
             checkingAccount.getDao().deleteFromDatabase(checkingAccount);  // delete checkingAccount from database
             checkingAccount = null;
 
@@ -162,7 +184,7 @@ public final class Customer extends User {
                 System.out.print("Your selection is invalid, try again: ");
                 choice = sc.next();
             }
-            stockAccount.deposit(Double.parseDouble(choice));
+            stockAccount.deposit(Double.parseDouble(choice), "usd");
             savingAccount.setUSDBalance(-1.0 * Double.parseDouble(choice));
         }
         else
@@ -183,10 +205,11 @@ public final class Customer extends User {
 
     public boolean closeStockAccount() {
         System.out.println("I don't like you leaving us. So you can't have one cent back.");
+
+        stockAccountDao.deleteFromDatabase(stockAccount);
         stockAccount = null;
 
         // TODO: log
-        // TODO: delete stockAccount from database
 
         System.out.println("Stock account closed successfully.");
         return true;

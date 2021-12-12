@@ -44,7 +44,7 @@ public final class FileIo {
         List<List<String>> parsedLines = new ArrayList<>();
 
         while (scanner.hasNextLine()) {
-            String line = scanner.nextLine();
+            String line = scanner.nextLine().trim();
             List<String> parsedLine = Arrays.asList(line.split(" "));
             parsedLines.add(parsedLine);
         }

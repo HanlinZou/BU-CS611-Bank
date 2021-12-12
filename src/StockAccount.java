@@ -1,10 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
 
-public class StockAccount {
-    private String id;  // ID of this account
-    private String userId;  // ID of the user this account belongs to
-
+public final class StockAccount extends Account {
     public double balance;
     // Number of stocks this account owns
     private Map<Stock, Integer> stock2share;
@@ -14,27 +11,59 @@ public class StockAccount {
     public double accumulatedProfit;
 
     private StockDao stockDao = StockDao.getInstance();
-    // private StockAccountDao stockAccountDao = StockAccountDao.getInstance();
+    private StockAccountDao accountDao = null;
+    private static ConfigDao configDao = ConfigDao.getInstance();
 
-    public StockAccount() {
-    }
+    /**
+     * Loads a stock account from database (with ID).
+     *
+     * @param id Account id.
+     * @param userId ID of the user this account belongs to.
+     * @param balance Balance of this account.
+     * @param accumulatedProfit Accumulated profit of this account.
+     * @param stock2share Number of stocks this account owns
+     * @param stock2money Money that the account spends on each stock
+     */
+    public StockAccount(
+        String id,
+        String userId,
+        double balance,
+        double accumulatedProfit,
+        Map<Stock, Integer> stock2share,
+        Map<Stock, Double> stock2money
+    ) {
+        super("stock", id, userId);
 
-    public StockAccount(String userId, double balance) {
-        // this.id = stockAccountDao.getNewId();  // generate a new id
-        this.userId = userId;
-        this.balance = balance;
-        this.accumulatedProfit = 0;
-        stock2share = new HashMap<>();
-        stock2money = new HashMap<>();
-    }
-
-    public StockAccount(String id, String userId, double balance, double accumulatedProfit) {
-        this.id = id;
-        this.userId = userId;
-        this.balance = balance;
+        setBalance(balance);
         this.accumulatedProfit = accumulatedProfit;
+        this.stock2share = stock2share;
+        this.stock2money = stock2money;
+    }
+
+    /**
+     * Creates a new stock account, generates a new ID and add it to database.
+     *
+     * @param userId ID of the user this account belongs to.
+     * @param balance Balance of this account.
+     */
+    public StockAccount(String userId, double balance) {
+        super("stock", userId);
+
+        setBalance(balance);
+        accumulatedProfit = 0;
         stock2share = new HashMap<>();
         stock2money = new HashMap<>();
+
+        setID(getDao().getNewId());  // generates a new id
+        setName(userId + "-" + getID());
+        getDao().addToDatabase(this);  // add to database
+    }
+
+    public AccountDao<StockAccount> getDao() {
+        if (accountDao == null) {
+            accountDao = StockAccountDao.getInstance();
+        }
+        return accountDao;
     }
 
     public void setStock2Share(Map<Stock, Integer> stock2share){
@@ -43,6 +72,14 @@ public class StockAccount {
 
     public void setStock2Money(Map<Stock, Double> stock2money){
         this.stock2money = stock2money;
+    }
+
+    public void setBalance(double balance) {
+        this.balance = balance;
+    }
+
+    public double getBalance() {
+        return balance;
     }
 
     /**
@@ -59,13 +96,16 @@ public class StockAccount {
      *
      * @param money Money value to deposit.
      */
-    public void deposit(double money) {
-        balance += money;
+    public boolean deposit(double money, String currencyType) {
+        if (currencyType.equalsIgnoreCase("usd")) balance += money;
+        else if (currencyType.equalsIgnoreCase("cny")) balance += money * configDao.getConfigDouble("CNY2USD", 1.0);
+        else balance += money * configDao.getConfigDouble("HKD2USD", 1.0);
+
+        getDao().saveToDatabase();  // update stock account database
 
         // TODO: log
 
-        // TODO: update account database
-        // stockAccountDao.update(this);
+        return true;
     }
 
     /**
@@ -80,12 +120,16 @@ public class StockAccount {
 
         balance -= money;
 
+        getDao().saveToDatabase();  // update stock account database
+
         // TODO: log
 
-        // TODO: update account database
-        // stockAccountDao.update(this);
-
         return true;
+    }
+
+    @Override
+    public boolean withdraw(double money, String currencyType) {
+        return withdraw(money);
     }
 
     /**
@@ -113,10 +157,9 @@ public class StockAccount {
         // update current balance
         this.balance -= spentMoney;
 
-        // TODO: log
+        getDao().saveToDatabase();  // update stock account database
 
-        // TODO: update account database
-        // stockAccountDao.update(this);
+        // TODO: log
 
         return true;
     }
@@ -148,10 +191,9 @@ public class StockAccount {
         double pricePerShare = oldShare == 0 ? 0 : oldMoney / oldShare;
         this.accumulatedProfit += share * (stock.getPrice() - pricePerShare); // update accumulated profit
 
-        // TODO: log
+        getDao().saveToDatabase();  // update stock account database
 
-        // TODO: update account database
-        // stockAccountDao.update(this);
+        // TODO: log
 
         return true;
     }
@@ -211,11 +253,9 @@ public class StockAccount {
             "\nEstimated Profit: $" + calculateEstimatedProfit() + "\nAccumulated Profit: $" + accumulatedProfit;
     }
 
+    @Override
     public String saveString() {
-        String str = "";
-
-        str += balance;
-        str += "|";
+        String str = getID() + " " + getUserId() + " " + balance + " " + accumulatedProfit + " ";
 
         for (Stock stock : stock2share.keySet()) {
             int share = stock2share.get(stock);

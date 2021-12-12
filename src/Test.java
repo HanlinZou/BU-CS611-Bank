@@ -11,7 +11,7 @@ public final class Test {
     }
 
     public void testUser() {
-        System.out.println("---------- User -----------");
+        System.out.println("======== User ========");
 
         // create
         Customer c = new Customer("customer2", "654321");
@@ -35,7 +35,7 @@ public final class Test {
     }
 
     public void testStock() {
-        System.out.println("---------- Stock -----------");
+        System.out.println("======== Stock ========");
 
         // create
         Stock s = new Stock("google", 1.5);
@@ -53,7 +53,7 @@ public final class Test {
     }
 
     public void testCurrency() {
-        System.out.println("---------- Currency -----------");
+        System.out.println("======== Currency ========");
 
         CNY cny = new CNY(10);
         System.out.println(cny.getExchangeRate2CNY() + " " + cny.getExchangeRate2HKD() + " " + cny.getExchangeRate2USD());
@@ -64,7 +64,9 @@ public final class Test {
     }
 
     public void testAccount() {
-        System.out.println("---------- Account -----------");
+        System.out.println("======== Account ========");
+
+        System.out.println("--- Saving / Checking ---");
 
         SavingAccount account = new SavingAccount("1");
         System.out.println(account.saveString());
@@ -81,9 +83,78 @@ public final class Test {
         System.out.println(queryAccount.saveString());
 
         account.getDao().deleteFromDatabase(account);
+
+        System.out.println("-------- Stock --------");
+
+        System.out.println("create account:");
+        StockAccount stockAccount = new StockAccount("1", 5000.0);
+        System.out.println(stockAccount.saveString());
+
+        System.out.println("deposit:");
+        stockAccount.deposit(1000, "usd");
+        System.out.println(stockAccount.saveString());
+        stockAccount.deposit(1000, "cny");
+        System.out.println(stockAccount.saveString());
+
+        System.out.println("query:");
+        StockAccount queryStockAccount = stockAccount.getDao().queryById("1");
+        System.out.println(queryStockAccount.saveString());
+
+        System.out.println("withdraw:");
+        stockAccount.withdraw(1000);
+        queryStockAccount = stockAccount.getDao().queryById("1");
+        System.out.println(queryStockAccount.saveString());
+
+        System.out.println("buy stock:");
+        stockAccount.buyStock("1", 100);
+        queryStockAccount = stockAccount.getDao().queryById("1");
+        System.out.println(queryStockAccount.saveString());
+
+        System.out.println("stock price increases:");
+        Stock stock = stockDao.queryById("1");
+        double oldPrice = stock.getPrice();
+        stock.setPrice(80.2);
+
+        System.out.println("sell stock:");
+        stockAccount.sellStock("1", 50);
+        queryStockAccount = stockAccount.getDao().queryById("1");
+        System.out.println(queryStockAccount.saveString());
+
+        stock.setPrice(oldPrice);
+        stockAccount.getDao().deleteFromDatabase(stockAccount);
+    }
+
+    public void testCustomer() {
+        System.out.println("======== Customer ========");
+
+        Customer customer = new Customer("test2", "827489");
+
+        System.out.println("open checking account:");
+        customer.openCheckingAccount();
+        System.out.println(customer.accountInquiry());
+
+        System.out.println("open saving account:");
+        customer.openSavingAccount();
+        System.out.println(customer.accountInquiry());
+
+        System.out.println("deposit to accounts:");
+        customer.getSavingAccount().deposit(1000, "usd");
+        customer.getCheckingAccount().deposit(1000, "usd");
+        System.out.println(customer.accountInquiry());
+
+        System.out.println("transfer saving -> checking:");
+        customer.transfer(1, 500, "usd");
+        System.out.println(customer.accountInquiry());
+
+        System.out.println("close accounts:");
+        customer.closeCheckingAccount();
+        customer.closeSavingAccount();
+
+        customerDao.deleteFromDatabase(customer);
     }
 
     public void testTimer() {
+        System.out.println("======== Timers ========");
         new Thread(timer).start();  // print current date and time stamp ervery 1 sec
     }
 
@@ -93,5 +164,6 @@ public final class Test {
         testCurrency();
         testTimer();
         testAccount();
+        testCustomer();
     }
 }

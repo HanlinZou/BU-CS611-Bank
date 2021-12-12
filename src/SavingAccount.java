@@ -4,7 +4,7 @@ public final class SavingAccount extends BasicAccount {
     /**
      * Loads a saving account from database (with ID).
      *
-     * @param id Stock id.
+     * @param id Account id.
      * @param userId ID of the user this account belongs to.
      */
     public SavingAccount(String id, String userId, double cny, double usd, double hkd) {
