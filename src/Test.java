@@ -75,11 +75,11 @@ public final class Test {
         account.deposit(20, "usd");
         account.deposit(30, "hkd");
 
-        SavingAccount queryAccount = account.getDao().queryById("1");
-        System.out.println(queryAccount.saveString());
+        SavingAccount queryAccount = account.getDao().queryByUserId("1");
+        System.out.println(account.saveString());
 
         account.withdraw(5, "cny");
-        queryAccount = account.getDao().queryById("1");
+        queryAccount = account.getDao().queryByUserId("1");
         System.out.println(queryAccount.saveString());
 
         account.getDao().deleteFromDatabase(account);
@@ -97,17 +97,17 @@ public final class Test {
         System.out.println(stockAccount.saveString());
 
         System.out.println("query:");
-        StockAccount queryStockAccount = stockAccount.getDao().queryById("1");
+        StockAccount queryStockAccount = stockAccount.getDao().queryByUserId("1");
         System.out.println(queryStockAccount.saveString());
 
         System.out.println("withdraw:");
         stockAccount.withdraw(1000);
-        queryStockAccount = stockAccount.getDao().queryById("1");
+        queryStockAccount = stockAccount.getDao().queryByUserId("1");
         System.out.println(queryStockAccount.saveString());
 
         System.out.println("buy stock:");
         stockAccount.buyStock("1", 100);
-        queryStockAccount = stockAccount.getDao().queryById("1");
+        queryStockAccount = stockAccount.getDao().queryByUserId("1");
         System.out.println(queryStockAccount.saveString());
 
         System.out.println("stock price increases:");
@@ -117,7 +117,7 @@ public final class Test {
 
         System.out.println("sell stock:");
         stockAccount.sellStock("1", 50);
-        queryStockAccount = stockAccount.getDao().queryById("1");
+        queryStockAccount = stockAccount.getDao().queryByUserId("1");
         System.out.println(queryStockAccount.saveString());
 
         stock.setPrice(oldPrice);

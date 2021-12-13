@@ -32,7 +32,7 @@ public final class Stock extends BankObject {
      *
      * @param price Stock's price.
      */
-    public void setPrice(double price){
+    public void setPrice(double price) {
         this.price = price;
     }
 
@@ -41,7 +41,7 @@ public final class Stock extends BankObject {
      *
      * @return Stock's price.
      */
-    public double getPrice(){
+    public double getPrice() {
         return price;
     }
 

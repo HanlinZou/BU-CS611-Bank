@@ -1,5 +1,6 @@
 public class CheckingAccount extends BasicAccount {
     private CheckingAccountDao accountDao = null;
+    private BankTimer timer = BankTimer.getInstance();
 
     /**
      * Loads a checkings account from database (with ID).
@@ -39,11 +40,12 @@ public class CheckingAccount extends BasicAccount {
     @Override
     public boolean deposit(double money, String currencyType) {
         Currency currency = getCurrency(currencyType);
-        currency.setAmount(currency.getAmount() + 0.97 * money);
+        double gain = 0.97 * money;
+
+        currency.setAmount(currency.getAmount() + gain);
 
         getDao().saveToDatabase();  // update database
-
-        // TODO: log
+        new Log(getUserId(), timer.getDateStr(), "Checking: deposit " + money + " " + currencyType.toUpperCase() + " (get " + gain + " after fee).");  // log
 
         return true;
     }
@@ -58,13 +60,13 @@ public class CheckingAccount extends BasicAccount {
     @Override
     public boolean transfer(Account account, double money, String currencyType) {
         Currency currency = getCurrency(currencyType);
-        if (currency.setAmount(currency.getAmount() - 1.03 * money)) {
+        double cost = 1.03 * money;
+        if (currency.setAmount(currency.getAmount() - cost)) {
             account.deposit(money, currencyType);
 
             getDao().saveToDatabase();  // update database for this acount
             account.getDao().saveToDatabase();  // update database for another acount
-
-            // TODO: log
+            new Log(getUserId(), timer.getDateStr(), "Checking: transfer " + money + " " + currencyType.toUpperCase() + " from " + getType() + " to " + account.getType() + " (cost " + cost + " with fee).");  // log
 
             return true;
         }

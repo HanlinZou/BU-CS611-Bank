@@ -2,6 +2,7 @@ public abstract class BasicAccount extends Account {
     private CNY CNYBalance;
     private USD USDBalance;
     private HKD HKDBalance;
+    private BankTimer timer = BankTimer.getInstance();
 
     /**
      * Loads an account from database (with ID).
@@ -43,14 +44,13 @@ public abstract class BasicAccount extends Account {
      * @param USDAmt Amount of USD customer wants to purchase
      */
     public boolean CNY2USD(double USDAmt) {
-        double cost = 1.05 * USDAmt * USDBalance.getExchangeRate2CNY();
+        double cost = USDAmt * USDBalance.getExchangeRate2CNY();
+        double costWithFee = 1.05 * cost;
 
         setUSDBalance(USDAmt);
-        if (setCNYBalance(-cost)) {
+        if (setCNYBalance(-costWithFee)) {
             getDao().saveToDatabase();  // update database
-
-            // TODO: log
-
+            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " CNY (" + costWithFee + " with fee) to " + USDAmt + " USD.");  // log
             return true;
         }
 
@@ -63,14 +63,13 @@ public abstract class BasicAccount extends Account {
      * @param HKDAmt Amount of HKD customer wants to purchase
      */
     public boolean CNY2HKD(double HKDAmt) {
-        double cost = 1.05 * HKDAmt * HKDBalance.getExchangeRate2CNY();
+        double cost = HKDAmt * HKDBalance.getExchangeRate2CNY();
+        double costWithFee = 1.05 * cost;
 
         setHKDBalance(HKDAmt);
-        if (setCNYBalance(-cost)) {
+        if (setCNYBalance(-costWithFee)) {
             getDao().saveToDatabase();
-
-            // TODO: log
-
+            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " CNY (" + costWithFee + " with fee) to " + HKDAmt + " HKD.");  // log
             return true;
         }
 
@@ -95,14 +94,13 @@ public abstract class BasicAccount extends Account {
      * @param CNYAmt Amount of CNY customer wants to purchase
      */
     public boolean USD2CNY(double CNYAmt) {
-        double cost = 1.05 * CNYAmt * CNYBalance.getExchangeRate2USD();
+        double cost = CNYAmt * CNYBalance.getExchangeRate2USD();
+        double costWithFee = 1.05 * cost;
 
         setCNYBalance(CNYAmt);
-        if (setUSDBalance(-cost)) {
+        if (setUSDBalance(-costWithFee)) {
             getDao().saveToDatabase();
-
-            // TODO: log
-
+            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " USD (" + costWithFee + " with fee) to " + CNYAmt + " CNY.");  // log
             return true;
         }
 
@@ -115,14 +113,13 @@ public abstract class BasicAccount extends Account {
      * @param HKDAmt Amount of HKD customer wants to purchase
      */
     public boolean USD2HKD(double HKDAmt) {
-        double cost = 1.05 * HKDAmt * HKDBalance.getExchangeRate2USD();
+        double cost = HKDAmt * HKDBalance.getExchangeRate2USD();
+        double costWithFee = 1.05 * cost;
 
         setHKDBalance(HKDAmt);
-        if (setUSDBalance(-cost)) {
+        if (setUSDBalance(-costWithFee)) {
             getDao().saveToDatabase();
-
-            // TODO: log
-
+            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " USD (" + costWithFee + " with fee) to " + HKDAmt + " HKD.");  // log
             return true;
         }
 
@@ -143,14 +140,13 @@ public abstract class BasicAccount extends Account {
      * @param CNYAmt Amount of CNY customer wants to purchase
      */
     public boolean HKD2CNY(double CNYAmt) {
-        double cost = 1.05 * CNYAmt * CNYBalance.getExchangeRate2HKD();
+        double cost = CNYAmt * CNYBalance.getExchangeRate2HKD();
+        double costWithFee = 1.05 * cost;
 
         setCNYBalance(CNYAmt);
-        if (setHKDBalance(-cost)) {
+        if (setHKDBalance(-costWithFee)) {
             getDao().saveToDatabase();
-
-            // TODO: log
-
+            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " HKD (" + costWithFee + " with fee) to " + CNYAmt + " CNY.");  // log
             return true;
         }
 
@@ -163,14 +159,13 @@ public abstract class BasicAccount extends Account {
      * @param USDAmt Amount of USD customer wants to purchase
      */
     public boolean HKD2USD(double USDAmt) {
-        double cost = 1.05 * USDAmt * USDBalance.getExchangeRate2HKD();
+        double cost = USDAmt * USDBalance.getExchangeRate2HKD();
+        double costWithFee = 1.05 * cost;
 
         setUSDBalance(USDAmt);
         if (setHKDBalance(-cost)) {
             getDao().saveToDatabase();
-
-            // TODO: log
-
+            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " HKD (" + costWithFee + " with fee) to " + USDAmt + " USD.");  // log
             return true;
         }
 
@@ -186,11 +181,10 @@ public abstract class BasicAccount extends Account {
     @Override
     public boolean withdraw(double money, String currencyType) {
         Currency currency = getCurrency(currencyType);
-        if (currency.setAmount(currency.getAmount() - 1.03 * money)) {
+        double cost = 1.03 * money;
+        if (currency.setAmount(currency.getAmount() - cost)) {
             getDao().saveToDatabase();
-
-            // TODO: log
-
+            new Log(getUserId(), timer.getDateStr(), getType() + ": withdraw " + money + " " + currencyType.toUpperCase() + " (cost " + cost + " with fee).");  // log
             return true;
         }
         return false;

@@ -14,6 +14,8 @@ public final class StockAccount extends Account {
     private StockAccountDao accountDao = null;
     private static ConfigDao configDao = ConfigDao.getInstance();
 
+    private BankTimer timer = BankTimer.getInstance();
+
     /**
      * Loads a stock account from database (with ID).
      *
@@ -102,8 +104,7 @@ public final class StockAccount extends Account {
         else balance += money * configDao.getConfigDouble("HKD2USD", 1.0);
 
         getDao().saveToDatabase();  // update stock account database
-
-        // TODO: log
+        new Log(getUserId(), timer.getDateStr(), "Stock: deposit " + money + " " + currencyType.toUpperCase() + ".");  // log
 
         return true;
     }
@@ -121,8 +122,7 @@ public final class StockAccount extends Account {
         balance -= money;
 
         getDao().saveToDatabase();  // update stock account database
-
-        // TODO: log
+        new Log(getUserId(), timer.getDateStr(), "Stock: withdraw " + money + ".");  // log
 
         return true;
     }
@@ -158,8 +158,7 @@ public final class StockAccount extends Account {
         this.balance -= spentMoney;
 
         getDao().saveToDatabase();  // update stock account database
-
-        // TODO: log
+        new Log(getUserId(), timer.getDateStr(), "But " + share + " share stock " + stock.getName() + " (id: " + stockId + ", price: " + stock.getPrice() + ").");  // log
 
         return true;
     }
@@ -192,8 +191,7 @@ public final class StockAccount extends Account {
         this.accumulatedProfit += share * (stock.getPrice() - pricePerShare); // update accumulated profit
 
         getDao().saveToDatabase();  // update stock account database
-
-        // TODO: log
+        new Log(getUserId(), timer.getDateStr(), "Sell " + share + " share stock " + stock.getName() + " (id: " + stockId + ", price: " + stock.getPrice() + ").");  // log
 
         return true;
     }

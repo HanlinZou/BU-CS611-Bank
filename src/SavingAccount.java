@@ -1,5 +1,6 @@
 public final class SavingAccount extends BasicAccount {
     private SavingAccountDao accountDao = null;
+    private BankTimer timer = BankTimer.getInstance();
 
     /**
      * Loads a saving account from database (with ID).
@@ -42,8 +43,7 @@ public final class SavingAccount extends BasicAccount {
         currency.setAmount(currency.getAmount() + money);
 
         getDao().saveToDatabase();  // update database
-
-        // TODO: log
+        new Log(getUserId(), timer.getDateStr(), "Saving: deposit " + money + " " + currencyType.toUpperCase() + ".");  // log
 
         return true;
     }
@@ -63,8 +63,7 @@ public final class SavingAccount extends BasicAccount {
 
             getDao().saveToDatabase();  // update database for this acount
             account.getDao().saveToDatabase();  // update database for another acount
-
-            // TODO: log
+            new Log(getUserId(), timer.getDateStr(), "Saving: transfer " + money + " " + currencyType.toUpperCase() + " from " + getType() + " to " + account.getType() + ".");  // log
 
             return true;
         }
