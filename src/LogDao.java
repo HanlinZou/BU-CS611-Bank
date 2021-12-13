@@ -36,6 +36,24 @@ public final class LogDao extends Dao<Log> {
         return logList;
     }
 
+    /**
+     * Given an user ID, returns all logs related to it.
+     *
+     * @param userId User ID.
+     *
+     * @return A list of Log objects.
+     */
+    public List<Log> queryByUserId(String userId) {
+        List<Log> allLogList = getList();
+        List<Log> logList = new ArrayList<>();
+
+        for (Log log : allLogList) {
+            if (log.getUserId().equals(userId)) logList.add(log);
+        }
+
+        return logList;
+    }
+
     @Override
     public String getTableTitle() {
         return "id,userId,time,log";
