@@ -253,7 +253,7 @@ public final class StockAccount extends Account {
 
     @Override
     public String saveString() {
-        String str = getID() + "," + getUserId() + "," + balance + " " + accumulatedProfit + ",";
+        String str = getID() + "," + getUserId() + "," + balance + "," + accumulatedProfit + ",";
 
         for (Stock stock : stock2share.keySet()) {
             int share = stock2share.get(stock);
