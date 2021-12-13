@@ -1,10 +1,12 @@
 /**
  * 测试样例，提交的时候可以删掉
  */
+
 public final class Test {
     private CustomerDao customerDao = CustomerDao.getInstance();
     private ManagerDao managerDao = ManagerDao.getInstance();
     private StockDao stockDao = StockDao.getInstance();
+    private LogDao logDao = LogDao.getInstance();
     BankTimer timer = BankTimer.getInstance();
 
     public Test() {
