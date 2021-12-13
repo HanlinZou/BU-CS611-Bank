@@ -4,9 +4,11 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 {
+	
 	private String uid;
 	
 	private JButton buttonGoBack;
@@ -37,6 +39,7 @@ public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 		this.setButton();
 		this.setPanel();
 	}
+
 	@Override
 	public void setLabel() 
 	{
@@ -90,22 +93,57 @@ public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		super.frame.dispose();
+		
 		if(e.getSource() == this.buttonGoBack)
 		{
+			super.frame.dispose();
 			new GUIMainMenu(this.uid);
 		}
-		else if(e.getSource() == this.buttonDeposit)
+		Customer c = CustomerDao.getInstance().queryById(uid);
+		if(e.getSource() == this.buttonDeposit)
 		{
-			//go to deposit
+			String type = GUIInputUtil.getInstance().currencySelect();
+			if(type != null)
+			{
+				double money = GUIInputUtil.getInstance().moneyAmount("Enter the amount of money to be deposited");
+				if(money > 0)
+				{
+					System.out.println(money+" : " + type);
+					c.getSavingAccount().deposit(money, type);
+					JOptionPane.showMessageDialog(null, "You have successfully deposited " + money + " " + type + " into your saving account","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
+			//
 		}
 		else if(e.getSource() == this.buttonWithdraw)
 		{
 			//withdraw action
+			String type = GUIInputUtil.getInstance().currencySelect();
+			if(type != null)
+			{
+				double money = GUIInputUtil.getInstance().moneyAmount("Enter the amount of money to be withdrawn");
+				if(money > 0)
+				{
+					if(c.getSavingAccount().withdraw(money, type))
+					{
+						JOptionPane.showMessageDialog(null, "<html>Confirmation:<br>"
+								+ "With draw complete!<br>"
+								+ "remaining balance:<br>"
+								+ "______CNY: " + c.getSavingAccount().getCNYBalance()+"<br>"
+								+ "______USD: " + c.getSavingAccount().getUSDBalance()+"<br>"
+								+ "______HKD: " + c.getSavingAccount().getHKDBalance()+"<br>");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Not enough money in the account","Warning",JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			}
 		}
 		else if(e.getSource() == this.buttonTransaction)
 		{
 			//view transaction
+			JOptionPane.showMessageDialog(null, LogDao.getInstance().queryByUserId(uid),"information",JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if(e.getSource() == this.buttonForeignCurrency)
 		{
