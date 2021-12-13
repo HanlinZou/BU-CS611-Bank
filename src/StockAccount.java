@@ -158,7 +158,7 @@ public final class StockAccount extends Account {
         this.balance -= spentMoney;
 
         getDao().saveToDatabase();  // update stock account database
-        new Log(getUserId(), timer.getDateStr(), "But " + share + " share stock " + stock.getName() + " (id: " + stockId + ", price: " + stock.getPrice() + ").");  // log
+        new Log(getUserId(), timer.getDateStr(), "But " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
 
         return true;
     }
@@ -191,7 +191,7 @@ public final class StockAccount extends Account {
         this.accumulatedProfit += share * (stock.getPrice() - pricePerShare); // update accumulated profit
 
         getDao().saveToDatabase();  // update stock account database
-        new Log(getUserId(), timer.getDateStr(), "Sell " + share + " share stock " + stock.getName() + " (id: " + stockId + ", price: " + stock.getPrice() + ").");  // log
+        new Log(getUserId(), timer.getDateStr(), "Sell " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
 
         return true;
     }

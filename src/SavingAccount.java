@@ -89,7 +89,7 @@ public final class SavingAccount extends BasicAccount implements TimerObserver {
         setHKDBalance(hkd);
 
         getDao().saveToDatabase();  // update database for this acount
-        new Log(getUserId(), timer.getDateStr(), "Saving: get interest: " + cny + " CNY, " + usd + " USD, " + hkd + " HKD.");  // log
+        new Log(getUserId(), timer.getDateStr(), "Saving: get interest: " + cny + " CNY; " + usd + " USD; " + hkd + " HKD.");  // log
     }
 
     @Override

@@ -75,7 +75,7 @@ public final class Customer extends User {
             System.out.println("Successfully opened a saving account.");
 
             savingAccount.getDao().saveToDatabase();  // update savingAccount database
-            new Log(getID(), timer.getDateStr(), "Open a saving account, cost 10.0 USD as fee.");  // log
+            new Log(getID(), timer.getDateStr(), "Open a saving account; cost 10.0 USD as fee.");  // log
             return true;
         }
         else System.out.println("You already have a saving account.");return false;
@@ -112,7 +112,7 @@ public final class Customer extends User {
             System.out.println("Successfully opened a checking account.");
 
             checkingAccount.getDao().saveToDatabase();  // update checkingAccount database
-            new Log(getID(), timer.getDateStr(), "Open a checking account, cost 15.0 USD as fee.");  // log
+            new Log(getID(), timer.getDateStr(), "Open a checking account; cost 15.0 USD as fee.");  // log
 
             return true;
         }

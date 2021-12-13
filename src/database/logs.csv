@@ -1,18 +1,18 @@
 id,userId,time,log
-1,1,2021-12-13 12:44:16,Saving: deposit 10.0 CNY.
-2,1,2021-12-13 12:44:16,Saving: deposit 20.0 USD.
-3,1,2021-12-13 12:44:16,Saving: deposit 30.0 HKD.
-4,1,2021-12-13 12:44:16,saving: withdraw 5.0 CNY (cost 5.15 with fee).
-5,1,2021-12-13 12:44:16,Stock: deposit 1000.0 USD.
-6,1,2021-12-13 12:44:16,Stock: deposit 1000.0 CNY.
-7,1,2021-12-13 12:44:16,Stock: withdraw 1000.0.
-8,1,2021-12-13 12:44:16,But 100 share stock microsoft (id: 1, price: 10.2).
-9,1,2021-12-13 12:44:16,Sell 50 share stock microsoft (id: 1, price: 80.2).
-10,12,2021-12-13 12:44:16,Open a checking account, cost 15.0 USD as fee.
-11,12,2021-12-13 12:44:16,Open a saving account, cost 10.0 USD as fee.
-12,12,2021-12-13 12:44:16,Saving: deposit 1000.0 USD.
-13,12,2021-12-13 12:44:16,Checking: deposit 1000.0 USD (get 970.0 after fee).
-14,12,2021-12-13 12:44:16,Checking: deposit 500.0 USD (get 485.0 after fee).
-15,12,2021-12-13 12:44:16,Saving: transfer 500.0 USD from saving to checking.
-16,12,2021-12-13 12:44:16,Close a checking account.
-17,12,2021-12-13 12:44:16,Close a saving account.
+1,1,2021-12-13 11:58:27,Saving: deposit 10.0 CNY.
+2,1,2021-12-13 11:58:27,Saving: deposit 20.0 USD.
+3,1,2021-12-13 11:58:27,Saving: deposit 30.0 HKD.
+4,1,2021-12-13 11:58:27,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+5,1,2021-12-13 11:58:27,Stock: deposit 1000.0 USD.
+6,1,2021-12-13 11:58:27,Stock: deposit 1000.0 CNY.
+7,1,2021-12-13 11:58:27,Stock: withdraw 1000.0.
+8,1,2021-12-13 11:58:27,But 100 share stock microsoft (id: 1; price: 10.2).
+9,1,2021-12-13 11:58:27,Sell 50 share stock microsoft (id: 1; price: 80.2).
+10,12,2021-12-13 11:58:27,Open a checking account; cost 15.0 USD as fee.
+11,12,2021-12-13 11:58:27,Open a saving account; cost 10.0 USD as fee.
+12,12,2021-12-13 11:58:27,Saving: deposit 1000.0 USD.
+13,12,2021-12-13 11:58:27,Checking: deposit 1000.0 USD (get 970.0 after fee).
+14,12,2021-12-13 11:58:27,Checking: deposit 500.0 USD (get 485.0 after fee).
+15,12,2021-12-13 11:58:27,Saving: transfer 500.0 USD from saving to checking.
+16,12,2021-12-13 11:58:27,Close a checking account.
+17,12,2021-12-13 11:58:27,Close a saving account.
