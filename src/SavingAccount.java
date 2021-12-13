@@ -1,5 +1,6 @@
-public final class SavingAccount extends BasicAccount {
+public final class SavingAccount extends BasicAccount implements TimerObserver {
     private SavingAccountDao accountDao = null;
+    private static ConfigDao configDao = ConfigDao.getInstance();
     private BankTimer timer = BankTimer.getInstance();
 
     /**
@@ -10,6 +11,7 @@ public final class SavingAccount extends BasicAccount {
      */
     public SavingAccount(String id, String userId, double cny, double usd, double hkd) {
         super("saving", id, userId, cny, usd, hkd);
+        timer.addObserver(this);  // observe time changing
     }
 
     /**
@@ -22,6 +24,7 @@ public final class SavingAccount extends BasicAccount {
         setID(getDao().getNewId());  // generates a new id
         setName(userId + "-" + getID());
         getDao().addToDatabase(this);  // add to database
+        timer.addObserver(this);  // observe time changing
     }
 
     public AccountDao<SavingAccount> getDao() {
@@ -70,8 +73,27 @@ public final class SavingAccount extends BasicAccount {
         return false;
     }
 
+    /**
+     * Adds interest to this account every config.INTERVAL seconds.
+     */
     @Override
-    public String toString(){
+    public void onTimeChange() {
+        double rate = configDao.getConfigDouble("RATE", 0.003);
+
+        double cny = rate * getCNYBalance();
+        double usd = rate * getUSDBalance();
+        double hkd = rate * getHKDBalance();
+
+        setCNYBalance(cny);
+        setUSDBalance(usd);
+        setHKDBalance(hkd);
+
+        getDao().saveToDatabase();  // update database for this acount
+        new Log(getUserId(), timer.getDateStr(), "Saving: get interest: " + cny + " CNY, " + usd + " USD, " + hkd + " HKD.");  // log
+    }
+
+    @Override
+    public String toString() {
         return "Saving Account Balance: \nUSD: " + getUSDBalance() + "\nCNY: " +
             getCNYBalance() + "\nHKD: " + getHKDBalance();
     }
