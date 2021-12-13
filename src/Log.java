@@ -84,12 +84,14 @@ public final class Log extends BankObject {
      *
      * @return User ID.
      */
-    public String getUserId() {
+    public String getUserId() 
+    {
         return userId;
     }
 
     @Override
-    public String saveString() {
-        return getID() + "," + userId + "," + time + "," + log;
+    public String saveString() 
+    {
+        return "Transaction id: " +getID() + ", userID: " + userId + ", time: " + time + "," + log;
     }
 }

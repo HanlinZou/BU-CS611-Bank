@@ -19,15 +19,18 @@ public class GUIInputUtil {
 		return inputUtil;
 	}
 	
+	public String currencySelect(String message)
+	{
+		return (String)JOptionPane.showInputDialog(null,message,"Currency Selection", JOptionPane.QUESTION_MESSAGE, null, this.currencyType,this.currencyType[0]);
+	}
 	public String currencySelect()
 	{
-		return (String)JOptionPane.showInputDialog(null,"Select a currency","Currency Selection", JOptionPane.QUESTION_MESSAGE, null, this.currencyType,this.currencyType[0]);
+		return this.currencySelect("Select a currency");
 	}
-	
 	public double moneyAmount(String message)
 	{
 		String input = JOptionPane.showInputDialog(null,message);
-		if(!input.equals(""))
+		if(input!=null&&!input.equals(""))
 		{
 			try
 			{

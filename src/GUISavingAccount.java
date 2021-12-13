@@ -142,12 +142,63 @@ public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 		}
 		else if(e.getSource() == this.buttonTransaction)
 		{
+			String result = "<html>";
+			for(Log s:LogDao.getInstance().queryByUserId(uid))
+			{
+				result += s.saveString() + "<br>";
+			}
+			result += "</html>";
 			//view transaction
-			JOptionPane.showMessageDialog(null, LogDao.getInstance().queryByUserId(uid),"information",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, result,"information",JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if(e.getSource() == this.buttonForeignCurrency)
 		{
 			//purchase foreign currency
+			String target = GUIInputUtil.getInstance().currencySelect("Which currency do you wish to purchase?");
+			if(target != null)
+			{
+				String withWhat = GUIInputUtil.getInstance().currencySelect("Which currency are you going to use to make this purchase?");
+				if(withWhat != null)
+				{
+					double howmuch = GUIInputUtil.getInstance().moneyAmount("How much " + target + " are you going to buy?");
+					if(howmuch > 0)
+					{
+						boolean valid = false;
+						if(withWhat.equals("hkd")&&target.equals("usd"))
+						{
+							valid = c.getSavingAccount().HKD2USD(howmuch);
+						}
+						else if(withWhat.equals("hkd")&&target.equals("cny")) 
+						{
+							valid = c.getSavingAccount().HKD2CNY(howmuch);
+						}
+						else if(withWhat.equals("cny")&&target.equals("hkd")) 
+						{
+							valid = c.getSavingAccount().CNY2HKD(howmuch);
+						}
+						else if(withWhat.equals("cny")&&target.equals("usd")) 
+						{
+							valid = c.getSavingAccount().CNY2USD(howmuch);
+						}
+						else if(withWhat.equals("usd")&&target.equals("cny")) 
+						{
+							valid = c.getSavingAccount().USD2CNY(howmuch);
+						}
+						else if(withWhat.equals("usd")&&target.equals("hkd")) 
+						{
+							valid = c.getSavingAccount().USD2HKD(howmuch);
+						}
+						if(valid)
+						{
+							JOptionPane.showInternalMessageDialog(null, "Purchase succeed","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+						}
+						else
+						{
+							JOptionPane.showInternalMessageDialog(null, "Purchase failed, Please check your balance","Causion",JOptionPane.INFORMATION_MESSAGE);
+						}
+					}
+				}
+			}
 		}
 	}
 
