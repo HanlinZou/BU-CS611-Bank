@@ -12,7 +12,13 @@ public class GUIBalance extends Frame implements GUIsetup, ActionListener
 	private double balance;
 	
 	private JButton buttonGoBack;
-	private JLabel labelBalance;
+
+	private JLabel labelChecking;
+	private JLabel labelSaving;
+	private JLabel labelCheckingBal;
+	private JLabel labelSavingBal;
+	private JLabel labelStock;
+	private JLabel labelStockBal;
 	private JLabel labelTitle;
 	public GUIBalance(String uid)
 	{
@@ -26,23 +32,69 @@ public class GUIBalance extends Frame implements GUIsetup, ActionListener
 		this.updateBalance();
 		
 		this.buttonGoBack = new JButton("Back");
-		this.labelBalance = new JLabel();
+
+		this.labelChecking = new JLabel();
+		this.labelSaving = new JLabel();
+		this.labelCheckingBal = new JLabel();
+		this.labelSavingBal = new JLabel();
 		this.labelTitle = new JLabel();
+		this.labelStock = new JLabel();
+		this.labelStockBal = new JLabel();
 		
 		this.setLabel();
 		this.setButton();
 		this.setPanel();
 	}
+	
 	@Override
 	public void setLabel() 
 	{
-		this.labelTitle.setText("Balance");
+		Customer c = CustomerDao.getInstance().queryById(uid);
+		this.labelTitle.setText("Total Balance");
 		this.labelTitle.setFont(new Font(null, Font.BOLD, 50));
-		this.labelTitle.setBounds(200,50,600,100);
+		this.labelTitle.setBounds(140,50,600,100);
 		
-		this.labelBalance.setText(this.balance + "");
-		this.labelBalance.setFont(new Font(null, Font.BOLD, 50));
-		this.labelBalance.setBounds(200,250,600,100);
+		
+		
+		if(SavingAccountDao.getInstance().queryByUserId(uid) != null)
+		{
+			this.labelSaving.setText("Saving Account");
+			this.labelSaving.setFont(new Font(null, Font.BOLD, 50));
+			this.labelSaving.setBounds(110,100,600,100);
+			
+			this.labelSavingBal.setText("<html>"
+					+ "USD: " + c.getSavingAccount().getUSDBalance() + "<br>"
+					+ "CNY: " + c.getSavingAccount().getCNYBalance() + "<br>"
+					+ "HKD: " + c.getSavingAccount().getHKDBalance() + "<html>");
+			this.labelSavingBal.setFont(new Font(null, Font.BOLD, 25));
+			this.labelSavingBal.setBounds(160,80,600,300);
+		}
+		
+		if(CheckingAccountDao.getInstance().queryByUserId(uid) != null)
+		{
+			this.labelChecking.setText("Checking Account");
+			this.labelChecking.setFont(new Font(null, Font.BOLD, 50));
+			this.labelChecking.setBounds(100,280,600,100);
+			
+			this.labelCheckingBal.setText("<html>"
+					+ "USD: " + c.getCheckingAccount().getUSDBalance() + "<br>"
+					+ "CNY: " + c.getCheckingAccount().getCNYBalance() + "<br>"
+					+ "HKD: " + c.getCheckingAccount().getHKDBalance() + "<html>");
+			this.labelCheckingBal.setFont(new Font(null, Font.BOLD, 25));
+			this.labelCheckingBal.setBounds(160,370,600,100);
+		}
+		
+		if(StockAccountDao.getInstance().queryByUserId(uid) != null)
+		{
+			this.labelStock.setText("Stock Account");
+			this.labelStock.setFont(new Font(null, Font.BOLD, 50));
+			this.labelStock.setBounds(120,480,600,100);
+			
+			
+			this.labelStockBal.setText("USD: " + c.getStockAccount().getBalance());
+			this.labelStockBal.setFont(new Font(null, Font.BOLD, 25));
+			this.labelStockBal.setBounds(160,560,600,50);
+		}
 	}
 
 	@Override
@@ -59,7 +111,12 @@ public class GUIBalance extends Frame implements GUIsetup, ActionListener
 	{
 		super.panel.add(buttonGoBack);
 		super.panel.add(labelTitle);
-		super.panel.add(labelBalance);
+		super.panel.add(this.labelSaving);
+		super.panel.add(this.labelSavingBal);
+		super.panel.add(this.labelChecking);
+		super.panel.add(this.labelCheckingBal);
+		super.panel.add(this.labelStock);
+		super.panel.add(this.labelStockBal);
 	}
 
 	@Override

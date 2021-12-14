@@ -14,6 +14,7 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 	private JButton buttonPurchase;
 	private JButton buttonSell;
 	private JButton buttonCheckStock;
+	private JButton buttonDeposit;
 	
 	private JLabel labelTitle;
 	
@@ -31,7 +32,7 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 		this.buttonPurchase = new JButton("Purchase Stock Share");
 		this.buttonSell = new JButton("Sell Stock Share");
 		this.buttonCheckStock = new JButton("Check Stock/Profit");
-		
+		this.buttonDeposit = new JButton("Deposit");
 		
 		this.setLabel();
 		this.setButton();
@@ -68,6 +69,11 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 		this.buttonSell.setFont(new Font(null,Font.BOLD,25));
 		this.buttonSell.setBounds(150, 400, 300, 100);
 		this.buttonSell.setFocusable(false);
+		
+		this.buttonDeposit.addActionListener(this);
+		this.buttonDeposit.setFont(new Font(null,Font.BOLD,25));
+		this.buttonDeposit.setBounds(150, 700, 300, 100);
+		this.buttonDeposit.setFocusable(false);
 	}
 
 	@Override
@@ -79,6 +85,7 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 		super.panel.add(this.buttonPurchase);
 		super.panel.add(this.buttonCheckStock);
 		super.panel.add(this.buttonSell);
+		super.panel.add(this.buttonDeposit);
 	}
 
 	@Override
@@ -125,8 +132,6 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 			{
 				JOptionPane.showMessageDialog(null, "You don't own any stock","Warning",JOptionPane.WARNING_MESSAGE);
 			}
-			
-			
 		}
 		else if(e.getSource() == this.buttonSell)
 		{
@@ -145,6 +150,23 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 					{
 						JOptionPane.showMessageDialog(null, "Failed, make sure you have these shares","Warning",JOptionPane.WARNING_MESSAGE);
 					}
+				}
+			}
+		}
+		else if(e.getSource() == this.buttonDeposit)
+		{
+			double amount = GUIInputUtil.getInstance().moneyAmount("<html>Your saving account has " + c.getSavingAccount().getUSDBalance() + " USD<br>"
+					+ "How much do you wish to transfer to Stock account?");
+			if(amount > 0)
+			{
+				if(c.depositStockAccount(amount))
+				{
+					JOptionPane.showMessageDialog(null, "<html>You have successfully deposited " + amount + " USD into Stock account<br>"
+							+ "Current Stock account balance: " + c.getStockAccount().getBalance() + " USD<html>","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+				}
+				else
+				{
+					JOptionPane.showMessageDialog(null, "Failed, make sure you have enough money in your stock account","Warning",JOptionPane.WARNING_MESSAGE);
 				}
 			}
 		}

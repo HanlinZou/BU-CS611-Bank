@@ -2421,3 +2421,20 @@ id,userId,time,log
 2420,4,2021-12-14 08:44:53,Saving: deposit 100000.0 USD.
 2421,4,2021-12-14 08:44:53,But 50.0 share stock microsoft (id: 1; price: 10.2).
 2422,4,2021-12-14 10:47:30,Saving: deposit 800000.0 USD.
+2423,4,2021-12-14 10:38:35,But 1.0 share stock microsoft (id: 1; price: 10.2).
+2424,4,2021-12-14 10:38:35,Saving: deposit 400000.0 USD.
+2425,4,2021-12-14 11:23:16,Stock: deposit 5000000.0 USD.
+2426,4,2021-12-14 11:23:16,Saving: transfer 5000000.0 USD from saving to stock.
+2427,4,2021-12-14 11:24:31,Stock: deposit 6.0E9 USD.
+2428,4,2021-12-14 11:24:31,Saving: transfer 6.0E9 USD from saving to stock.
+2429,4,2021-12-14 11:24:31,But 50000.0 share stock microsoft (id: 1; price: 10.2).
+2430,4,2021-12-14 11:47:54,Saving: deposit 60000.0 HKD.
+2431,4,2021-12-14 11:54:51,Checking: deposit 5000.0 CNY (get 4850.0 after fee).
+2432,4,2021-12-14 11:54:51,Checking: deposit 5000.0 USD (get 4850.0 after fee).
+2433,4,2021-12-14 11:54:51,Saving: deposit 5000.0 CNY.
+2434,4,2021-12-15 12:12:53,Checking: deposit 100.0 HKD (get 97.0 after fee).
+2435,4,2021-12-15 12:12:53,Saving: transfer 100.0 HKD from saving to checking.
+2436,7,2021-12-15 12:15:16,Open a checking account; cost 15.0 USD as fee.
+2437,7,2021-12-15 12:15:16,Open a saving account; cost 10.0 USD as fee.
+2438,12,2021-12-15 12:17:02,Open a checking account; cost 15.0 USD as fee.
+2439,4,2021-12-15 01:03:07,Close a stock account.

@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class GUICloseAccount extends Frame implements GUIsetup, ActionListener
 {
@@ -16,12 +17,13 @@ public class GUICloseAccount extends Frame implements GUIsetup, ActionListener
 	
 	private JLabel labelTitle;
 	
+	private int count;
 	public GUICloseAccount(String uid)
 	{
 		super();
 		super.addPanel();
 		super.frame.setVisible(true);
-		
+		this.count = 0;
 		this.uid = uid;
 		
 		this.labelTitle = new JLabel();
@@ -83,22 +85,84 @@ public class GUICloseAccount extends Frame implements GUIsetup, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		super.frame.dispose();
+		
 		if(e.getSource() == this.buttonGoBack)
 		{
+			super.frame.dispose();
 			new GUIMainMenu(this.uid);
+			JOptionPane.showMessageDialog(null, "It was a d**k move to go there","Causion",JOptionPane.INFORMATION_MESSAGE);
 		}
-		else if(e.getSource() == this.buttonSaving)
+		else
 		{
-			//close saving account
-		}
-		else if(e.getSource() == this.buttonStock)
-		{
-			//close stock account
-		}
-		else if(e.getSource() == this.buttonChecking)
-		{
-			//close checking account
+			Customer c = CustomerDao.getInstance().queryById(uid);
+			
+			switch(count)
+			{
+			case 0:
+			
+				JOptionPane.showMessageDialog(null, "This is a dangerous thought","Causion",JOptionPane.INFORMATION_MESSAGE);
+				break;
+			case 1:
+				
+				JOptionPane.showMessageDialog(null, "Don't do this please","Causion",JOptionPane.INFORMATION_MESSAGE);
+				break;
+			case 2:
+				
+				JOptionPane.showMessageDialog(null, "We don't want to lose you","Causion",JOptionPane.INFORMATION_MESSAGE);
+				break;
+			case 3:
+				JOptionPane.showMessageDialog(null, "Hanlin Zou the COO will kiss you if you stay","Causion",JOptionPane.INFORMATION_MESSAGE);
+				break;
+			case 4:
+				for(int i = 0; i < 5; i++)
+				{
+					JOptionPane.showMessageDialog(null, "Hanlin Zou is on his kness begging you to stay","Causion",JOptionPane.INFORMATION_MESSAGE);
+				}
+				break;
+			default:
+				if(e.getSource() == this.buttonSaving)
+				{
+					//close saving account
+					if(SavingAccountDao.getInstance().queryByUserId(uid) != null)
+					{
+						c.closeSavingAccount();
+						JOptionPane.showMessageDialog(null, "Saving account closed, now you are dead to us","Causion",JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Nice try, you don't have this account opened yet","Causion",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else if(e.getSource() == this.buttonStock)
+				{
+					//close stock account
+					if(StockAccountDao.getInstance().queryByUserId(uid) != null)
+					{
+						c.closeStockAccount();
+						JOptionPane.showMessageDialog(null, "Stock account closed, now you are dead to us","Causion",JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Nice try, you don't have this account opened yet","Causion",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				else if(e.getSource() == this.buttonChecking)
+				{
+					//close checking account
+					if(CheckingAccountDao.getInstance().queryByUserId(uid) != null)
+					{
+						c.closeCheckingAccount();
+						JOptionPane.showMessageDialog(null, "Checking account closed, now you are dead to us","Causion",JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Nice try, you don't have this account opened yet","Causion",JOptionPane.INFORMATION_MESSAGE);
+					}
+				}
+				count = -1;
+				break;
+			}
+			count++;
 		}
 	}
 
