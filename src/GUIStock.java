@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class GUIStock extends Frame implements GUIsetup, ActionListener
 {
@@ -83,14 +84,35 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		super.frame.dispose();
+		
 		if(e.getSource() == this.buttonGoBack)
 		{
+			super.frame.dispose();
 			new GUIMainMenu(this.uid);
 		}
-		else if(e.getSource() == this.buttonPurchase)
+		Customer c = CustomerDao.getInstance().queryById(uid);
+		
+		if(e.getSource() == this.buttonPurchase)
 		{
 			//go to deposit
+			String stockToPurchase = GUIInputUtil.getInstance().stockSelect("Please select a Stock to purchase");
+			if(stockToPurchase != null)
+			{
+				double numOfShare = GUIInputUtil.getInstance().moneyAmount("How many share do you wish to buy?");
+				if(numOfShare > 0)
+				{
+					
+					if(c.getStockAccount().buyStock(StockDao.getInstance().queryByName(stockToPurchase).getID(),numOfShare))
+					{
+						JOptionPane.showMessageDialog(null, "Confirmation! you have bought " + numOfShare + " shares of " + stockToPurchase + " stock","Purchase Successfully",JOptionPane.WARNING_MESSAGE);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Not enough money in the account","Purchase failed",JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			}
+			
 		}
 		else if(e.getSource() == this.buttonCheckStock)
 		{
@@ -101,5 +123,6 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 			//purchase foreign currency
 		}
 	}
-
+	
+	
 }

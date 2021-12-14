@@ -4,7 +4,7 @@ import java.util.Map;
 public final class StockAccount extends Account {
     public double balance;
     // Number of stocks this account owns
-    private Map<Stock, Integer> stock2share;
+    private Map<Stock, Double> stock2share;
     // Money that the account spends on each stock
     private Map<Stock, Double> stock2money;
 
@@ -31,7 +31,7 @@ public final class StockAccount extends Account {
         String userId,
         double balance,
         double accumulatedProfit,
-        Map<Stock, Integer> stock2share,
+        Map<Stock, Double> stock2share,
         Map<Stock, Double> stock2money
     ) {
         super("stock", id, userId);
@@ -68,7 +68,7 @@ public final class StockAccount extends Account {
         return accountDao;
     }
 
-    public void setStock2Share(Map<Stock, Integer> stock2share){
+    public void setStock2Share(Map<Stock, Double> stock2share){
         this.stock2share = stock2share;
     }
 
@@ -140,7 +140,7 @@ public final class StockAccount extends Account {
      *
      * @return true: successful / false: fail
      */
-    public boolean buyStock(String stockId, int share) {
+    public boolean buyStock(String stockId, double share) {
         Stock stock = stockDao.queryById(stockId);
 
         if (stock == null) return false;  // wrong stockId
@@ -149,7 +149,7 @@ public final class StockAccount extends Account {
         if(balance < spentMoney) return false;  // no enough balance
 
         // update current share
-        int newShare = stock2share.getOrDefault(stock, 0) + share;
+        double newShare = stock2share.getOrDefault(stock, 0.0) + share;
         stock2share.put(stock, newShare);
         // update spent money
         double newMoney = stock2money.getOrDefault(stock, 0.0) + spentMoney;
@@ -176,7 +176,7 @@ public final class StockAccount extends Account {
 
         if (stock == null) return false;  // wrong stockId
 
-        int oldShare = stock2share.getOrDefault(stock, 0);
+        double oldShare = stock2share.getOrDefault(stock, 0.0);
         double oldMoney = stock2money.getOrDefault(stock, 0.0);
 
         if(oldShare < share) return false;  // no enough share
@@ -203,7 +203,7 @@ public final class StockAccount extends Account {
         String str = "";
 
         for (Stock stock : stock2share.keySet()) {
-            int share = stock2share.get(stock);
+            double share = stock2share.get(stock);
             double money = stock2money.get(stock);
 
             str += ("Stock name: " + stock.getName() + System.lineSeparator());
@@ -225,7 +225,7 @@ public final class StockAccount extends Account {
         double estimatedProfit = 0;
 
         for (Stock stock : stock2share.keySet()) {
-            int share = stock2share.get(stock);
+            double share = stock2share.get(stock);
             double money = stock2money.get(stock);
             estimatedProfit += stock.getPrice() * share - money;
         }
@@ -256,7 +256,7 @@ public final class StockAccount extends Account {
         String str = getID() + "," + getUserId() + "," + balance + "," + accumulatedProfit + ",";
 
         for (Stock stock : stock2share.keySet()) {
-            int share = stock2share.get(stock);
+            double share = stock2share.get(stock);
             double money = stock2money.get(stock);
 
             str += stock.getID() + ":";

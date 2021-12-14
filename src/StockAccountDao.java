@@ -30,7 +30,7 @@ public class StockAccountDao extends AccountDao<StockAccount> {
         List<StockAccount> accountList = new ArrayList<>();
 
         for (int i = 1; i < lines.size(); i++) {  // skip table title
-            Map<Stock, Integer> stock2share = new HashMap<>();
+            Map<Stock, Double> stock2share = new HashMap<>();
             Map<Stock, Double> stock2money = new HashMap<>();
 
             List<String> info = lines.get(i);
@@ -47,7 +47,7 @@ public class StockAccountDao extends AccountDao<StockAccount> {
                 String[] stockList = stockInfo.split(";");
                 for (String stockString : stockList) {
                     String stockId = stockString.split(":")[0];
-                    int share = Integer.parseInt(stockString.split(":")[1].split("\\$")[0]);
+                    double share = Integer.parseInt(stockString.split(":")[1].split("\\$")[0]);
                     double money = Double.parseDouble(stockString.split(":")[1].split("\\$")[1]);
 
                     Stock stock = stockDao.queryById(stockId);

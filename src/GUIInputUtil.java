@@ -4,7 +4,7 @@ public class GUIInputUtil {
 	
 	private final String[] currencyType = {"usd","cny","hkd"};
 	private static GUIInputUtil inputUtil;
-	
+	private String[] stockLis;
 	private GUIInputUtil()
 	{
 		
@@ -48,5 +48,29 @@ public class GUIInputUtil {
 			}
 		}
 		return 0;
+	}
+	
+	public String stockSelect(String message)
+	{
+		String[] stockList = new String[StockDao.getInstance().getList().size()];
+		for(int i = 0; i < stockList.length; i++)
+		{
+			stockList[i] = StockDao.getInstance().getList().get(i).getName() + " : " + StockDao.getInstance().getList().get(i).getPrice() + "/Share";
+		}
+		String result = (String) JOptionPane.showInputDialog(null,"Please select a stock to purchase","Stock",JOptionPane.QUESTION_MESSAGE,null,stockList,stockList[0]);
+		int index = -1;
+		if(result != null)
+		{
+			for(String sl:stockList)
+			{
+				index += 1;
+				if(result.equals(sl))
+				{
+					return StockDao.getInstance().getList().get(index).getName();
+				}
+			}
+			return null;
+		}
+		return null;
 	}
 }

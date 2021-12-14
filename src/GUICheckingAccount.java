@@ -4,6 +4,7 @@ import java.awt.event.ActionListener;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 
 public class GUICheckingAccount extends Frame implements GUIsetup, ActionListener
 {
@@ -97,30 +98,120 @@ public class GUICheckingAccount extends Frame implements GUIsetup, ActionListene
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
-		super.frame.dispose();
+		
 		if(e.getSource() == this.buttonGoBack)
 		{
+			super.frame.dispose();
 			new GUIMainMenu(this.uid);
 		}
-		else if(e.getSource() == this.buttonDeposit)
+		Customer c = CustomerDao.getInstance().queryById(uid);
+		if(e.getSource() == this.buttonDeposit)
 		{
 			//go to deposit
+			String type = GUIInputUtil.getInstance().currencySelect();
+			if(type != null)
+			{
+				double money = GUIInputUtil.getInstance().moneyAmount("Enter the amount of money to be deposited");
+				if(money > 0)
+				{
+					System.out.println(money+" : " + type);
+					c.getCheckingAccount().deposit(money, type);
+					JOptionPane.showMessageDialog(null, "You have successfully deposited " + money + " " + type + " into your checking account","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+				}
+			}
 		}
 		else if(e.getSource() == this.buttonWithdraw)
 		{
 			//withdraw action
+			String type = GUIInputUtil.getInstance().currencySelect();
+			if(type != null)
+			{
+				double money = GUIInputUtil.getInstance().moneyAmount("Enter the amount of money to be withdrawn");
+				if(money > 0)
+				{
+					if(c.getCheckingAccount().withdraw(money, type))
+					{
+						JOptionPane.showMessageDialog(null, "<html>Confirmation:<br>"
+								+ "With draw complete!<br>"
+								+ "remaining balance:<br>"
+								+ "______CNY: " + c.getCheckingAccount().getCNYBalance()+"<br>"
+								+ "______USD: " + c.getCheckingAccount().getUSDBalance()+"<br>"
+								+ "______HKD: " + c.getCheckingAccount().getHKDBalance()+"<br>");
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Not enough money in the account","Warning",JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			}
 		}
 		else if(e.getSource() == this.buttonTransaction)
 		{
 			//view transaction
+			String result = "<html>";
+			for(Log s:LogDao.getInstance().queryByUserId(uid))
+			{
+				result += s.saveString() + "<br>";
+			}
+			result += "</html>";
+			//view transaction
+			JOptionPane.showMessageDialog(null, result,"information",JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if(e.getSource() == this.buttonForeignCurrency)
 		{
 			//purchase foreign currency
+			//purchase foreign currency
+			String target = GUIInputUtil.getInstance().currencySelect("Which currency do you wish to purchase?");
+			if(target != null)
+			{
+				String withWhat = GUIInputUtil.getInstance().currencySelect("Which currency are you going to use to make this purchase?");
+				if(withWhat != null)
+				{
+					double howmuch = GUIInputUtil.getInstance().moneyAmount("How much " + target + " are you going to buy?");
+					if(howmuch > 0)
+					{
+						boolean valid = false;
+						if(withWhat.equals("hkd")&&target.equals("usd"))
+						{
+							valid = c.getCheckingAccount().HKD2USD(howmuch);
+						}
+						else if(withWhat.equals("hkd")&&target.equals("cny")) 
+						{
+							valid = c.getCheckingAccount().HKD2CNY(howmuch);
+						}
+						else if(withWhat.equals("cny")&&target.equals("hkd")) 
+						{
+							valid = c.getCheckingAccount().CNY2HKD(howmuch);
+						}
+						else if(withWhat.equals("cny")&&target.equals("usd")) 
+						{
+							valid = c.getCheckingAccount().CNY2USD(howmuch);
+						}
+						else if(withWhat.equals("usd")&&target.equals("cny")) 
+						{
+							valid = c.getCheckingAccount().USD2CNY(howmuch);
+						}
+						else if(withWhat.equals("usd")&&target.equals("hkd")) 
+						{
+							valid = c.getCheckingAccount().USD2HKD(howmuch);
+						}
+						if(valid)
+						{
+							JOptionPane.showMessageDialog(null, "Purchase succeed","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "Purchase failed, Please check your balance or your choice","Causion",JOptionPane.INFORMATION_MESSAGE);
+						}
+					}
+				}
+			}
 		}
 		else if(e.getSource() == this.buttonLoan)
 		{
 			//loan action
+			String target = GUIInputUtil.getInstance().currencySelect("Which currency do you wish to purchase?");
+			
 		}
 	}
 

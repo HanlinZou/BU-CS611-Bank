@@ -190,11 +190,11 @@ public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 						}
 						if(valid)
 						{
-							JOptionPane.showInternalMessageDialog(null, "Purchase succeed","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Purchase succeed","Confirmation",JOptionPane.INFORMATION_MESSAGE);
 						}
 						else
 						{
-							JOptionPane.showInternalMessageDialog(null, "Purchase failed, Please check your balance","Causion",JOptionPane.INFORMATION_MESSAGE);
+							JOptionPane.showMessageDialog(null, "Purchase failed, Please check your balance or your choice","Causion",JOptionPane.INFORMATION_MESSAGE);
 						}
 					}
 				}
