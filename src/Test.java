@@ -118,7 +118,7 @@ public final class Test {
         stock.setPrice(80.2);
 
         System.out.println("sell stock:");
-        stockAccount.sellStock("1", 50);
+        stockAccount.sellStock("1", 50.5);
         queryStockAccount = stockAccount.getDao().queryByUserId("1");
         System.out.println(queryStockAccount.saveString());
 

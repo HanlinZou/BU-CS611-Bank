@@ -171,7 +171,7 @@ public final class StockAccount extends Account {
      *
      * @return true: successful / false: fail
      */
-    public boolean sellStock(String stockId, int share) {
+    public boolean sellStock(String stockId, double share) {
         Stock stock = stockDao.queryById(stockId);
 
         if (stock == null) return false;  // wrong stockId

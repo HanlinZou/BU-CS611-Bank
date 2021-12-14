@@ -47,7 +47,7 @@ public class StockAccountDao extends AccountDao<StockAccount> {
                 String[] stockList = stockInfo.split(";");
                 for (String stockString : stockList) {
                     String stockId = stockString.split(":")[0];
-                    double share = Integer.parseInt(stockString.split(":")[1].split("\\$")[0]);
+                    double share = Double.parseDouble(stockString.split(":")[1].split("\\$")[0]);
                     double money = Double.parseDouble(stockString.split(":")[1].split("\\$")[1]);
 
                     Stock stock = stockDao.queryById(stockId);

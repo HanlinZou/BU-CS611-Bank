@@ -8,40 +8,40 @@ import javax.swing.JOptionPane;
 
 public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 {
-	
+
 	private String uid;
-	
+
 	private JButton buttonGoBack;
 	private JButton buttonDeposit;
 	private JButton buttonWithdraw;
 	private JButton buttonTransaction;
 	private JButton buttonForeignCurrency;
-	
+
 	private JLabel labelTitle;
-	
+
 	public GUISavingAccount(String uid)
 	{
 		super();
 		super.addPanel();
 		super.frame.setVisible(true);
-		
+
 		this.uid = uid;
-		
+
 		this.labelTitle = new JLabel();
-		
+
 		this.buttonGoBack = new JButton("Back");
 		this.buttonDeposit = new JButton("Deposit");
 		this.buttonForeignCurrency = new JButton("Foreign Currency");
 		this.buttonTransaction = new JButton("Transaction");
 		this.buttonWithdraw = new JButton("Withdraw Cash");
-		
+
 		this.setLabel();
 		this.setButton();
 		this.setPanel();
 	}
 
 	@Override
-	public void setLabel() 
+	public void setLabel()
 	{
 		this.labelTitle.setText("Saving Account");
 		this.labelTitle.setFont(new Font(null, Font.BOLD, 50));
@@ -49,29 +49,29 @@ public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 	}
 
 	@Override
-	public void setButton() 
+	public void setButton()
 	{
 		// TODO Auto-generated method stub
 		this.buttonGoBack.addActionListener(this);
 		this.buttonGoBack.setFont(new Font(null, Font.BOLD, 25));
 		this.buttonGoBack.setBounds(0, 0, 100, 100);
 		this.buttonGoBack.setFocusable(false);
-		
+
 		this.buttonDeposit.addActionListener(this);
 		this.buttonDeposit.setFont(new Font(null,Font.BOLD,25));
 		this.buttonDeposit.setBounds(150,250,300,100);
 		this.buttonDeposit.setFocusable(false);
-		
+
 		this.buttonWithdraw.addActionListener(this);
 		this.buttonWithdraw.setFont(new Font(null,Font.BOLD,25));
 		this.buttonWithdraw.setBounds(150, 400, 300, 100);
 		this.buttonWithdraw.setFocusable(false);
-		
+
 		this.buttonTransaction.addActionListener(this);
 		this.buttonTransaction.setFont(new Font(null,Font.BOLD,25));
 		this.buttonTransaction.setBounds(150, 550, 300, 100);
 		this.buttonTransaction.setFocusable(false);
-		
+
 		this.buttonForeignCurrency.addActionListener(this);
 		this.buttonForeignCurrency.setFont(new Font(null,Font.BOLD,25));
 		this.buttonForeignCurrency.setBounds(150, 700, 300, 100);
@@ -79,7 +79,7 @@ public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 	}
 
 	@Override
-	public void setPanel() 
+	public void setPanel()
 	{
 		// TODO Auto-generated method stub
 		super.panel.add(this.labelTitle);
@@ -91,9 +91,9 @@ public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void actionPerformed(ActionEvent e)
 	{
-		
+
 		if(e.getSource() == this.buttonGoBack)
 		{
 			super.frame.dispose();
@@ -143,9 +143,8 @@ public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 		else if(e.getSource() == this.buttonTransaction)
 		{
 			String result = "<html>";
-			for(Log s:LogDao.getInstance().queryByUserId(uid))
-			{
-				result += s.saveString() + "<br>";
+			for (Log s : LogDao.getInstance().queryByUserId(uid)) {
+				result += s.displayString() + "<br>";
 			}
 			result += "</html>";
 			//view transaction
@@ -168,23 +167,23 @@ public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 						{
 							valid = c.getSavingAccount().HKD2USD(howmuch);
 						}
-						else if(withWhat.equals("hkd")&&target.equals("cny")) 
+						else if(withWhat.equals("hkd")&&target.equals("cny"))
 						{
 							valid = c.getSavingAccount().HKD2CNY(howmuch);
 						}
-						else if(withWhat.equals("cny")&&target.equals("hkd")) 
+						else if(withWhat.equals("cny")&&target.equals("hkd"))
 						{
 							valid = c.getSavingAccount().CNY2HKD(howmuch);
 						}
-						else if(withWhat.equals("cny")&&target.equals("usd")) 
+						else if(withWhat.equals("cny")&&target.equals("usd"))
 						{
 							valid = c.getSavingAccount().CNY2USD(howmuch);
 						}
-						else if(withWhat.equals("usd")&&target.equals("cny")) 
+						else if(withWhat.equals("usd")&&target.equals("cny"))
 						{
 							valid = c.getSavingAccount().USD2CNY(howmuch);
 						}
-						else if(withWhat.equals("usd")&&target.equals("hkd")) 
+						else if(withWhat.equals("usd")&&target.equals("hkd"))
 						{
 							valid = c.getSavingAccount().USD2HKD(howmuch);
 						}

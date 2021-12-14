@@ -9,39 +9,39 @@ import javax.swing.JOptionPane;
 public class GUICheckingAccount extends Frame implements GUIsetup, ActionListener
 {
 	private String uid;
-	
+
 	private JButton buttonGoBack;
 	private JButton buttonDeposit;
 	private JButton buttonWithdraw;
 	private JButton buttonTransaction;
 	private JButton buttonForeignCurrency;
 	private JButton buttonLoan;
-	
+
 	private JLabel labelTitle;
-	
+
 	public GUICheckingAccount(String uid)
 	{
 		super();
 		super.addPanel();
 		super.frame.setVisible(true);
-		
+
 		this.uid = uid;
-		
+
 		this.labelTitle = new JLabel();
-		
+
 		this.buttonGoBack = new JButton("Back");
 		this.buttonDeposit = new JButton("Deposit");
 		this.buttonForeignCurrency = new JButton("Foreign Currency");
 		this.buttonTransaction = new JButton("Transaction");
 		this.buttonWithdraw = new JButton("Withdraw Cash");
 		this.buttonLoan = new JButton("Loan");
-		
+
 		this.setLabel();
 		this.setButton();
 		this.setPanel();
 	}
 	@Override
-	public void setLabel() 
+	public void setLabel()
 	{
 		this.labelTitle.setText("Checking Account");
 		this.labelTitle.setFont(new Font(null, Font.BOLD, 50));
@@ -49,34 +49,34 @@ public class GUICheckingAccount extends Frame implements GUIsetup, ActionListene
 	}
 
 	@Override
-	public void setButton() 
+	public void setButton()
 	{
 		// TODO Auto-generated method stub
 		this.buttonGoBack.addActionListener(this);
 		this.buttonGoBack.setFont(new Font(null, Font.BOLD, 25));
 		this.buttonGoBack.setBounds(0, 0, 100, 100);
 		this.buttonGoBack.setFocusable(false);
-		
+
 		this.buttonDeposit.addActionListener(this);
 		this.buttonDeposit.setFont(new Font(null,Font.BOLD,25));
 		this.buttonDeposit.setBounds(150,250,300,100);
 		this.buttonDeposit.setFocusable(false);
-		
+
 		this.buttonWithdraw.addActionListener(this);
 		this.buttonWithdraw.setFont(new Font(null,Font.BOLD,25));
 		this.buttonWithdraw.setBounds(150, 400, 300, 100);
 		this.buttonWithdraw.setFocusable(false);
-		
+
 		this.buttonTransaction.addActionListener(this);
 		this.buttonTransaction.setFont(new Font(null,Font.BOLD,25));
 		this.buttonTransaction.setBounds(150, 550, 300, 100);
 		this.buttonTransaction.setFocusable(false);
-		
+
 		this.buttonForeignCurrency.addActionListener(this);
 		this.buttonForeignCurrency.setFont(new Font(null,Font.BOLD,25));
 		this.buttonForeignCurrency.setBounds(150, 700, 300, 100);
 		this.buttonForeignCurrency.setFocusable(false);
-		
+
 		this.buttonLoan.addActionListener(this);
 		this.buttonLoan.setFont(new Font(null,Font.BOLD,25));
 		this.buttonLoan.setBounds(150, 850, 300, 100);
@@ -84,7 +84,7 @@ public class GUICheckingAccount extends Frame implements GUIsetup, ActionListene
 	}
 
 	@Override
-	public void setPanel() 
+	public void setPanel()
 	{
 		// TODO Auto-generated method stub
 		super.panel.add(this.labelTitle);
@@ -96,9 +96,9 @@ public class GUICheckingAccount extends Frame implements GUIsetup, ActionListene
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void actionPerformed(ActionEvent e)
 	{
-		
+
 		if(e.getSource() == this.buttonGoBack)
 		{
 			super.frame.dispose();
@@ -149,9 +149,8 @@ public class GUICheckingAccount extends Frame implements GUIsetup, ActionListene
 		{
 			//view transaction
 			String result = "<html>";
-			for(Log s:LogDao.getInstance().queryByUserId(uid))
-			{
-				result += s.saveString() + "<br>";
+			for (Log s : LogDao.getInstance().queryByUserId(uid)) {
+				result += s.displayString() + "<br>";
 			}
 			result += "</html>";
 			//view transaction
@@ -175,23 +174,23 @@ public class GUICheckingAccount extends Frame implements GUIsetup, ActionListene
 						{
 							valid = c.getCheckingAccount().HKD2USD(howmuch);
 						}
-						else if(withWhat.equals("hkd")&&target.equals("cny")) 
+						else if(withWhat.equals("hkd")&&target.equals("cny"))
 						{
 							valid = c.getCheckingAccount().HKD2CNY(howmuch);
 						}
-						else if(withWhat.equals("cny")&&target.equals("hkd")) 
+						else if(withWhat.equals("cny")&&target.equals("hkd"))
 						{
 							valid = c.getCheckingAccount().CNY2HKD(howmuch);
 						}
-						else if(withWhat.equals("cny")&&target.equals("usd")) 
+						else if(withWhat.equals("cny")&&target.equals("usd"))
 						{
 							valid = c.getCheckingAccount().CNY2USD(howmuch);
 						}
-						else if(withWhat.equals("usd")&&target.equals("cny")) 
+						else if(withWhat.equals("usd")&&target.equals("cny"))
 						{
 							valid = c.getCheckingAccount().USD2CNY(howmuch);
 						}
-						else if(withWhat.equals("usd")&&target.equals("hkd")) 
+						else if(withWhat.equals("usd")&&target.equals("hkd"))
 						{
 							valid = c.getCheckingAccount().USD2HKD(howmuch);
 						}
@@ -211,7 +210,7 @@ public class GUICheckingAccount extends Frame implements GUIsetup, ActionListene
 		{
 			//loan action
 			String target = GUIInputUtil.getInstance().currencySelect("Which currency do you wish to purchase?");
-			
+
 		}
 	}
 
