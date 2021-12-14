@@ -179,22 +179,12 @@ public final class Customer extends User {
     /**
      * USD from SAVING to STOCK
      */
-    public void depositStockAccount(){
-        if (savingAccount.getUSDBalance() >= 2500) {
-            Scanner sc = new Scanner(System.in);
-            System.out.println("Min: 0.0 Max: " + (savingAccount.getUSDBalance() - 2500.0) +
-                " How much you want to deposit into your stocking account: ");
-            String choice = sc.next();
-            while (!choice.matches("^[-//+]?//d+(//.//d*)?|//.//d+$") || Double.parseDouble(choice) < 0.0 ||
-                Double.parseDouble(choice) > savingAccount.getUSDBalance() - 2500.0) {
-                System.out.print("Your selection is invalid, try again: ");
-                choice = sc.next();
-            }
-            stockAccount.deposit(Double.parseDouble(choice), "usd");
-            savingAccount.setUSDBalance(-1.0 * Double.parseDouble(choice));
+    public boolean depositStockAccount(double money) {
+        if (savingAccount.getUSDBalance() - money >= 2500) {
+            savingAccount.transfer(stockAccount, money, "usd");
+            return true;
         }
-        else
-            System.out.println("You need to have at least $2500 in your saving account.");
+        else return false;
     }
 
     /**

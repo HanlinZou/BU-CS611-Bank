@@ -140,12 +140,20 @@ public final class Test {
         System.out.println(customer.accountInquiry());
 
         System.out.println("deposit to accounts:");
-        customer.getSavingAccount().deposit(1000, "usd");
-        customer.getCheckingAccount().deposit(1000, "usd");
+        customer.getSavingAccount().deposit(20000, "usd");
+        customer.getCheckingAccount().deposit(10000, "usd");
         System.out.println(customer.accountInquiry());
 
         System.out.println("transfer saving -> checking:");
         customer.transfer(1, 500, "usd");
+        System.out.println(customer.accountInquiry());
+
+        System.out.println("open stock account:");
+        customer.openStockAccount(5000);
+        System.out.println(customer.accountInquiry());
+
+        System.out.println("transfer saving -> stock:");
+        customer.depositStockAccount(500);
         System.out.println(customer.accountInquiry());
 
         System.out.println("close accounts:");
