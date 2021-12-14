@@ -11,6 +11,7 @@ import java.io.File;
 
 public final class LogDao extends Dao<Log> {
     private static LogDao logDao = new LogDao();
+    private BankTimer timer = BankTimer.getInstance();
 
     private LogDao() {
         setFileProxy(new DatabaseFileProxy(path + "logs.csv"));
@@ -30,7 +31,7 @@ public final class LogDao extends Dao<Log> {
 
         for (int i = 1; i < lines.size(); i++) {  // skip table title
             List<String> info = lines.get(i);
-            logList.add(new Log(info.get(0).trim(), info.get(1).trim(), info.get(2).trim(), info.get(3).trim()));
+            logList.add(new Log(info.get(0).trim(), info.get(1).trim(), info.get(2).trim(), info.get(3).trim(), info.get(4).trim()));
         }
 
         return logList;
@@ -39,16 +40,34 @@ public final class LogDao extends Dao<Log> {
     /**
      * Given an user ID, returns all logs related to it.
      *
+     * @param userType User type.
      * @param userId User ID.
      *
      * @return A list of Log objects.
      */
-    public List<Log> queryByUserId(String userId) {
+    public List<Log> queryByUserTypeAndId(String userType, String userId) {
         List<Log> allLogList = getList();
         List<Log> logList = new ArrayList<>();
 
         for (Log log : allLogList) {
-            if (log.getUserId().equals(userId)) logList.add(log);
+            if (log.getUserId().equals(userId) && log.getLogType().equals(userType)) logList.add(log);
+        }
+
+        return logList;
+    }
+
+    /**
+     * Returns all logs generated in today.
+     *
+     * @return A list of Log objects.
+     */
+    public List<Log> queryToday() {
+        String today = timer.getDateStr();
+        List<Log> allLogList = getList();
+        List<Log> logList = new ArrayList<>();
+
+        for (Log log : allLogList) {
+            if (log.getTime().substring(0, 10).equals(today)) logList.add(log);
         }
 
         return logList;
@@ -56,6 +75,6 @@ public final class LogDao extends Dao<Log> {
 
     @Override
     public String getTableTitle() {
-        return "id,userId,time,log";
+        return "type,id,userId,time,log";
     }
 }

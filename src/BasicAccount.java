@@ -50,7 +50,7 @@ public abstract class BasicAccount extends Account {
         setUSDBalance(USDAmt);
         if (setCNYBalance(-costWithFee)) {
             getDao().saveToDatabase();  // update database
-            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " CNY (" + costWithFee + " with fee) to " + USDAmt + " USD.");  // log
+            new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " CNY (" + costWithFee + " with fee) to " + USDAmt + " USD.");  // log
             return true;
         }
 
@@ -69,7 +69,7 @@ public abstract class BasicAccount extends Account {
         setHKDBalance(HKDAmt);
         if (setCNYBalance(-costWithFee)) {
             getDao().saveToDatabase();
-            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " CNY (" + costWithFee + " with fee) to " + HKDAmt + " HKD.");  // log
+            new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " CNY (" + costWithFee + " with fee) to " + HKDAmt + " HKD.");  // log
             return true;
         }
 
@@ -100,7 +100,7 @@ public abstract class BasicAccount extends Account {
         setCNYBalance(CNYAmt);
         if (setUSDBalance(-costWithFee)) {
             getDao().saveToDatabase();
-            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " USD (" + costWithFee + " with fee) to " + CNYAmt + " CNY.");  // log
+            new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " USD (" + costWithFee + " with fee) to " + CNYAmt + " CNY.");  // log
             return true;
         }
 
@@ -119,7 +119,7 @@ public abstract class BasicAccount extends Account {
         setHKDBalance(HKDAmt);
         if (setUSDBalance(-costWithFee)) {
             getDao().saveToDatabase();
-            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " USD (" + costWithFee + " with fee) to " + HKDAmt + " HKD.");  // log
+            new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " USD (" + costWithFee + " with fee) to " + HKDAmt + " HKD.");  // log
             return true;
         }
 
@@ -146,7 +146,7 @@ public abstract class BasicAccount extends Account {
         setCNYBalance(CNYAmt);
         if (setHKDBalance(-costWithFee)) {
             getDao().saveToDatabase();
-            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " HKD (" + costWithFee + " with fee) to " + CNYAmt + " CNY.");  // log
+            new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " HKD (" + costWithFee + " with fee) to " + CNYAmt + " CNY.");  // log
             return true;
         }
 
@@ -165,7 +165,7 @@ public abstract class BasicAccount extends Account {
         setUSDBalance(USDAmt);
         if (setHKDBalance(-cost)) {
             getDao().saveToDatabase();
-            new Log(getUserId(), timer.getDateStr(), getType() + ": tranfer " + cost + " HKD (" + costWithFee + " with fee) to " + USDAmt + " USD.");  // log
+            new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " HKD (" + costWithFee + " with fee) to " + USDAmt + " USD.");  // log
             return true;
         }
 
@@ -184,7 +184,7 @@ public abstract class BasicAccount extends Account {
         double cost = 1.03 * money;
         if (currency.setAmount(currency.getAmount() - cost)) {
             getDao().saveToDatabase();
-            new Log(getUserId(), timer.getDateStr(), getType() + ": withdraw " + money + " " + currencyType.toUpperCase() + " (cost " + cost + " with fee).");  // log
+            new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": withdraw " + money + " " + currencyType.toUpperCase() + " (cost " + cost + " with fee).");  // log
             return true;
         }
         return false;

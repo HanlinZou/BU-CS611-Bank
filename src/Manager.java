@@ -1,5 +1,12 @@
+import java.util.List;
+
 public final class Manager extends User {
     private ManagerDao managerDao = ManagerDao.getInstance();
+    private CustomerDao customerDao = CustomerDao.getInstance();
+    private LogDao logDao = LogDao.getInstance();
+    private StockDao stockDao = StockDao.getInstance();
+
+    private BankTimer timer = BankTimer.getInstance();
 
     public Manager() {
     }
@@ -27,13 +34,90 @@ public final class Manager extends User {
         super("manager", id, name, password);
     }
 
-    //TODO: check information of a specific customer
+    /**
+     * Returns info of a specific customer by the given ID.
+     *
+     * @param uid Customer ID.
+     */
+    public String getCustomerInfoById(String uid) {
+        Customer customer = customerDao.queryById(uid);
+        return customer.displayString() + "\n" + customer.accountInquiry();
+    }
 
-    //TODO: view daily report on transaction
+    /**
+     * Returns info of a specific customer by the given name.
+     *
+     * @param name Customer name.
+     */
+    public String getCustomerInfoByName(String name) {
+        Customer customer = customerDao.queryByName(name);
+        return customer.displayString() + "\n" + customer.accountInquiry();
+    }
 
-    //TODO: add new stock
+    /**
+     * Returns daily report (all logs generated in today).
+     *
+     * @return A list of Log objects.
+     */
+    public List<Log> getDailyReport() {
+        return logDao.queryToday();
+    }
 
-    //TODO: adjust stock price
+    /**
+     * Adds a new stock.
+     *
+     * @param name Stock name.
+     * @param price Stock price.
+     *
+     * @return true: success / false: failed
+     */
+    public boolean addStock(String name, double price) {
+        if (stockDao.queryByName(name) != null) return false;  // dublicate name
+        if (price < 0 || price > 10000) return false;  // invalid price
+        Stock stock = new Stock(name, price);
+        new Log("manager", getID(), timer.getTimeStr(), "Add a new stock " + name + " (id: " + stock.getID() + "; price: " + price + ").");  // log
+        return true;
+    }
 
-    //TODO: add new loans
+    /**
+     * Adjusts a stock's price.
+     *
+     * @param stock A stock object.
+     * @param price Stock price.
+     *
+     * @return true: success / false: failed
+     */
+    public boolean adjustStockPrice(Stock stock, double price) {
+        if (stock == null) return false;  // dublicate name
+        if (price < 0 || price > 10000) return false;  // invalid price
+        stockDao.saveToDatabase();  // update database
+        new Log("manager", getID(), timer.getTimeStr(), "Stock " + stock.getName() + " (id: " + stock.getID() + ")'s price: " + stock.getPrice() + " -> " + price + ".");  // log
+        return true;
+    }
+
+    /**
+     * Adjusts a stock's price by name.
+     *
+     * @param name Stock name.
+     * @param price Stock price.
+     *
+     * @return true: success / false: failed
+     */
+    public boolean adjustStockPriceByName(String name, double price) {
+        return adjustStockPrice(stockDao.queryByName(name), price);
+    }
+
+    /**
+     * Adjusts a stock's price by id.
+     *
+     * @param id Stock id.
+     * @param price Stock price.
+     *
+     * @return true: success / false: failed
+     */
+    public boolean adjustStockPriceById(String id, double price) {
+        return adjustStockPrice(stockDao.queryById(id), price);
+    }
+
+    // TODO: add new loans
 }

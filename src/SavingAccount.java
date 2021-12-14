@@ -46,7 +46,7 @@ public final class SavingAccount extends BasicAccount implements TimerObserver {
         currency.setAmount(currency.getAmount() + money);
 
         getDao().saveToDatabase();  // update database
-        new Log(getUserId(), timer.getDateStr(), "Saving: deposit " + money + " " + currencyType.toUpperCase() + ".");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Saving: deposit " + money + " " + currencyType.toUpperCase() + ".");  // log
 
         return true;
     }
@@ -66,7 +66,7 @@ public final class SavingAccount extends BasicAccount implements TimerObserver {
 
             getDao().saveToDatabase();  // update database for this acount
             account.getDao().saveToDatabase();  // update database for another acount
-            new Log(getUserId(), timer.getDateStr(), "Saving: transfer " + money + " " + currencyType.toUpperCase() + " from " + getType() + " to " + account.getType() + ".");  // log
+            new Log("customer", getUserId(), timer.getTimeStr(), "Saving: transfer " + money + " " + currencyType.toUpperCase() + " from " + getType() + " to " + account.getType() + ".");  // log
 
             return true;
         }
@@ -89,7 +89,7 @@ public final class SavingAccount extends BasicAccount implements TimerObserver {
         setHKDBalance(hkd);
 
         getDao().saveToDatabase();  // update database for this acount
-        new Log(getUserId(), timer.getDateStr(), "Saving: get interest: " + cny + " CNY; " + usd + " USD; " + hkd + " HKD.");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Saving: get interest: " + cny + " CNY; " + usd + " USD; " + hkd + " HKD.");  // log
     }
 
     @Override

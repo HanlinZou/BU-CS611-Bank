@@ -58,6 +58,10 @@ public abstract class User extends BankObject {
         return type + " user: id='" + getID() + "', name='" + getName() + "', password='" + password + "'";
     }
 
+    public String displayString() {
+        return type + " user: id='" + getID() + "', name='" + getName() + "'";
+    }
+
     @Override
     public String saveString() {
         return getID() + "," + getName() + "," + password;

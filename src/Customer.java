@@ -75,7 +75,7 @@ public final class Customer extends User {
             System.out.println("Successfully opened a saving account.");
 
             savingAccount.getDao().saveToDatabase();  // update savingAccount database
-            new Log(getID(), timer.getDateStr(), "Open a saving account; cost 10.0 USD as fee.");  // log
+            new Log("customer", getID(), timer.getTimeStr(), "Open a saving account; cost 10.0 USD as fee.");  // log
             return true;
         }
         else System.out.println("You already have a saving account.");return false;
@@ -93,7 +93,7 @@ public final class Customer extends User {
             );
             savingAccount.getDao().deleteFromDatabase(savingAccount);  // update savingAccount database
             savingAccount = null;
-            new Log(getID(), timer.getDateStr(), "Close a saving account.");  // log
+            new Log("customer", getID(), timer.getTimeStr(), "Close a saving account.");  // log
         }
         else if (savingAccount.getUSDBalance() < 0)
             System.out.println("You idiot owe me money. I can't let you close your account.");
@@ -112,7 +112,7 @@ public final class Customer extends User {
             System.out.println("Successfully opened a checking account.");
 
             checkingAccount.getDao().saveToDatabase();  // update checkingAccount database
-            new Log(getID(), timer.getDateStr(), "Open a checking account; cost 15.0 USD as fee.");  // log
+            new Log("customer", getID(), timer.getTimeStr(), "Open a checking account; cost 15.0 USD as fee.");  // log
 
             return true;
         }
@@ -132,7 +132,7 @@ public final class Customer extends User {
 
             checkingAccount.getDao().deleteFromDatabase(checkingAccount);  // delete checkingAccount from database
             checkingAccount = null;
-            new Log(getID(), timer.getDateStr(), "Close a checking account.");  // log
+            new Log("customer", getID(), timer.getTimeStr(), "Close a checking account.");  // log
         }
         else System.out.println("You idiot owe me money. I can't let you close your account.");
     }
@@ -162,7 +162,7 @@ public final class Customer extends User {
                 savingAccount.setUSDBalance(-1.0 * stockMoney);
 
                 savingAccount.getDao().saveToDatabase();  // update savingAccount database
-                new Log(getID(), timer.getDateStr(), "Open a stock account and deposit " + stockMoney + " USD.");  // log
+                new Log("customer", getID(), timer.getTimeStr(), "Open a stock account and deposit " + stockMoney + " USD.");  // log
 
                 return 1;
             } else {
@@ -204,7 +204,7 @@ public final class Customer extends User {
 
         stockAccountDao.deleteFromDatabase(stockAccount);
         stockAccount = null;
-        new Log(getID(), timer.getDateStr(), "Close a stock account.");  // log
+        new Log("customer", getID(), timer.getTimeStr(), "Close a stock account.");  // log
 
         System.out.println("Stock account closed successfully.");
         return true;

@@ -13,14 +13,14 @@ public final class FileIo {
     private FileIo() {
     }
 
-    public static void writeDatabaseFile(File file, String title, List<String> infoList){
+    public static void writeDatabaseFile(File file, String title, List<String> infoList) {
         try {
             FileWriter fw = new FileWriter(file);
 
             fw.write(title);
             fw.write(System.lineSeparator());
 
-            for(String info : infoList){
+            for(String info : infoList) {
                 fw.write(info);
                 fw.write(System.lineSeparator());
             }

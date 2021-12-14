@@ -45,7 +45,7 @@ public class CheckingAccount extends BasicAccount {
         currency.setAmount(currency.getAmount() + gain);
 
         getDao().saveToDatabase();  // update database
-        new Log(getUserId(), timer.getDateStr(), "Checking: deposit " + money + " " + currencyType.toUpperCase() + " (get " + gain + " after fee).");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Checking: deposit " + money + " " + currencyType.toUpperCase() + " (get " + gain + " after fee).");  // log
 
         return true;
     }
@@ -66,7 +66,7 @@ public class CheckingAccount extends BasicAccount {
 
             getDao().saveToDatabase();  // update database for this acount
             account.getDao().saveToDatabase();  // update database for another acount
-            new Log(getUserId(), timer.getDateStr(), "Checking: transfer " + money + " " + currencyType.toUpperCase() + " from " + getType() + " to " + account.getType() + " (cost " + cost + " with fee).");  // log
+            new Log("customer", getUserId(), timer.getTimeStr(), "Checking: transfer " + money + " " + currencyType.toUpperCase() + " from " + getType() + " to " + account.getType() + " (cost " + cost + " with fee).");  // log
 
             return true;
         }

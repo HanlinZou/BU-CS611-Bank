@@ -104,7 +104,7 @@ public final class StockAccount extends Account {
         else balance += money * configDao.getConfigDouble("HKD2USD", 1.0);
 
         getDao().saveToDatabase();  // update stock account database
-        new Log(getUserId(), timer.getDateStr(), "Stock: deposit " + money + " " + currencyType.toUpperCase() + ".");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Stock: deposit " + money + " " + currencyType.toUpperCase() + ".");  // log
 
         return true;
     }
@@ -122,7 +122,7 @@ public final class StockAccount extends Account {
         balance -= money;
 
         getDao().saveToDatabase();  // update stock account database
-        new Log(getUserId(), timer.getDateStr(), "Stock: withdraw " + money + ".");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Stock: withdraw " + money + ".");  // log
 
         return true;
     }
@@ -158,7 +158,7 @@ public final class StockAccount extends Account {
         this.balance -= spentMoney;
 
         getDao().saveToDatabase();  // update stock account database
-        new Log(getUserId(), timer.getDateStr(), "But " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "But " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
 
         return true;
     }
@@ -191,7 +191,7 @@ public final class StockAccount extends Account {
         this.accumulatedProfit += share * (stock.getPrice() - pricePerShare); // update accumulated profit
 
         getDao().saveToDatabase();  // update stock account database
-        new Log(getUserId(), timer.getDateStr(), "Sell " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Sell " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
 
         return true;
     }
@@ -247,7 +247,7 @@ public final class StockAccount extends Account {
     }
 
     public String toString(){
-        return "Balance: $" + balance + "\nNum of stocks: " + getStockNum() +
+        return "Stock Account: \nBalance: $" + balance + "\nNum of stocks: " + getStockNum() +
             "\nEstimated Profit: $" + calculateEstimatedProfit() + "\nAccumulated Profit: $" + accumulatedProfit;
     }
 

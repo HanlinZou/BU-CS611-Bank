@@ -33,8 +33,13 @@ public class BankTimer implements Runnable {
         return date.getTime();
     }
 
-    public String getDateStr() {
+    public String getTimeStr() {
         SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd hh:mm:ss");
+        return ft.format(date);
+    }
+
+    public String getDateStr() {
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy-MM-dd");
         return ft.format(date);
     }
 
@@ -52,7 +57,7 @@ public class BankTimer implements Runnable {
             }
 
             date = new Date();
-            System.out.println(getDateStr() + " " + getTimeStamp());
+            System.out.println(getTimeStr() + " " + getTimeStamp());
 
             for(TimerObserver observer : observers){
                 observer.onTimeChange();
