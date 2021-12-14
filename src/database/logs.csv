@@ -2418,3 +2418,6 @@ id,userId,time,log
 2417,12,2021-12-14 05:55:59,Saving: get interest: 0.0 CNY
 2418,4,2021-12-14 07:03:29,But 500.0 share stock facebook (id: 3; price: 30.0).
 2419,4,2021-12-14 07:03:29,But 1.25 share stock microsoft (id: 1; price: 10.2).
+2420,4,2021-12-14 08:44:53,Saving: deposit 100000.0 USD.
+2421,4,2021-12-14 08:44:53,But 50.0 share stock microsoft (id: 1; price: 10.2).
+2422,4,2021-12-14 10:47:30,Saving: deposit 800000.0 USD.

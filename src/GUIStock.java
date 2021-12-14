@@ -40,7 +40,7 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 	@Override
 	public void setLabel() 
 	{
-		this.labelTitle.setText("Saving Account");
+		this.labelTitle.setText("Stock Account");
 		this.labelTitle.setFont(new Font(null, Font.BOLD, 50));
 		this.labelTitle.setBounds(120,50,600,100);
 	}
@@ -116,11 +116,37 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 		}
 		else if(e.getSource() == this.buttonCheckStock)
 		{
-			//view transaction
+			//view stock info
+			if(c.getStockAccount().getDao().getList().size() > 0)
+			{
+				JOptionPane.showMessageDialog(null, c.getStockAccount().displayStocks(),"Warning",JOptionPane.WARNING_MESSAGE);
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "You don't own any stock","Warning",JOptionPane.WARNING_MESSAGE);
+			}
+			
+			
 		}
 		else if(e.getSource() == this.buttonSell)
 		{
-			//purchase foreign currency
+			//go to sell stock
+			String stockToSell = GUIInputUtil.getInstance().stockSelect("Please select a Stock to sell");
+			if(stockToSell != null)
+			{
+				double numOfShare = GUIInputUtil.getInstance().moneyAmount("How many share do you wish to buy?");
+				if(numOfShare > 0)
+				{
+					if(c.getStockAccount().sellStock(StockDao.getInstance().queryByName(stockToSell).getID(),numOfShare))
+					{
+						JOptionPane.showMessageDialog(null, "Confirmation! you have bought " + numOfShare + " shares of " + stockToSell + " stock","Sold Successfully",JOptionPane.INFORMATION_MESSAGE);
+					}
+					else
+					{
+						JOptionPane.showMessageDialog(null, "Failed, make sure you have these shares","Warning",JOptionPane.WARNING_MESSAGE);
+					}
+				}
+			}
 		}
 	}
 	
