@@ -126,7 +126,8 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 			//view stock info
 			if(c.getStockAccount().getDao().getList().size() > 0)
 			{
-				JOptionPane.showMessageDialog(null, c.getStockAccount().displayStocks(),"Warning",JOptionPane.WARNING_MESSAGE);
+				JOptionPane.showMessageDialog(null, c.getStockAccount().displayStocks(),"Information",JOptionPane.INFORMATION_MESSAGE);
+				JOptionPane.showMessageDialog(null, "<html>Accumulated profit: " + c.getStockAccount().getAccumulatedProfit()+"<br>Estimated profit: " + c.getStockAccount().calculateEstimatedProfit() + "</html>","Profit",JOptionPane.INFORMATION_MESSAGE);
 			}
 			else
 			{

@@ -36,3 +36,12 @@ customer,34,13,2021-12-15 01:24:54,Open a saving account; cost 10.0 USD as fee.
 customer,35,13,2021-12-15 01:24:54,Saving: deposit 100000.0 USD.
 customer,36,13,2021-12-15 01:24:54,saving: tranfer 110.32 USD (115.836 with fee) to 700.0 CNY.
 customer,37,13,2021-12-15 01:24:54,Open a checking account; cost 15.0 USD as fee.
+manager,38,156,2021-12-15 11:20:45,Stock amazon (id: 2)'s price: 20.5 -> 234.0.
+manager,39,156,2021-12-15 11:20:45,Stock amazon (id: 2)'s price: 20.5 -> 234.0.
+manager,40,156,2021-12-15 11:20:45,Stock amazon (id: 2)'s price: 20.5 -> 234.0.
+manager,41,156,2021-12-15 11:20:45,Stock amazon (id: 2)'s price: 20.5 -> 234.0.
+manager,42,156,2021-12-15 11:20:45,Stock amazon (id: 2)'s price: 20.5 -> 234.0.
+manager,43,156,2021-12-15 11:20:45,Stock amazon (id: 2)'s price: 20.5 -> 234.0.
+manager,44,156,2021-12-15 11:22:20,Stock microsoft (id: 1)'s price: 10.2 -> 23.0.
+manager,45,156,2021-12-15 11:24:04,Add a new stock  (id: 6; price: 9.0).
+manager,46,156,2021-12-15 11:34:20,Add a new stock the fish company (id: 7; price: 2.0).

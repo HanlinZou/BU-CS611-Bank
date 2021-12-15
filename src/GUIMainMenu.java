@@ -31,7 +31,7 @@ public class GUIMainMenu extends Frame implements GUIsetup, ActionListener
 	public GUIMainMenu(String uid)
 	{
 		super();
-		
+		//super.frame.setLayout(new BorderLayout());
 		this.uid = uid;
 		
 		this.up = new JPanel();

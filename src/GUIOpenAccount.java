@@ -114,7 +114,7 @@ public class GUIOpenAccount extends Frame implements GUIsetup, ActionListener
 		if(this.customer.openSavingAccount())
 		{
 			//create account
-			JOptionPane.showMessageDialog(null, "<html>Saving account created!<br>We will take 10$ as service fee</html>", "Thank you", JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "<html>Saving account created!<br>We will take $10 as service fee</html>", "Thank you", JOptionPane.INFORMATION_MESSAGE);
 		}
 		else
 		{

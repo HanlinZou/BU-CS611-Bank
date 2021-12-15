@@ -11,7 +11,7 @@ import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
-public class GUIATM_MainPage extends Frame implements ActionListener
+public class GUIATM_MainPage extends Frame
 {
 	public JLabel credit;
 	public JPanel mainPanel;
@@ -98,6 +98,12 @@ public class GUIATM_MainPage extends Frame implements ActionListener
 		{
 			new GUICreateAccount();
 		}
+		
+	}
+
+	@Override
+	public void setLabel() {
+		// TODO Auto-generated method stub
 		
 	}
 }

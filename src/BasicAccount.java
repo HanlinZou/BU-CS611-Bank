@@ -47,8 +47,9 @@ public abstract class BasicAccount extends Account {
         double cost = USDAmt * USDBalance.getExchangeRate2CNY();
         double costWithFee = 1.05 * cost;
 
-        setUSDBalance(USDAmt);
+        
         if (setCNYBalance(-costWithFee)) {
+        	setUSDBalance(USDAmt);
             getDao().saveToDatabase();  // update database
             new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " CNY (" + costWithFee + " with fee) to " + USDAmt + " USD.");  // log
             return true;
@@ -66,8 +67,9 @@ public abstract class BasicAccount extends Account {
         double cost = HKDAmt * HKDBalance.getExchangeRate2CNY();
         double costWithFee = 1.05 * cost;
 
-        setHKDBalance(HKDAmt);
+        
         if (setCNYBalance(-costWithFee)) {
+        	setHKDBalance(HKDAmt);
             getDao().saveToDatabase();
             new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " CNY (" + costWithFee + " with fee) to " + HKDAmt + " HKD.");  // log
             return true;
@@ -97,8 +99,9 @@ public abstract class BasicAccount extends Account {
         double cost = CNYAmt * CNYBalance.getExchangeRate2USD();
         double costWithFee = 1.05 * cost;
 
-        setCNYBalance(CNYAmt);
+        
         if (setUSDBalance(-costWithFee)) {
+        	setCNYBalance(CNYAmt);
             getDao().saveToDatabase();
             new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " USD (" + costWithFee + " with fee) to " + CNYAmt + " CNY.");  // log
             return true;
@@ -116,8 +119,9 @@ public abstract class BasicAccount extends Account {
         double cost = HKDAmt * HKDBalance.getExchangeRate2USD();
         double costWithFee = 1.05 * cost;
 
-        setHKDBalance(HKDAmt);
+        
         if (setUSDBalance(-costWithFee)) {
+        	setHKDBalance(HKDAmt);
             getDao().saveToDatabase();
             new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " USD (" + costWithFee + " with fee) to " + HKDAmt + " HKD.");  // log
             return true;
@@ -143,8 +147,9 @@ public abstract class BasicAccount extends Account {
         double cost = CNYAmt * CNYBalance.getExchangeRate2HKD();
         double costWithFee = 1.05 * cost;
 
-        setCNYBalance(CNYAmt);
+        
         if (setHKDBalance(-costWithFee)) {
+        	setCNYBalance(CNYAmt);
             getDao().saveToDatabase();
             new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " HKD (" + costWithFee + " with fee) to " + CNYAmt + " CNY.");  // log
             return true;
@@ -162,8 +167,9 @@ public abstract class BasicAccount extends Account {
         double cost = USDAmt * USDBalance.getExchangeRate2HKD();
         double costWithFee = 1.05 * cost;
 
-        setUSDBalance(USDAmt);
+        
         if (setHKDBalance(-cost)) {
+        	setUSDBalance(USDAmt);
             getDao().saveToDatabase();
             new Log("customer", getUserId(), timer.getTimeStr(), getType() + ": tranfer " + cost + " HKD (" + costWithFee + " with fee) to " + USDAmt + " USD.");  // log
             return true;
