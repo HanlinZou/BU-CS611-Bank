@@ -84,7 +84,7 @@ public final class Customer extends User {
     /**
      * 10% of total USD fee when close a saving account.
      */
-    public void closeSavingAccount() {
+    public int closeSavingAccount() {
         if (savingAccount.getUSDBalance() >= 0 && stockAccount == null) {
             System.out.println(
                 "You have " + savingAccount.getUSDBalance() + " USD. " +
@@ -94,11 +94,19 @@ public final class Customer extends User {
             savingAccount.getDao().deleteFromDatabase(savingAccount);  // update savingAccount database
             savingAccount = null;
             new Log("customer", getID(), timer.getTimeStr(), "Close a saving account.");  // log
+            return 1;
         }
         else if (savingAccount.getUSDBalance() < 0)
-            System.out.println("You idiot owe me money. I can't let you close your account.");
+        {
+        	System.out.println("You idiot owe me money. I can't let you close your account.");
+         	return 0;
+        }
         else
-            System.out.println("You need to close your stock account first");
+        {
+        	System.out.println("You need to close your stock account first");
+         	return -1;
+        }
+           
     }
 
     /**
@@ -122,8 +130,9 @@ public final class Customer extends User {
     /**
      * 15% of total USD fee when close a saving account.
      */
-    public void closeCheckingAccount(){
-        if (checkingAccount.getUSDBalance() >= 0) {
+    public int closeCheckingAccount(){
+        if (checkingAccount.getUSDBalance() >= 0)
+        {
             System.out.println(
                 "You have " + checkingAccount.getUSDBalance() + " USD. " +
                 "10% close fee: " + String.format("%.2f", checkingAccount.getUSDBalance() * 0.15) +
@@ -133,8 +142,13 @@ public final class Customer extends User {
             checkingAccount.getDao().deleteFromDatabase(checkingAccount);  // delete checkingAccount from database
             checkingAccount = null;
             new Log("customer", getID(), timer.getTimeStr(), "Close a checking account.");  // log
+            return 1;
         }
-        else System.out.println("You idiot owe me money. I can't let you close your account.");
+        else 
+        {
+        	System.out.println("You idiot owe me money. I can't let you close your account.");
+        	return 0;
+        }
     }
 
     public String accountInquiry() {

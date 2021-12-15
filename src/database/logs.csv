@@ -45,3 +45,24 @@ manager,43,156,2021-12-15 11:20:45,Stock amazon (id: 2)'s price: 20.5 -> 234.0.
 manager,44,156,2021-12-15 11:22:20,Stock microsoft (id: 1)'s price: 10.2 -> 23.0.
 manager,45,156,2021-12-15 11:24:04,Add a new stock  (id: 6; price: 9.0).
 manager,46,156,2021-12-15 11:34:20,Add a new stock the fish company (id: 7; price: 2.0).
+customer,47,4,2021-12-16 02:03:48,Stock: deposit 50000.0 USD.
+customer,48,4,2021-12-16 02:03:48,Saving: transfer 50000.0 USD from saving to stock.
+customer,49,4,2021-12-16 02:03:48,But 5000.0 share stock microsoft (id: 1; price: 10.2).
+customer,50,4,2021-12-16 02:03:48,Sell 5000.0 share stock microsoft (id: 1; price: 10.2).
+customer,51,4,2021-12-16 02:07:14,But 5000.0 share stock the fish company (id: 7; price: 2.0).
+customer,52,4,2021-12-16 02:27:04,Close a checking account.
+customer,53,4,2021-12-16 02:29:21,Close a checking account.
+customer,54,4,2021-12-16 02:34:34,Close a checking account.
+customer,55,4,2021-12-16 02:39:01,Saving: deposit 5000.0 USD.
+customer,56,4,2021-12-16 03:05:13,Open a checking account; cost 15.0 USD as fee.
+customer,57,4,2021-12-16 03:05:13,Checking: deposit 50000.0 USD (get 48500.0 after fee).
+customer,58,4,2021-12-16 03:05:13,Saving: transfer 50000.0 USD from saving to checking.
+customer,59,4,2021-12-16 03:05:13,Close a stock account.
+customer,60,4,2021-12-16 03:05:13,Close a saving account.
+customer,61,4,2021-12-16 03:05:13,Open a saving account; cost 10.0 USD as fee.
+customer,62,4,2021-12-16 03:05:13,Saving: deposit 5000000.0 USD.
+customer,63,4,2021-12-16 03:05:13,Open a stock account and deposit 5000.0 USD.
+customer,64,4,2021-12-16 03:05:13,Stock: deposit 500.0 USD.
+customer,65,4,2021-12-16 03:05:13,Saving: transfer 500.0 USD from saving to stock.
+customer,66,4,2021-12-16 03:05:13,But 1.0 share stock microsoft (id: 1; price: 10.2).
+customer,67,4,2021-12-16 03:05:13,Sell 1.0 share stock microsoft (id: 1; price: 10.2).

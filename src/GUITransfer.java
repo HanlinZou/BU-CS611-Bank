@@ -83,46 +83,57 @@ public class GUITransfer extends Frame implements GUIsetup, ActionListener
 			super.frame.dispose();
 			new GUIMainMenu(this.uid);
 		}
+		else
+		{
+			Customer c = CustomerDao.getInstance().queryById(uid);
+			if(c.getCheckingAccount() != null && c.getSavingAccount() != null)
+			{
+				if(e.getSource() == this.bSaving2Checking)
+				{
+					String type = GUIInputUtil.getInstance().currencySelect("Please Select what currency you wish to transfer to checking account");
+					if(type != null)
+					{
+						double amount = GUIInputUtil.getInstance().moneyAmount("How much do you wish to transfer?");
+						if(amount > 0)
+						{
+							if(c.getSavingAccount().transfer(c.getCheckingAccount(), amount, type))
+							{
+								JOptionPane.showMessageDialog(null, "Transfer succeed","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null, "Transfer failed, Please check your balance","Causion",JOptionPane.INFORMATION_MESSAGE);
+							}
+						}
+					}
+				}
+				else if(e.getSource() == this.bChecking2Saving)
+				{
+					String type = GUIInputUtil.getInstance().currencySelect("Please Select what currency you wish to transfer to Saving account");
+					if(type != null)
+					{
+						double amount = GUIInputUtil.getInstance().moneyAmount("How much do you wish to transfer?");
+						
+						if(amount > 0)
+						{
+							if(c.getCheckingAccount().transfer(c.getSavingAccount(), amount, type))
+							{
+								JOptionPane.showMessageDialog(null, "Transfer succeed","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+							}
+							else
+							{
+								JOptionPane.showMessageDialog(null, "Transfer failed, Please check your balance","Causion",JOptionPane.INFORMATION_MESSAGE);
+							}
+						}
+					}
+				}
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "Please make sure you have both saving and checking account open","Causion",JOptionPane.INFORMATION_MESSAGE);
+			}
+		}
 		
-		Customer c = CustomerDao.getInstance().queryById(uid);
-		if(e.getSource() == this.bSaving2Checking)
-		{
-			String type = GUIInputUtil.getInstance().currencySelect("Please Select what currency you wish to transfer to checking account");
-			if(type != null)
-			{
-				double amount = GUIInputUtil.getInstance().moneyAmount("How much do you wish to transfer?");
-				if(amount > 0)
-				{
-					if(c.getSavingAccount().transfer(c.getCheckingAccount(), amount, type))
-					{
-						JOptionPane.showMessageDialog(null, "Transfer succeed","Confirmation",JOptionPane.INFORMATION_MESSAGE);
-					}
-					else
-					{
-						JOptionPane.showMessageDialog(null, "Purchase failed, Please check your balance","Causion",JOptionPane.INFORMATION_MESSAGE);
-					}
-				}
-			}
-		}
-		else if(e.getSource() == this.bChecking2Saving)
-		{
-			String type = GUIInputUtil.getInstance().currencySelect("Please Select what currency you wish to transfer to Saving account");
-			if(type != null)
-			{
-				double amount = GUIInputUtil.getInstance().moneyAmount("How much do you wish to transfer?");
-				if(amount > 0)
-				{
-					if(c.getCheckingAccount().transfer(c.getSavingAccount(), amount, type))
-					{
-						JOptionPane.showMessageDialog(null, "Transfer succeed","Confirmation",JOptionPane.INFORMATION_MESSAGE);
-					}
-					else
-					{
-						JOptionPane.showMessageDialog(null, "Purchase failed, Please check your balance","Causion",JOptionPane.INFORMATION_MESSAGE);
-					}
-				}
-			}
-		}
 	}
 
 }

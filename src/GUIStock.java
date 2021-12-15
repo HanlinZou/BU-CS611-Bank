@@ -137,15 +137,15 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 		else if(e.getSource() == this.buttonSell)
 		{
 			//go to sell stock
-			String stockToSell = GUIInputUtil.getInstance().stockSelect("Please select a Stock to sell");
+			String stockToSell = GUIInputUtil.getInstance().customerStockSelect("Please select a Stock to sell", uid);
 			if(stockToSell != null)
 			{
-				double numOfShare = GUIInputUtil.getInstance().moneyAmount("How many share do you wish to buy?");
+				double numOfShare = GUIInputUtil.getInstance().moneyAmount("How many share do you wish to sell?");
 				if(numOfShare > 0)
 				{
 					if(c.getStockAccount().sellStock(StockDao.getInstance().queryByName(stockToSell).getID(),numOfShare))
 					{
-						JOptionPane.showMessageDialog(null, "Confirmation! you have bought " + numOfShare + " shares of " + stockToSell + " stock","Sold Successfully",JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Confirmation! " + numOfShare + " shares of " + stockToSell + " has sold","Sold Successfully",JOptionPane.INFORMATION_MESSAGE);
 					}
 					else
 					{

@@ -71,7 +71,10 @@ public final class StockAccount extends Account {
     public void setStock2Share(Map<Stock, Double> stock2share){
         this.stock2share = stock2share;
     }
-
+    public Map<Stock, Double> getStock2Share()
+    {
+    	return this.stock2share;
+    }
     public void setStock2Money(Map<Stock, Double> stock2money){
         this.stock2money = stock2money;
     }
@@ -202,7 +205,8 @@ public final class StockAccount extends Account {
     public String displayStocks() {
         String str = "";
 
-        for (Stock stock : stock2share.keySet()) {
+        for (Stock stock : stock2share.keySet()) 
+        {
             double share = stock2share.get(stock);
             double money = stock2money.get(stock);
 

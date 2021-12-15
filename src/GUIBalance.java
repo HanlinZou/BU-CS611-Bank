@@ -56,7 +56,7 @@ public class GUIBalance extends Frame implements GUIsetup, ActionListener
 		
 		
 		
-		if(SavingAccountDao.getInstance().queryByUserId(uid) != null)
+		if(CustomerDao.getInstance().queryById(uid).getSavingAccount() != null)
 		{
 			this.labelSaving.setText("Saving Account");
 			this.labelSaving.setFont(new Font(null, Font.BOLD, 50));
@@ -70,7 +70,7 @@ public class GUIBalance extends Frame implements GUIsetup, ActionListener
 			this.labelSavingBal.setBounds(160,80,600,300);
 		}
 		
-		if(CheckingAccountDao.getInstance().queryByUserId(uid) != null)
+		if(CustomerDao.getInstance().queryById(uid).getCheckingAccount() != null)
 		{
 			this.labelChecking.setText("Checking Account");
 			this.labelChecking.setFont(new Font(null, Font.BOLD, 50));
@@ -84,7 +84,7 @@ public class GUIBalance extends Frame implements GUIsetup, ActionListener
 			this.labelCheckingBal.setBounds(160,370,600,100);
 		}
 		
-		if(StockAccountDao.getInstance().queryByUserId(uid) != null)
+		if(CustomerDao.getInstance().queryById(uid).getStockAccount() != null)
 		{
 			this.labelStock.setText("Stock Account");
 			this.labelStock.setFont(new Font(null, Font.BOLD, 50));

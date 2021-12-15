@@ -90,7 +90,7 @@ public class GUICloseAccount extends Frame implements GUIsetup, ActionListener
 		{
 			super.frame.dispose();
 			new GUIMainMenu(this.uid);
-			JOptionPane.showMessageDialog(null, "It was a d**k move to go there","Causion",JOptionPane.INFORMATION_MESSAGE);
+			JOptionPane.showMessageDialog(null, "It was a bad move to go there","Causion",JOptionPane.INFORMATION_MESSAGE);
 		}
 		else
 		{
@@ -106,27 +106,27 @@ public class GUICloseAccount extends Frame implements GUIsetup, ActionListener
 				
 				JOptionPane.showMessageDialog(null, "Don't do this please","Causion",JOptionPane.INFORMATION_MESSAGE);
 				break;
-			case 2:
-				
-				JOptionPane.showMessageDialog(null, "We don't want to lose you","Causion",JOptionPane.INFORMATION_MESSAGE);
-				break;
-			case 3:
-				JOptionPane.showMessageDialog(null, "Hanlin Zou the COO will kiss you if you stay","Causion",JOptionPane.INFORMATION_MESSAGE);
-				break;
-			case 4:
-				for(int i = 0; i < 5; i++)
-				{
-					JOptionPane.showMessageDialog(null, "Hanlin Zou is on his kness begging you to stay","Causion",JOptionPane.INFORMATION_MESSAGE);
-				}
-				break;
 			default:
+				int result;
 				if(e.getSource() == this.buttonSaving)
 				{
 					//close saving account
 					if(SavingAccountDao.getInstance().queryByUserId(uid) != null)
 					{
-						c.closeSavingAccount();
-						JOptionPane.showMessageDialog(null, "Saving account closed, now you are dead to us","Causion",JOptionPane.INFORMATION_MESSAGE);
+						result = c.closeSavingAccount();
+						if(result == 1)
+						{
+							JOptionPane.showMessageDialog(null, "Saving account closed","Causion",JOptionPane.INFORMATION_MESSAGE);
+						}
+						else if(result == 0)
+						{
+							JOptionPane.showMessageDialog(null, "You idiot owe me money. I can't let you close your account.","Causion",JOptionPane.INFORMATION_MESSAGE);
+						}
+						else if(result == -1)
+						{
+							JOptionPane.showMessageDialog(null, "You need to close your stock account first","Causion",JOptionPane.INFORMATION_MESSAGE);
+						}
+						
 					}
 					else
 					{
@@ -139,7 +139,7 @@ public class GUICloseAccount extends Frame implements GUIsetup, ActionListener
 					if(StockAccountDao.getInstance().queryByUserId(uid) != null)
 					{
 						c.closeStockAccount();
-						JOptionPane.showMessageDialog(null, "Stock account closed, now you are dead to us","Causion",JOptionPane.INFORMATION_MESSAGE);
+						JOptionPane.showMessageDialog(null, "Stock account closed","Causion",JOptionPane.INFORMATION_MESSAGE);
 					}
 					else
 					{
@@ -149,10 +149,18 @@ public class GUICloseAccount extends Frame implements GUIsetup, ActionListener
 				else if(e.getSource() == this.buttonChecking)
 				{
 					//close checking account
+					result = c.closeCheckingAccount();
 					if(CheckingAccountDao.getInstance().queryByUserId(uid) != null)
 					{
-						c.closeCheckingAccount();
-						JOptionPane.showMessageDialog(null, "Checking account closed, now you are dead to us","Causion",JOptionPane.INFORMATION_MESSAGE);
+						if(result == 1)
+						{
+							JOptionPane.showMessageDialog(null, "Checking account closed","Causion",JOptionPane.INFORMATION_MESSAGE);
+						}
+						else if(result == 0)
+						{
+							JOptionPane.showMessageDialog(null, "You idiot owe me money. I can't let you close your account.","Causion",JOptionPane.INFORMATION_MESSAGE);
+						}
+						
 					}
 					else
 					{

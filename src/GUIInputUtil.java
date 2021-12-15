@@ -73,5 +73,23 @@ public class GUIInputUtil {
 		}
 		return null;
 	}
+	
+	public String customerStockSelect(String message, String uid)
+	{
+		String[] stockList = new String[CustomerDao.getInstance().queryById(uid).getStockAccount().getStock2Share().size()];
+		
+		int i = 0;
+		for(Stock stock:CustomerDao.getInstance().queryById(uid).getStockAccount().getStock2Share().keySet())
+		{
+			stockList[i] = stock.getName();
+			i++;
+		}
+		String result = (String) JOptionPane.showInputDialog(null,message,"Stock",JOptionPane.QUESTION_MESSAGE,null,stockList,stockList[0]);
+		if(result == null || result.equals(""))
+		{
+			return null;
+		}
+		return result;
+	}
 
 }
