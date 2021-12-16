@@ -298,12 +298,13 @@ public final class Customer extends User implements TimerObserver {
         for (Loan loan : loan2collateral.keySet()) {
             String collateral = loan2collateral.get(loan);
 
-            str += ("Loan name: " + loan.getName() + System.lineSeparator());
-            str += ("Loan interest rate: " + loan.getInterest() + System.lineSeparator());
-            str += ("Loan value: " + loan.getValue() + System.lineSeparator());
-            str += ("Collateral: " + collateral + System.lineSeparator());
+            str += ("Loan name: " + loan.getName() + "\n");
+            str += ("Loan interest rate: " + loan.getInterest() + "\n");
+            str += ("Loan value: " + loan.getValue() + "\n");
+            str += ("Collateral: " + collateral + "\n");
         }
 
+        if (str.length() > 0) str = str.substring(0, str.length() - 1);
         return str;
     }
 
@@ -352,7 +353,9 @@ public final class Customer extends User implements TimerObserver {
 
     @Override
     public String displayString() {
-        return displayString() + "\n\n" + "Accounts:" + "\n" + accountInquiry() + "\n\n" + "Loans:" + "\n" + displayLoans();
+        String accountInfo = accountInquiry().equals("") ? "" : "\n\n" + "Accounts:" + "\n" + accountInquiry();
+        String loanInfo = displayLoans().equals("") ? "" : "\n\n" + "Loans:" + "\n" + displayLoans();
+        return getType() + " user: id='" + getID() + "', name='" + getName() + "'" + accountInfo + loanInfo;
     }
 
     @Override
