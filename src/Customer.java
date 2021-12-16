@@ -95,7 +95,8 @@ public final class Customer extends User implements TimerObserver {
      * 10% of total USD fee when close a saving account.
      */
     public int closeSavingAccount() {
-        if (savingAccount.getUSDBalance() >= 0 && stockAccount == null) {
+        if (savingAccount.checkBalance() && getLoanNum() == 0 && stockAccount == null) {
+            // balance >=0, no loan, no stock account
             System.out.println(
                 "You have " + savingAccount.getUSDBalance() + " USD. " +
                 "10% close fee: " + String.format("%.2f", savingAccount.getUSDBalance() * 0.1) +
@@ -105,18 +106,14 @@ public final class Customer extends User implements TimerObserver {
             savingAccount = null;
             new Log("customer", getID(), timer.getTimeStr(), "Close a saving account.");  // log
             return 1;
-        }
-        else if (savingAccount.getUSDBalance() < 0)
-        {
+        } else if (!savingAccount.checkBalance() || getLoanNum() > 0) {
+            // balance < 0 or has loan
         	System.out.println("You idiot owe me money. I can't let you close your account.");
          	return 0;
-        }
-        else
-        {
+        } else {
         	System.out.println("You need to close your stock account first");
          	return -1;
         }
-
     }
 
     /**
@@ -141,8 +138,7 @@ public final class Customer extends User implements TimerObserver {
      * 15% of total USD fee when close a saving account.
      */
     public int closeCheckingAccount(){
-        if (checkingAccount.getUSDBalance() >= 0)
-        {
+        if (checkingAccount.checkBalance()) {
             System.out.println(
                 "You have " + checkingAccount.getUSDBalance() + " USD. " +
                 "10% close fee: " + String.format("%.2f", checkingAccount.getUSDBalance() * 0.15) +
@@ -154,8 +150,7 @@ public final class Customer extends User implements TimerObserver {
             new Log("customer", getID(), timer.getTimeStr(), "Close a checking account.");  // log
             return 1;
         }
-        else
-        {
+        else {
         	System.out.println("You idiot owe me money. I can't let you close your account.");
         	return 0;
         }
@@ -175,10 +170,7 @@ public final class Customer extends User implements TimerObserver {
     // TODO: read data to provide transaction history
     //xiansong: changed the return type to int, add a stockacount == null condition
     public int openStockAccount(double stockMoney) {
-    	if (this.stockAccount != null)
-    	{
-    		return -3;
-    	}
+    	if (this.stockAccount != null) return -3;
     	else if (savingAccount != null) {
             if (savingAccount.getUSDBalance() >= 5000.0) {
                 if (stockMoney < 1000 || stockMoney > savingAccount.getUSDBalance() - 2500.0) return 0;

@@ -47,7 +47,7 @@ public abstract class BasicAccount extends Account {
         double cost = USDAmt * USDBalance.getExchangeRate2CNY();
         double costWithFee = 1.05 * cost;
 
-        
+
         if (setCNYBalance(-costWithFee)) {
         	setUSDBalance(USDAmt);
             getDao().saveToDatabase();  // update database
@@ -67,7 +67,7 @@ public abstract class BasicAccount extends Account {
         double cost = HKDAmt * HKDBalance.getExchangeRate2CNY();
         double costWithFee = 1.05 * cost;
 
-        
+
         if (setCNYBalance(-costWithFee)) {
         	setHKDBalance(HKDAmt);
             getDao().saveToDatabase();
@@ -99,7 +99,7 @@ public abstract class BasicAccount extends Account {
         double cost = CNYAmt * CNYBalance.getExchangeRate2USD();
         double costWithFee = 1.05 * cost;
 
-        
+
         if (setUSDBalance(-costWithFee)) {
         	setCNYBalance(CNYAmt);
             getDao().saveToDatabase();
@@ -119,7 +119,7 @@ public abstract class BasicAccount extends Account {
         double cost = HKDAmt * HKDBalance.getExchangeRate2USD();
         double costWithFee = 1.05 * cost;
 
-        
+
         if (setUSDBalance(-costWithFee)) {
         	setHKDBalance(HKDAmt);
             getDao().saveToDatabase();
@@ -147,7 +147,7 @@ public abstract class BasicAccount extends Account {
         double cost = CNYAmt * CNYBalance.getExchangeRate2HKD();
         double costWithFee = 1.05 * cost;
 
-        
+
         if (setHKDBalance(-costWithFee)) {
         	setCNYBalance(CNYAmt);
             getDao().saveToDatabase();
@@ -167,7 +167,7 @@ public abstract class BasicAccount extends Account {
         double cost = USDAmt * USDBalance.getExchangeRate2HKD();
         double costWithFee = 1.05 * cost;
 
-        
+
         if (setHKDBalance(-cost)) {
         	setUSDBalance(USDAmt);
             getDao().saveToDatabase();
@@ -194,6 +194,13 @@ public abstract class BasicAccount extends Account {
             return true;
         }
         return false;
+    }
+
+    /**
+     * Makes sure that balance of all currency >=0.
+     */
+    public boolean checkBalance() {
+        return (getUSDBalance() >= 0 && getCNYBalance() >= 0 && getHKDBalance() >= 0);
     }
 
     @Override
