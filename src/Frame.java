@@ -16,7 +16,7 @@ public abstract class Frame implements ActionListener, GUIsetup
 	protected JPanel panel;
 	protected JPanel up;
 	protected JPanel down;
-	
+
 	protected JLabel lTitle;
 	protected JButton buttonGoBack;
 	public Frame()
@@ -29,11 +29,11 @@ public abstract class Frame implements ActionListener, GUIsetup
 		frame.setLayout(null);
 		frame.getContentPane().setBackground(new Color(241,247,255));
 		frame.setLocationRelativeTo(null);
-		
+
 		this.lTitle = new JLabel();
 		this.buttonGoBack = new JButton("Back");
 	}
-	
+
 	public void addPanel()
 	{
 		panel = new JPanel();
@@ -42,21 +42,22 @@ public abstract class Frame implements ActionListener, GUIsetup
 		panel.setBackground(new Color(241,247,255));
 		frame.add(panel);
 	}
+
 	public void addPanelResize(int row, int column, int horGap, int verGap)
 	{
 		this.frame.setLayout(new BorderLayout());
-		
+
 		this.up = new JPanel();
 		this.down = new JPanel();
 		this.up.setBackground(new Color(241,247,255));
 		this.down.setBackground(new Color(241,247,255));
-		
+
 		this.up.setPreferredSize(new Dimension(600,200));
 		this.down.setPreferredSize(new Dimension(500,700));
-		
+
 		this.up.setLayout(new BorderLayout());
 		this.down.setLayout(new GridLayout(row,column,horGap,verGap));
-		
+
 		JPanel partition1 = new JPanel();
 		JPanel partition2 = new JPanel();
 		JPanel partition3 = new JPanel();
@@ -66,18 +67,18 @@ public abstract class Frame implements ActionListener, GUIsetup
 		partition1.setPreferredSize(new Dimension(50,650));
 		partition2.setPreferredSize(new Dimension(50,650));
 		partition3.setPreferredSize(new Dimension(600,50));
-		
+
 		frame.add(partition1,BorderLayout.WEST);
 		frame.add(partition2,BorderLayout.EAST);
 		frame.add(partition3,BorderLayout.SOUTH);
-		
+
 		frame.add(this.up,BorderLayout.NORTH);
 		frame.add(this.down,BorderLayout.CENTER);
-		
+
 		this.addTitle();
 		this.addBackButton();
 	}
-	
+
 	public void addTitle()
 	{
 		//this.lTitle.setText("         Manager Menu");
@@ -85,7 +86,7 @@ public abstract class Frame implements ActionListener, GUIsetup
 		this.lTitle.setPreferredSize(new Dimension(600,100));
 		this.up.add(this.lTitle, BorderLayout.SOUTH);
 	}
-	
+
 	public void addBackButton()
 	{
 		this.buttonGoBack.addActionListener(this);

@@ -1,24 +1,36 @@
-public class Loan {
-    private String name;
+public final class Loan extends BankObject {
     private double interest;
-    private String collateral;
-    private double USD;
+    private double value;
+    private LoanDao loanDao = LoanDao.getInstance();
 
-    Loan(){}
-
-    Loan(String name, double interest, String collateral, double USD){
-        setName(name);
+    /**
+     * Loads a loan from database (with ID).
+     *
+     * @param id Loan id.
+     * @param name Loan name.
+     * @param interest Loan rate.
+     * @param value Loan value.
+     */
+    public Loan(String id, String name, double interest, double value) {
+        super(id, name);
         setInterest(interest);
-        setCollateral(collateral);
-        setUSD(USD);
+        setValue(value);
     }
 
-    public void setName(String name){
-        this.name = name;
-    }
-
-    public String getName(){
-        return name;
+    /**
+     * Creates a new loan, generates a new ID and add it to database.
+     *
+     * @param name Loan name.
+     * @param interest Loan rate.
+     * @param value Loan value.
+     */
+    Loan(String name, double interest, double value) {
+        super(name);
+        setInterest(interest);
+        // setCollateral(collateral);
+        setValue(value);
+        setID(loanDao.getNewId());  // generates a new id
+        loanDao.addToDatabase(this);  // add to database
     }
 
     public void setInterest(double interest){
@@ -29,19 +41,21 @@ public class Loan {
         return interest;
     }
 
-    public void setCollateral(String collateral){
-        this.collateral = collateral;
+    public void setValue(double amt){
+        value = amt;
     }
 
-    public String getCollateral(){
-        return collateral;
+    public double getValue(){
+        return value;
     }
 
-    public void setUSD(double amt){
-        USD = amt;
+    @Override
+    public String toString() {
+        return "Loan: id='" + getID() + "', name='" + getName() + "', interest rate='" + interest + "', value='" + value + "'";
     }
 
-    public double getUSD(){
-        return USD;
+    @Override
+    public String saveString() {
+        return getID() + "," + getName() + "," + interest + "," + value;
     }
 }

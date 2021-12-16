@@ -6,7 +6,8 @@ public final class Test {
     private CustomerDao customerDao = CustomerDao.getInstance();
     private ManagerDao managerDao = ManagerDao.getInstance();
     private StockDao stockDao = StockDao.getInstance();
-    private LogDao logDao = LogDao.getInstance();
+    private LoanDao loanDao = LoanDao.getInstance();
+
     BankTimer timer = BankTimer.getInstance();
 
     public Test() {
@@ -52,6 +53,21 @@ public final class Test {
 
         // delete
         stockDao.deleteFromDatabase(s);
+    }
+
+    public void testLoan() {
+        System.out.println("======== Loan ========");
+
+        // create
+        Loan l = new Loan("loan2", 0.03, 200000);
+        System.out.println(l.saveString());
+
+        // query
+        l = loanDao.queryByName("loan2");
+        System.out.println(l.saveString());
+
+        // delete
+        loanDao.deleteFromDatabase(l);
     }
 
     public void testCurrency() {
@@ -139,6 +155,10 @@ public final class Test {
         customer.openSavingAccount();
         System.out.println(customer.accountInquiry());
 
+        System.out.println("buy a loan:");
+        customer.buyLoan("loan1", "an expensive houst");
+        System.out.println(customer.displayLoans());
+
         System.out.println("deposit to accounts:");
         customer.getSavingAccount().deposit(20000, "usd");
         customer.getCheckingAccount().deposit(10000, "usd");
@@ -171,6 +191,7 @@ public final class Test {
     public void testAll() {
         testUser();
         testStock();
+        testLoan();
         testCurrency();
         testTimer();
         testAccount();

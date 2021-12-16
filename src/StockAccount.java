@@ -161,7 +161,7 @@ public final class StockAccount extends Account {
         this.balance -= spentMoney;
 
         getDao().saveToDatabase();  // update stock account database
-        new Log("customer", getUserId(), timer.getTimeStr(), "But " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Buy " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
 
         return true;
     }
@@ -169,7 +169,7 @@ public final class StockAccount extends Account {
     /**
      * Sells a stock.
      *
-     * @param stockId ID of the stock to be bought.
+     * @param stockId ID of the stock to sell.
      * @param share How many share the account wants to sell.
      *
      * @return true: successful / false: fail

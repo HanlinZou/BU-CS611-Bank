@@ -5,6 +5,7 @@ public final class Manager extends User {
     private CustomerDao customerDao = CustomerDao.getInstance();
     private LogDao logDao = LogDao.getInstance();
     private StockDao stockDao = StockDao.getInstance();
+    private LoanDao loanDao = LoanDao.getInstance();
 
     private BankTimer timer = BankTimer.getInstance();
 
@@ -41,7 +42,7 @@ public final class Manager extends User {
      */
     public String getCustomerInfoById(String uid) {
         Customer customer = customerDao.queryById(uid);
-        return customer.displayString() + "\n" + customer.accountInquiry();
+        return customer.displayString();
     }
 
     /**
@@ -51,7 +52,7 @@ public final class Manager extends User {
      */
     public String getCustomerInfoByName(String name) {
         Customer customer = customerDao.queryByName(name);
-        return customer.displayString() + "\n" + customer.accountInquiry();
+        return customer.displayString();
     }
 
     /**
@@ -119,5 +120,21 @@ public final class Manager extends User {
         return adjustStockPrice(stockDao.queryById(id), price);
     }
 
-    // TODO: add new loans
+    /**
+     * Adds a new loan.
+     *
+     * @param name Loan name.
+     * @param interest Loan interest rate.
+     * @param value Loan value.
+     *
+     * @return true: success / false: failed
+     */
+    public boolean addLoan(String name, double interest, double value) {
+        if (loanDao.queryByName(name) != null) return false;  // dublicate name
+        if (interest < 0 || interest > 1) return false;  // invalid interest
+        if (value < 0 || value > 100000000) return false;  // invalid value
+        Loan loan = new Loan(name, interest, value);
+        new Log("manager", getID(), timer.getTimeStr(), "Add a new loan " + name + " (id: " + loan.getID() + "; interest rate: " + loan.getInterest() + "; value: " + loan.getValue() + ").");  // log
+        return true;
+    }
 }

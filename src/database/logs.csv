@@ -79,3 +79,194 @@ customer,77,13,2021-12-16 11:16:42,Sell 10.0 share stock microsoft (id: 1; price
 customer,78,13,2021-12-16 11:16:42,But 40.0 share stock microsoft (id: 1; price: 10.2).
 customer,79,13,2021-12-16 11:16:42,Sell 20.0 share stock microsoft (id: 1; price: 10.2).
 customer,80,13,2021-12-16 11:16:42,Sell 20.0 share stock microsoft (id: 1; price: 10.2).
+customer,81,1,2021-12-16 03:08:47,Saving: deposit 10.0 CNY.
+customer,82,1,2021-12-16 03:08:47,Saving: deposit 20.0 USD.
+customer,83,1,2021-12-16 03:08:47,Saving: deposit 30.0 HKD.
+customer,84,1,2021-12-16 03:08:47,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+customer,85,1,2021-12-16 03:08:47,Stock: deposit 1000.0 USD.
+customer,86,1,2021-12-16 03:08:47,Stock: deposit 1000.0 CNY.
+customer,87,1,2021-12-16 03:08:47,Stock: withdraw 1000.0.
+customer,88,1,2021-12-16 03:08:47,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,89,1,2021-12-16 03:08:47,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+customer,90,15,2021-12-16 03:08:47,Open a checking account; cost 15.0 USD as fee.
+customer,91,15,2021-12-16 03:08:47,Open a saving account; cost 10.0 USD as fee.
+customer,92,15,2021-12-16 03:08:47,Saving: deposit 20000.0 USD.
+customer,93,15,2021-12-16 03:08:47,Checking: deposit 10000.0 USD (get 9700.0 after fee).
+customer,94,15,2021-12-16 03:08:47,Checking: deposit 500.0 USD (get 485.0 after fee).
+customer,95,15,2021-12-16 03:08:47,Saving: transfer 500.0 USD from saving to checking.
+customer,96,15,2021-12-16 03:08:47,Open a stock account and deposit 5000.0 USD.
+customer,97,15,2021-12-16 03:08:47,Stock: deposit 500.0 USD.
+customer,98,15,2021-12-16 03:08:47,Saving: transfer 500.0 USD from saving to stock.
+customer,99,15,2021-12-16 03:08:47,Close a checking account.
+customer,100,1,2021-12-16 03:09:45,Saving: deposit 10.0 CNY.
+customer,101,1,2021-12-16 03:09:45,Saving: deposit 20.0 USD.
+customer,102,1,2021-12-16 03:09:45,Saving: deposit 30.0 HKD.
+customer,103,1,2021-12-16 03:09:45,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+customer,104,1,2021-12-16 03:09:45,Stock: deposit 1000.0 USD.
+customer,105,1,2021-12-16 03:09:45,Stock: deposit 1000.0 CNY.
+customer,106,1,2021-12-16 03:09:45,Stock: withdraw 1000.0.
+customer,107,1,2021-12-16 03:09:45,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,108,1,2021-12-16 03:09:45,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+customer,109,15,2021-12-16 03:09:45,Open a checking account; cost 15.0 USD as fee.
+customer,110,15,2021-12-16 03:09:45,Open a saving account; cost 10.0 USD as fee.
+customer,111,15,2021-12-16 03:09:45,Saving: deposit 20000.0 USD.
+customer,112,15,2021-12-16 03:09:45,Checking: deposit 10000.0 USD (get 9700.0 after fee).
+customer,113,15,2021-12-16 03:09:45,Checking: deposit 500.0 USD (get 485.0 after fee).
+customer,114,15,2021-12-16 03:09:45,Saving: transfer 500.0 USD from saving to checking.
+customer,115,15,2021-12-16 03:09:45,Open a stock account and deposit 5000.0 USD.
+customer,116,15,2021-12-16 03:09:45,Stock: deposit 500.0 USD.
+customer,117,15,2021-12-16 03:09:45,Saving: transfer 500.0 USD from saving to stock.
+customer,118,15,2021-12-16 03:09:45,Close a checking account.
+customer,119,1,2021-12-16 03:10:21,Saving: deposit 10.0 CNY.
+customer,120,1,2021-12-16 03:10:21,Saving: deposit 20.0 USD.
+customer,121,1,2021-12-16 03:10:21,Saving: deposit 30.0 HKD.
+customer,122,1,2021-12-16 03:10:21,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+customer,123,1,2021-12-16 03:10:21,Stock: deposit 1000.0 USD.
+customer,124,1,2021-12-16 03:10:21,Stock: deposit 1000.0 CNY.
+customer,125,1,2021-12-16 03:10:21,Stock: withdraw 1000.0.
+customer,126,1,2021-12-16 03:10:21,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,127,1,2021-12-16 03:10:21,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+customer,128,15,2021-12-16 03:10:21,Open a checking account; cost 15.0 USD as fee.
+customer,129,15,2021-12-16 03:10:21,Open a saving account; cost 10.0 USD as fee.
+customer,130,15,2021-12-16 03:10:21,Saving: deposit 20000.0 USD.
+customer,131,15,2021-12-16 03:10:21,Checking: deposit 10000.0 USD (get 9700.0 after fee).
+customer,132,15,2021-12-16 03:10:21,Checking: deposit 500.0 USD (get 485.0 after fee).
+customer,133,15,2021-12-16 03:10:21,Saving: transfer 500.0 USD from saving to checking.
+customer,134,15,2021-12-16 03:10:21,Open a stock account and deposit 5000.0 USD.
+customer,135,15,2021-12-16 03:10:21,Stock: deposit 500.0 USD.
+customer,136,15,2021-12-16 03:10:21,Saving: transfer 500.0 USD from saving to stock.
+customer,137,15,2021-12-16 03:10:21,Close a checking account.
+customer,138,1,2021-12-16 03:10:27,Saving: deposit 10.0 CNY.
+customer,139,1,2021-12-16 03:10:27,Saving: deposit 20.0 USD.
+customer,140,1,2021-12-16 03:10:27,Saving: deposit 30.0 HKD.
+customer,141,1,2021-12-16 03:10:27,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+customer,142,1,2021-12-16 03:10:27,Stock: deposit 1000.0 USD.
+customer,143,1,2021-12-16 03:10:27,Stock: deposit 1000.0 CNY.
+customer,144,1,2021-12-16 03:10:27,Stock: withdraw 1000.0.
+customer,145,1,2021-12-16 03:10:27,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,146,1,2021-12-16 03:10:27,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+customer,147,15,2021-12-16 03:10:27,Open a checking account; cost 15.0 USD as fee.
+customer,148,15,2021-12-16 03:10:27,Open a saving account; cost 10.0 USD as fee.
+customer,149,15,2021-12-16 03:10:27,Saving: deposit 20000.0 USD.
+customer,150,15,2021-12-16 03:10:27,Checking: deposit 10000.0 USD (get 9700.0 after fee).
+customer,151,15,2021-12-16 03:10:27,Checking: deposit 500.0 USD (get 485.0 after fee).
+customer,152,15,2021-12-16 03:10:27,Saving: transfer 500.0 USD from saving to checking.
+customer,153,15,2021-12-16 03:10:27,Open a stock account and deposit 5000.0 USD.
+customer,154,15,2021-12-16 03:10:27,Stock: deposit 500.0 USD.
+customer,155,15,2021-12-16 03:10:27,Saving: transfer 500.0 USD from saving to stock.
+customer,156,15,2021-12-16 03:10:27,Close a checking account.
+customer,157,1,2021-12-16 03:10:51,Saving: deposit 10.0 CNY.
+customer,158,1,2021-12-16 03:10:51,Saving: deposit 20.0 USD.
+customer,159,1,2021-12-16 03:10:51,Saving: deposit 30.0 HKD.
+customer,160,1,2021-12-16 03:10:51,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+customer,161,1,2021-12-16 03:10:51,Stock: deposit 1000.0 USD.
+customer,162,1,2021-12-16 03:10:51,Stock: deposit 1000.0 CNY.
+customer,163,1,2021-12-16 03:10:51,Stock: withdraw 1000.0.
+customer,164,1,2021-12-16 03:10:51,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,165,1,2021-12-16 03:10:51,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+customer,166,15,2021-12-16 03:10:51,Open a checking account; cost 15.0 USD as fee.
+customer,167,15,2021-12-16 03:10:51,Open a saving account; cost 10.0 USD as fee.
+customer,168,15,2021-12-16 03:10:51,Saving: deposit 20000.0 USD.
+customer,169,15,2021-12-16 03:10:51,Checking: deposit 10000.0 USD (get 9700.0 after fee).
+customer,170,15,2021-12-16 03:10:51,Checking: deposit 500.0 USD (get 485.0 after fee).
+customer,171,15,2021-12-16 03:10:51,Saving: transfer 500.0 USD from saving to checking.
+customer,172,15,2021-12-16 03:10:51,Open a stock account and deposit 5000.0 USD.
+customer,173,15,2021-12-16 03:10:51,Stock: deposit 500.0 USD.
+customer,174,15,2021-12-16 03:10:51,Saving: transfer 500.0 USD from saving to stock.
+customer,175,15,2021-12-16 03:10:51,Close a checking account.
+customer,176,1,2021-12-16 03:11:05,Saving: deposit 10.0 CNY.
+customer,177,1,2021-12-16 03:11:05,Saving: deposit 20.0 USD.
+customer,178,1,2021-12-16 03:11:05,Saving: deposit 30.0 HKD.
+customer,179,1,2021-12-16 03:11:05,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+customer,180,1,2021-12-16 03:11:05,Stock: deposit 1000.0 USD.
+customer,181,1,2021-12-16 03:11:05,Stock: deposit 1000.0 CNY.
+customer,182,1,2021-12-16 03:11:05,Stock: withdraw 1000.0.
+customer,183,1,2021-12-16 03:11:05,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,184,1,2021-12-16 03:11:05,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+customer,185,15,2021-12-16 03:11:05,Open a checking account; cost 15.0 USD as fee.
+customer,186,15,2021-12-16 03:11:05,Open a saving account; cost 10.0 USD as fee.
+customer,187,15,2021-12-16 03:11:05,Saving: deposit 20000.0 USD.
+customer,188,15,2021-12-16 03:11:05,Checking: deposit 10000.0 USD (get 9700.0 after fee).
+customer,189,15,2021-12-16 03:11:05,Checking: deposit 500.0 USD (get 485.0 after fee).
+customer,190,15,2021-12-16 03:11:05,Saving: transfer 500.0 USD from saving to checking.
+customer,191,15,2021-12-16 03:11:05,Open a stock account and deposit 5000.0 USD.
+customer,192,15,2021-12-16 03:11:05,Stock: deposit 500.0 USD.
+customer,193,15,2021-12-16 03:11:05,Saving: transfer 500.0 USD from saving to stock.
+customer,194,15,2021-12-16 03:11:05,Close a checking account.
+customer,195,1,2021-12-16 03:11:19,Saving: deposit 10.0 CNY.
+customer,196,1,2021-12-16 03:11:19,Saving: deposit 20.0 USD.
+customer,197,1,2021-12-16 03:11:19,Saving: deposit 30.0 HKD.
+customer,198,1,2021-12-16 03:11:19,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+customer,199,1,2021-12-16 03:11:19,Stock: deposit 1000.0 USD.
+customer,200,1,2021-12-16 03:11:19,Stock: deposit 1000.0 CNY.
+customer,201,1,2021-12-16 03:11:19,Stock: withdraw 1000.0.
+customer,202,1,2021-12-16 03:11:19,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,203,1,2021-12-16 03:11:19,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+customer,204,15,2021-12-16 03:11:19,Open a checking account; cost 15.0 USD as fee.
+customer,205,15,2021-12-16 03:11:19,Open a saving account; cost 10.0 USD as fee.
+customer,206,15,2021-12-16 03:11:19,Saving: deposit 20000.0 USD.
+customer,207,15,2021-12-16 03:11:19,Checking: deposit 10000.0 USD (get 9700.0 after fee).
+customer,208,15,2021-12-16 03:11:19,Checking: deposit 500.0 USD (get 485.0 after fee).
+customer,209,15,2021-12-16 03:11:19,Saving: transfer 500.0 USD from saving to checking.
+customer,210,15,2021-12-16 03:11:19,Open a stock account and deposit 5000.0 USD.
+customer,211,15,2021-12-16 03:11:19,Stock: deposit 500.0 USD.
+customer,212,15,2021-12-16 03:11:19,Saving: transfer 500.0 USD from saving to stock.
+customer,213,15,2021-12-16 03:11:19,Close a checking account.
+customer,214,1,2021-12-16 03:11:42,Saving: deposit 10.0 CNY.
+customer,215,1,2021-12-16 03:11:42,Saving: deposit 20.0 USD.
+customer,216,1,2021-12-16 03:11:42,Saving: deposit 30.0 HKD.
+customer,217,1,2021-12-16 03:11:42,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+customer,218,1,2021-12-16 03:11:42,Stock: deposit 1000.0 USD.
+customer,219,1,2021-12-16 03:11:42,Stock: deposit 1000.0 CNY.
+customer,220,1,2021-12-16 03:11:42,Stock: withdraw 1000.0.
+customer,221,1,2021-12-16 03:11:42,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,222,1,2021-12-16 03:11:42,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+customer,223,15,2021-12-16 03:11:42,Open a checking account; cost 15.0 USD as fee.
+customer,224,15,2021-12-16 03:11:42,Open a saving account; cost 10.0 USD as fee.
+customer,225,15,2021-12-16 03:11:42,Saving: deposit 20000.0 USD.
+customer,226,15,2021-12-16 03:11:42,Checking: deposit 10000.0 USD (get 9700.0 after fee).
+customer,227,15,2021-12-16 03:11:42,Checking: deposit 500.0 USD (get 485.0 after fee).
+customer,228,15,2021-12-16 03:11:42,Saving: transfer 500.0 USD from saving to checking.
+customer,229,15,2021-12-16 03:11:42,Open a stock account and deposit 5000.0 USD.
+customer,230,15,2021-12-16 03:11:42,Stock: deposit 500.0 USD.
+customer,231,15,2021-12-16 03:11:42,Saving: transfer 500.0 USD from saving to stock.
+customer,232,15,2021-12-16 03:11:42,Close a checking account.
+customer,233,1,2021-12-16 03:12:17,Saving: deposit 10.0 CNY.
+customer,234,1,2021-12-16 03:12:17,Saving: deposit 20.0 USD.
+customer,235,1,2021-12-16 03:12:17,Saving: deposit 30.0 HKD.
+customer,236,1,2021-12-16 03:12:17,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+customer,237,1,2021-12-16 03:12:17,Stock: deposit 1000.0 USD.
+customer,238,1,2021-12-16 03:12:17,Stock: deposit 1000.0 CNY.
+customer,239,1,2021-12-16 03:12:17,Stock: withdraw 1000.0.
+customer,240,1,2021-12-16 03:12:17,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,241,1,2021-12-16 03:12:17,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+customer,242,15,2021-12-16 03:12:17,Open a checking account; cost 15.0 USD as fee.
+customer,243,15,2021-12-16 03:12:17,Open a saving account; cost 10.0 USD as fee.
+customer,244,15,2021-12-16 03:12:17,Saving: deposit 20000.0 USD.
+customer,245,15,2021-12-16 03:12:17,Checking: deposit 10000.0 USD (get 9700.0 after fee).
+customer,246,15,2021-12-16 03:12:17,Checking: deposit 500.0 USD (get 485.0 after fee).
+customer,247,15,2021-12-16 03:12:17,Saving: transfer 500.0 USD from saving to checking.
+customer,248,15,2021-12-16 03:12:17,Open a stock account and deposit 5000.0 USD.
+customer,249,15,2021-12-16 03:12:17,Stock: deposit 500.0 USD.
+customer,250,15,2021-12-16 03:12:17,Saving: transfer 500.0 USD from saving to stock.
+customer,251,15,2021-12-16 03:12:17,Close a checking account.
+customer,252,1,2021-12-16 03:13:09,Saving: deposit 10.0 CNY.
+customer,253,1,2021-12-16 03:13:09,Saving: deposit 20.0 USD.
+customer,254,1,2021-12-16 03:13:09,Saving: deposit 30.0 HKD.
+customer,255,1,2021-12-16 03:13:09,saving: withdraw 5.0 CNY (cost 5.15 with fee).
+customer,256,1,2021-12-16 03:13:09,Stock: deposit 1000.0 USD.
+customer,257,1,2021-12-16 03:13:09,Stock: deposit 1000.0 CNY.
+customer,258,1,2021-12-16 03:13:09,Stock: withdraw 1000.0.
+customer,259,1,2021-12-16 03:13:09,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,260,1,2021-12-16 03:13:09,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+customer,261,15,2021-12-16 03:13:09,Open a checking account; cost 15.0 USD as fee.
+customer,262,15,2021-12-16 03:13:09,Open a saving account; cost 10.0 USD as fee.
+customer,263,15,2021-12-16 03:13:09,Buy loan loan1 (id: 1; interest rate: 0.04) using an expensive houst get 100000.0 USD.
+customer,264,15,2021-12-16 03:13:09,Saving: deposit 20000.0 USD.
+customer,265,15,2021-12-16 03:13:09,Checking: deposit 10000.0 USD (get 9700.0 after fee).
+customer,266,15,2021-12-16 03:13:09,Checking: deposit 500.0 USD (get 485.0 after fee).
+customer,267,15,2021-12-16 03:13:09,Saving: transfer 500.0 USD from saving to checking.
+customer,268,15,2021-12-16 03:13:09,Open a stock account and deposit 5000.0 USD.
+customer,269,15,2021-12-16 03:13:09,Stock: deposit 500.0 USD.
+customer,270,15,2021-12-16 03:13:09,Saving: transfer 500.0 USD from saving to stock.
+customer,271,15,2021-12-16 03:13:09,Close a checking account.

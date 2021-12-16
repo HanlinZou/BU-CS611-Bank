@@ -1,8 +1,9 @@
-import java.util.ArrayList;
-import java.util.Scanner;
+import java.util.HashMap;
+import java.util.Map;
 
 public final class Customer extends User {
-    private ArrayList<Loan> loanArrayList;
+    private Map<Loan, String> loan2collateral;
+
     private SavingAccount savingAccount;
     private CheckingAccount checkingAccount;
     private StockAccount stockAccount;
@@ -11,6 +12,8 @@ public final class Customer extends User {
     private StockAccountDao stockAccountDao = StockAccountDao.getInstance();
     private SavingAccountDao savingAccountDao = SavingAccountDao.getInstance();
     private CheckingAccountDao checkingAccountDao = CheckingAccountDao.getInstance();
+    private LoanDao loanDao = LoanDao.getInstance();
+
     private BankTimer timer = BankTimer.getInstance();
 
     public Customer() {
@@ -24,8 +27,8 @@ public final class Customer extends User {
      */
     public Customer(String name, String password) {
         super("customer", name, password);
-        loanArrayList = new ArrayList<>();  // creates a new loan list
         setID(customerDao.getNewId());  // generates a new id
+        loan2collateral = new HashMap<>();  // creates a new loan map
         customerDao.addToDatabase(this);   // add to database
 
         savingAccount = null;
@@ -40,11 +43,15 @@ public final class Customer extends User {
      * @param name Customer name.
      * @param password Customer password.
      */
-    public Customer(String id, String name, String password) {
+    public Customer(
+        String id,
+        String name,
+        String password,
+        Map<Loan, String> loan2collateral
+    ) {
         super("customer", id, name, password);
 
-        // TODO we have to load loan list from database.
-        loanArrayList = new ArrayList<>();
+        this.loan2collateral = loan2collateral;
 
         // read accounts from database
         savingAccount = savingAccountDao.queryByUserId(getID());
@@ -235,5 +242,88 @@ public final class Customer extends User {
     public boolean transfer(int transferType, double money, String currencyType) {
         if (transferType == 1) return savingAccount.transfer(checkingAccount, money, currencyType);
         else return checkingAccount.transfer(savingAccount, money, currencyType);
+    }
+
+    /**
+     * Buys a loan.
+     *
+     * @param loanId ID of the loan to be bought.
+     * @param collateral Name of collateral use to buy the loan.
+     *
+     * @return true: successful / false: fail
+     */
+    public boolean buyLoan(String loanName, String collateral) {
+        Loan loan = loanDao.queryByName(loanName);
+
+        if (loan == null || savingAccount == null) return false;  // wrong loanId or no saving account
+
+        loan2collateral.put(loan, collateral);
+        savingAccount.setUSDBalance(loan.getValue());
+
+        customerDao.saveToDatabase();  // update customer database
+        new Log("customer", getID(), timer.getTimeStr(), "Buy loan " + loanName + " (id: " + loan.getID() + "; interest rate: " + loan.getInterest() + ") using " + collateral + " get " + loan.getValue() + " USD.");  // log
+
+        return true;
+    }
+
+    /**
+     * Sells a loan.
+     *
+     * @param loanId ID of the loan to sell.
+     *
+     * @return true: successful / false: fail
+     */
+    public boolean sellLoan(String loanName) {
+        Loan loan = loanDao.queryById(loanName);
+
+        if (loan == null || savingAccount == null) return false;  // wrong loanId or no saving account
+
+        double cost = (1 + loan.getInterest()) * loan.getValue();
+
+        if (savingAccount.setUSDBalance(-cost)) {
+            String collateral = loan2collateral.get(loan);
+
+            loan2collateral.remove(loan);
+            customerDao.saveToDatabase();  // update customer database
+            new Log("customer", getID(), timer.getTimeStr(), "Sell loan " + loanName + " (id: " + loan.getID() + "; interest rate: " + loan.getInterest() + ") cost " + cost + " USD get " + collateral + "back.");  // log
+
+            return true;
+        }
+
+        return false;
+    }
+
+    public String displayLoans() {
+        String str = "";
+
+        for (Loan loan : loan2collateral.keySet()) {
+            String collateral = loan2collateral.get(loan);
+
+            str += ("Loan name: " + loan.getName() + System.lineSeparator());
+            str += ("Loan interest rate: " + loan.getInterest() + System.lineSeparator());
+            str += ("Loan value: " + loan.getValue() + System.lineSeparator());
+            str += ("Collateral: " + collateral + System.lineSeparator());
+        }
+
+        return str;
+    }
+
+    @Override
+    public String displayString() {
+        return displayString() + "\n\n" + "Accounts:" + "\n" + accountInquiry() + "\n\n" + "Loans:" + "\n" + displayLoans();
+    }
+
+    @Override
+    public String saveString() {
+        String str = ",";
+
+        for (Loan loan : loan2collateral.keySet()) {
+            String collateral = loan2collateral.get(loan);
+            str += loan.getID() + ":" + collateral + ";";
+        }
+
+        str = str.substring(0, str.length() - 1);
+
+        return getID() + "," + getName() + "," + getPassword() + str;
     }
 }
