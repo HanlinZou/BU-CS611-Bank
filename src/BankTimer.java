@@ -76,7 +76,7 @@ public class BankTimer implements Runnable {
             int oldDay = getDay();
 
             date = new Date();
-            System.out.println(getTimeStr() + " " + getTimeStamp());
+            // System.out.println(getTimeStr() + " " + getTimeStamp());
 
             for (TimerObserver observer : observers) {
                 observer.onTimeChange();

@@ -30,10 +30,9 @@ public final class CustomerDao extends UserDao<Customer> {
         List<List<String>> lines = FileIo.readDatabaseFile(file);
         List<Customer> customerList = new ArrayList<>();
 
-        Map<Loan, String> loan2collateral = new HashMap<>();
-
         for (int i = 1; i < lines.size(); i++) {  // skip table title
             List<String> info = lines.get(i);
+            Map<Loan, String> loan2collateral = new HashMap<>();
 
             String id = info.get(0).trim();
             String name = info.get(1).trim();

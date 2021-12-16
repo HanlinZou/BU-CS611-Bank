@@ -10,7 +10,7 @@ public final class Customer extends User implements TimerObserver {
     private CheckingAccount checkingAccount;
     private StockAccount stockAccount;
 
-    private CustomerDao customerDao = CustomerDao.getInstance();
+    private CustomerDao customerDao = null;
     private StockAccountDao stockAccountDao = StockAccountDao.getInstance();
     private SavingAccountDao savingAccountDao = SavingAccountDao.getInstance();
     private CheckingAccountDao checkingAccountDao = CheckingAccountDao.getInstance();
@@ -59,6 +59,13 @@ public final class Customer extends User implements TimerObserver {
         savingAccount = savingAccountDao.queryByUserId(getID());
         checkingAccount = checkingAccountDao.queryByUserId(getID());
         stockAccount = stockAccountDao.queryByUserId(getID());
+    }
+
+    public CustomerDao getDao() {
+        if (customerDao == null) {
+            customerDao = CustomerDao.getInstance();
+        }
+        return customerDao;
     }
 
     public SavingAccount getSavingAccount() {
@@ -252,9 +259,11 @@ public final class Customer extends User implements TimerObserver {
         if (loan == null || savingAccount == null) return false;  // wrong loanId or no saving account
 
         loan2collateral.put(loan, collateral);
-        savingAccount.setUSDBalance(loan.getValue());
 
-        customerDao.saveToDatabase();  // update customer database
+        savingAccount.setUSDBalance(loan.getValue());
+        savingAccount.getDao().saveToDatabase();  // update saving database
+
+        getDao().saveToDatabase();  // update customer database
         new Log("customer", getID(), timer.getTimeStr(), "Buy loan " + loanName + " (id: " + loan.getID() + "; interest rate: " + loan.getInterest() + ") using " + collateral + " get " + loan.getValue() + " USD.");  // log
 
         return true;
@@ -268,17 +277,19 @@ public final class Customer extends User implements TimerObserver {
      * @return true: successful / false: fail
      */
     public boolean sellLoan(String loanName) {
-        Loan loan = loanDao.queryById(loanName);
+        Loan loan = loanDao.queryByName(loanName);
 
         if (loan == null || savingAccount == null) return false;  // wrong loanId or no saving account
 
         double cost = (1 + loan.getInterest()) * loan.getValue();
 
         if (savingAccount.setUSDBalance(-cost)) {
-            String collateral = loan2collateral.get(loan);
+            savingAccount.getDao().saveToDatabase();  // update saving database
 
             loan2collateral.remove(loan);
-            customerDao.saveToDatabase();  // update customer database
+            getDao().saveToDatabase();  // update customer database
+
+            String collateral = loan2collateral.get(loan);
             new Log("customer", getID(), timer.getTimeStr(), "Sell loan " + loanName + " (id: " + loan.getID() + "; interest rate: " + loan.getInterest() + ") cost " + cost + " USD get " + collateral + "back.");  // log
 
             return true;
