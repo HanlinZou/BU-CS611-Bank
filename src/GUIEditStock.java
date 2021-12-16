@@ -16,14 +16,14 @@ public class GUIEditStock extends Frame
 	private JButton bSubmit;
 	private String[] stockList;
 	private JLabel lnewPrice;
-	
+
 	public GUIEditStock(String uid)
 	{
 			super();
 			super.addPanelResize(6, 1, 10, 10);
-			
+
 			this.uid = uid;
-			
+
 			this.tfPrice = new JTextField();
 			this.bSubmit = new JButton("Submit");
 			this.lnewPrice = new JLabel();
@@ -31,11 +31,11 @@ public class GUIEditStock extends Frame
 			this.cbStockList.setFont(new Font(null, Font.BOLD, 25));
 			this.cbStockList.addActionListener(this);
 			this.cbStockList.setPreferredSize(new Dimension(50,50));
-			
+
 			this.setLabel();
 			this.setButton();
 			this.setPanel();
-			
+
 			super.frame.setVisible(true);
 	}
 	public String[] getStockList()
@@ -47,8 +47,9 @@ public class GUIEditStock extends Frame
 		}
 		return this.stockList;
 	}
+
 	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void actionPerformed(ActionEvent e)
 	{
 		// TODO Auto-generated method stub
 		if(e.getSource() == super.buttonGoBack)
@@ -94,17 +95,17 @@ public class GUIEditStock extends Frame
 	}
 
 	@Override
-	public void setLabel() 
+	public void setLabel()
 	{
 		// TODO Auto-generated method stub
 		super.lTitle.setText("           Edit Stock");
-		
+
 		this.lnewPrice.setText("Set a new price");
 		this.lnewPrice.setFont(new Font(null, Font.BOLD, 25));
 	}
 
 	@Override
-	public void setButton() 
+	public void setButton()
 	{
 		// TODO Auto-generated method stub
 		this.bSubmit.addActionListener(this);
@@ -114,7 +115,7 @@ public class GUIEditStock extends Frame
 	}
 
 	@Override
-	public void setPanel() 
+	public void setPanel()
 	{
 		// TODO Auto-generated method stub
 		super.down.add(this.cbStockList);
@@ -122,5 +123,5 @@ public class GUIEditStock extends Frame
 		super.down.add(this.tfPrice);
 		super.down.add(bSubmit);
 	}
-	
+
 }

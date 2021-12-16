@@ -404,3 +404,7 @@ customer,402,13,2021-12-17 12:53:52,Stock: deposit 50000.0 USD.
 customer,403,13,2021-12-17 12:53:52,Saving: transfer 50000.0 USD from saving to stock.
 customer,404,13,2021-12-17 12:53:57,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
 customer,405,13,2021-12-17 12:54:56,Sell 99.0 share stock microsoft (id: 1; price: 10.2).
+manager,406,156,2021-12-17 01:10:35,Loan new_loan (id: 4)'s value: 2222.0 -> 500.0.
+manager,407,156,2021-12-17 01:10:35,Loan new_loan (id: 4)'s interest: 0.33 -> 0.2.
+manager,408,156,2021-12-17 01:10:58,Loan loan1 (id: 1)'s value: 100000.0 -> 200000.0.
+manager,409,156,2021-12-17 01:10:58,Loan loan1 (id: 1)'s interest: 0.04 -> 0.06.

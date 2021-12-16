@@ -174,4 +174,29 @@ public final class Manager extends User {
         loanDao.saveToDatabase();  // update database
         return true;
     }
+
+    /**
+     * Adjusts a loan's value and interest.
+     *
+     * @param name Loan name.
+     * @param value Loan's value.
+     *
+     * @return true: success / false: failed
+     */
+    public boolean adjustLoan(String name, double value, double interest) {
+        Loan loan = loanDao.queryByName(name);
+
+        if (loan == null) return false;  // loan isn't exist
+        if (value < 0 || value > 100000000) return false;  // invalid value
+        if (interest < 0 || interest > 1) return false;  // invalid interest
+
+        new Log("manager", getID(), timer.getTimeStr(), "Loan " + name + " (id: " + loan.getID() + ")'s value: " + loan.getValue() + " -> " + value + ".");  // log
+        new Log("manager", getID(), timer.getTimeStr(), "Loan " + name + " (id: " + loan.getID() + ")'s interest: " + loan.getInterest() + " -> " + interest + ".");  // log
+
+        loan.setValue(value);
+        loan.setInterest(interest);
+        loanDao.saveToDatabase();  // update database
+
+        return true;
+    }
 }
