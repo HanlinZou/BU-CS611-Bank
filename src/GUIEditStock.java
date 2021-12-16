@@ -123,5 +123,4 @@ public class GUIEditStock extends Frame
 		super.down.add(this.tfPrice);
 		super.down.add(bSubmit);
 	}
-
 }

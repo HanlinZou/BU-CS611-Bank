@@ -408,3 +408,11 @@ manager,406,156,2021-12-17 01:10:35,Loan new_loan (id: 4)'s value: 2222.0 -> 500
 manager,407,156,2021-12-17 01:10:35,Loan new_loan (id: 4)'s interest: 0.33 -> 0.2.
 manager,408,156,2021-12-17 01:10:58,Loan loan1 (id: 1)'s value: 100000.0 -> 200000.0.
 manager,409,156,2021-12-17 01:10:58,Loan loan1 (id: 1)'s interest: 0.04 -> 0.06.
+manager,410,156,2021-12-17 01:16:32,Loan second_loan (id: 3)'s value: 5000.0 -> 10000.0.
+manager,411,156,2021-12-17 01:16:32,Loan second_loan (id: 3)'s interest: 0.6 -> 0.9.
+customer,412,13,2021-12-17 01:23:32,Buy 100.73 share stock microsoft (id: 1; price: 10.2).
+customer,413,13,2021-12-17 01:28:17,Buy 10.72 share stock microsoft (id: 1; price: 10.2).
+customer,414,13,2021-12-17 01:29:56,Sell 20.0 share stock microsoft (id: 1; price: 10.2).
+manager,415,156,2021-12-17 01:30:19,Stock microsoft (id: 1)'s price: 10.2 -> 100.42.
+customer,416,13,2021-12-17 01:30:30,Sell 10.0 share stock microsoft (id: 1; price: 100.42).
+customer,417,13,2021-12-17 01:31:10,Sell 2.0 share stock microsoft (id: 1; price: 100.42).

@@ -5,16 +5,14 @@ import java.awt.event.ActionEvent;
 import javax.swing.JButton;
 import javax.swing.JOptionPane;
 
-public class GUILoan extends Frame
-{
+public class GUILoan extends Frame {
 	private String uid;
 
 	private JButton bApplyLoanl;
 	private JButton bPayLoan;
 
 
-	public GUILoan(String uid)
-	{
+	public GUILoan(String uid) {
 		super();
 		super.addPanelResize(6, 1, 10, 10);
 
@@ -76,8 +74,7 @@ public class GUILoan extends Frame
 				}
 			}
 
-			else
-			{
+			else {
 				JOptionPane.showMessageDialog(null, "Our bank does not offer any loan at this point","Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		}
@@ -97,7 +94,6 @@ public class GUILoan extends Frame
                 String select = (String) JOptionPane.showInputDialog(null, "Select a loan", "loan", JOptionPane.QUESTION_MESSAGE, null, loanDisplayList, loanDisplayList[0]);
 
                 if (select != null && !select.equals("")) {
-
                     for (int i = 0; i < loanList.length; i++) {
                         if (select.equals(loanDisplayList[i])) {
                             if (customer.sellLoan(loanList[i])) {

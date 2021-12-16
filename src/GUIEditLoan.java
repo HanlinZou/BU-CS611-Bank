@@ -8,8 +8,7 @@ import javax.swing.JLabel;
 import javax.swing.JTextField;
 import javax.swing.JOptionPane;
 
-public class GUIEditLoan extends Frame
-{
+public class GUIEditLoan extends Frame {
 	private String uid;
 	private JComboBox cbLoanList;
 	private JTextField tfInterest;
@@ -27,9 +26,9 @@ public class GUIEditLoan extends Frame
 		this.uid = uid;
 
 		this.cbLoanList = new JComboBox(this.getLoanDisplayList());
-		this.cbLoanList.setFont(new Font(null, Font.BOLD, 25));
+		this.cbLoanList.setFont(new Font(null, Font.BOLD, 15));
 		this.cbLoanList.addActionListener(this);
-		this.cbLoanList.setPreferredSize(new Dimension(50,50));
+		this.cbLoanList.setPreferredSize(new Dimension(50, 50));
 
 		this.tfAmount = new JTextField();
 		this.tfInterest = new JTextField();
@@ -151,5 +150,4 @@ public class GUIEditLoan extends Frame
 		super.down.add(this.tfAmount);
 		super.down.add(bSubmit);
 	}
-
 }

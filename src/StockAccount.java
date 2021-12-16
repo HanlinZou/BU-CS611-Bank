@@ -70,19 +70,20 @@ public final class StockAccount extends Account {
         return accountDao;
     }
 
-    public void setStock2Share(Map<Stock, Double> stock2share){
+    public void setStock2Share(Map<Stock, Double> stock2share) {
         this.stock2share = stock2share;
     }
-    public Map<Stock, Double> getStock2Share()
-    {
+
+    public Map<Stock, Double> getStock2Share() {
     	return this.stock2share;
     }
+
     public void setStock2Money(Map<Stock, Double> stock2money){
         this.stock2money = stock2money;
     }
 
     public void setBalance(double balance) {
-        this.balance = balance;
+        this.balance = Double.parseDouble(String.format("%.2f", balance));
     }
 
     public double getBalance() {
@@ -108,6 +109,8 @@ public final class StockAccount extends Account {
         else if (currencyType.equalsIgnoreCase("cny")) balance += money * configDao.getConfigDouble("CNY2USD", 1.0);
         else balance += money * configDao.getConfigDouble("HKD2USD", 1.0);
 
+        balance = Double.parseDouble(String.format("%.2f", balance));
+
         getDao().saveToDatabase();  // update stock account database
         new Log("customer", getUserId(), timer.getTimeStr(), "Stock: deposit " + money + " " + currencyType.toUpperCase() + ".");  // log
 
@@ -125,6 +128,7 @@ public final class StockAccount extends Account {
         if (balance < money) return false;
 
         balance -= money;
+        balance = Double.parseDouble(String.format("%.2f", balance));
 
         getDao().saveToDatabase();  // update stock account database
         new Log("customer", getUserId(), timer.getTimeStr(), "Stock: withdraw " + money + ".");  // log
@@ -151,16 +155,18 @@ public final class StockAccount extends Account {
         if (stock == null) return false;  // wrong stockId
 
         double spentMoney = share * stock.getPrice();
-        if(balance < spentMoney) return false;  // no enough balance
+        if (balance < spentMoney) return false;  // no enough balance
 
         // update current share
         double newShare = stock2share.getOrDefault(stock, 0.0) + share;
         stock2share.put(stock, newShare);
         // update spent money
         double newMoney = stock2money.getOrDefault(stock, 0.0) + spentMoney;
+        newMoney = Double.parseDouble(String.format("%.2f", newMoney));
         stock2money.put(stock, newMoney);
         // update current balance
         this.balance -= spentMoney;
+        this.balance = Double.parseDouble(String.format("%.2f", this.balance));
 
         getDao().saveToDatabase();  // update stock account database
         new Log("customer", getUserId(), timer.getTimeStr(), "Buy " + share + " share stock " + name + " (id: " + stock.getID() + "; price: " + stock.getPrice() + ").");  // log
@@ -190,11 +196,13 @@ public final class StockAccount extends Account {
         double gainMoney = share * stock.getPrice();
 
         stock2share.put(stock, newShare);  // update current share
-        stock2money.put(stock, oldMoney - gainMoney);  // update spent money
+        stock2money.put(stock, Double.parseDouble(String.format("%.2f", oldMoney - gainMoney)));  // update spent money
         this.balance += gainMoney;  // update current balance
+        this.balance = Double.parseDouble(String.format("%.2f", this.balance));
 
         double pricePerShare = oldShare == 0 ? 0 : oldMoney / oldShare;
         this.accumulatedProfit += share * (stock.getPrice() - pricePerShare); // update accumulated profit
+        this.accumulatedProfit = Double.parseDouble(String.format("%.2f", this.accumulatedProfit));
 
         if (newShare == 0) { // remove stock if sell out
             stock2share.remove(stock);
@@ -240,6 +248,7 @@ public final class StockAccount extends Account {
             double share = stock2share.get(stock);
             double money = stock2money.get(stock);
             estimatedProfit += stock.getPrice() * share - money;
+            estimatedProfit = Double.parseDouble(String.format("%.2f", estimatedProfit));
         }
 
         return estimatedProfit;
