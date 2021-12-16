@@ -399,3 +399,8 @@ customer,397,13,2021-12-17 12:52:13,saving: withdraw 500000.0 USD (cost 515000.0
 customer,398,13,2021-12-17 12:52:23,saving: withdraw 20000.0 USD (cost 20600.0 with fee).
 customer,399,13,2021-12-17 12:52:28,saving: withdraw 6000.0 USD (cost 6180.0 with fee).
 customer,400,13,2021-12-17 12:52:35,Buy loan loan1 (id: 1; interest rate: 0.04) using sdf get 100000.0 USD.
+customer,401,13,2021-12-17 12:53:30,Saving: deposit 500000.0 USD.
+customer,402,13,2021-12-17 12:53:52,Stock: deposit 50000.0 USD.
+customer,403,13,2021-12-17 12:53:52,Saving: transfer 50000.0 USD from saving to stock.
+customer,404,13,2021-12-17 12:53:57,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
+customer,405,13,2021-12-17 12:54:56,Sell 99.0 share stock microsoft (id: 1; price: 10.2).
