@@ -270,3 +270,6 @@ customer,268,15,2021-12-16 03:13:09,Open a stock account and deposit 5000.0 USD.
 customer,269,15,2021-12-16 03:13:09,Stock: deposit 500.0 USD.
 customer,270,15,2021-12-16 03:13:09,Saving: transfer 500.0 USD from saving to stock.
 customer,271,15,2021-12-16 03:13:09,Close a checking account.
+manager,272,156,2021-12-16 03:52:53,Stock microsoft (id: 1)'s price: 10.2 -> 20.0.
+manager,273,156,2021-12-16 03:54:16,Stock microsoft (id: 1)'s price: 50.0 -> 50.0.
+manager,274,156,2021-12-16 03:54:16,Stock microsoft (id: 1)'s price: 10.2 -> 10.2.

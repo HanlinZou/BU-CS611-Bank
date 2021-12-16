@@ -91,6 +91,7 @@ public final class Manager extends User {
     public boolean adjustStockPrice(Stock stock, double price) {
         if (stock == null) return false;  // dublicate name
         if (price < 0 || price > 10000) return false;  // invalid price
+        stock.setPrice(price);
         stockDao.saveToDatabase();  // update database
         new Log("manager", getID(), timer.getTimeStr(), "Stock " + stock.getName() + " (id: " + stock.getID() + ")'s price: " + stock.getPrice() + " -> " + price + ".");  // log
         return true;
