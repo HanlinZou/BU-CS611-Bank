@@ -66,3 +66,11 @@ customer,64,4,2021-12-16 03:05:13,Stock: deposit 500.0 USD.
 customer,65,4,2021-12-16 03:05:13,Saving: transfer 500.0 USD from saving to stock.
 customer,66,4,2021-12-16 03:05:13,But 1.0 share stock microsoft (id: 1; price: 10.2).
 customer,67,4,2021-12-16 03:05:13,Sell 1.0 share stock microsoft (id: 1; price: 10.2).
+customer,68,4,2021-12-16 02:48:10,But 30.0 share stock the fish company (id: 7; price: 2.0).
+customer,69,10,2021-12-16 02:48:10,Saving: deposit 900000.0 USD.
+customer,70,10,2021-12-16 02:48:10,Open a stock account and deposit 6000.0 USD.
+customer,71,10,2021-12-16 02:48:10,But 100.0 share stock apple (id: 4; price: 40.91).
+customer,72,10,2021-12-16 02:52:35,Close a stock account.
+customer,73,10,2021-12-16 02:52:35,Open a stock account and deposit 3000.0 USD.
+customer,74,4,2021-12-16 02:56:36,But 12.0 share stock apple (id: 4; price: 40.91).
+customer,75,10,2021-12-16 02:59:27,But 20.0 share stock tencent (id: 5; price: 50.0).
