@@ -10,12 +10,11 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-public class GUIMainMenu extends Frame implements GUIsetup, ActionListener 
+public class GUIMainMenu extends Frame 
 {
 	private String uid;
 	
-	private JPanel up;
-	private JPanel down;
+	
 	
 	private JButton buttonGoBack;
 	private JButton buttonOpenAccount;
@@ -25,8 +24,7 @@ public class GUIMainMenu extends Frame implements GUIsetup, ActionListener
 	private JButton buttonStocks;
 	private JButton buttonTransfer;
 	private JButton buttonCloseAccount;
-	
-	private JLabel labelTitle;
+	private JButton buttonLoan;
 	
 	public GUIMainMenu(String uid)
 	{
@@ -34,12 +32,8 @@ public class GUIMainMenu extends Frame implements GUIsetup, ActionListener
 		//super.frame.setLayout(new BorderLayout());
 		this.uid = uid;
 		
-		this.up = new JPanel();
-		this.down = new JPanel();
-		this.addPanel();
-		super.frame.setVisible(true);
+		super.addPanelResize(4, 2, 10, 10);
 		
-		this.buttonGoBack = new JButton("Back");
 		this.buttonOpenAccount = new JButton("Open Account");
 		this.buttonCheckBalance = new JButton("Balance");
 		this.buttonSavingAccount = new JButton("Saving Account");
@@ -47,8 +41,7 @@ public class GUIMainMenu extends Frame implements GUIsetup, ActionListener
 		this.buttonStocks = new JButton("Stocks");
 		this.buttonTransfer = new JButton("Transfer");
 		this.buttonCloseAccount = new JButton("Close Account");
-		
-		this.labelTitle = new JLabel();
+		this.buttonLoan = new JButton("Loan");
 		
 		this.setLabel();
 		this.setButton();
@@ -60,19 +53,12 @@ public class GUIMainMenu extends Frame implements GUIsetup, ActionListener
 	@Override
 	public void setLabel() 
 	{
-		this.labelTitle.setText("Main Menu");
-		this.labelTitle.setFont(new Font(null, Font.BOLD, 50));
-		this.labelTitle.setBounds(180, 50, 600, 100);
+		super.lTitle.setText("          Main Menu");
 	}
 
 	@Override
 	public void setButton() 
 	{
-		this.buttonGoBack.addActionListener(this);
-		this.buttonGoBack.setFont(new Font(null,Font.BOLD,25));
-		this.buttonGoBack.setFocusable(false);
-		this.buttonGoBack.setBounds(0, 0, 100, 100);
-		
 		this.buttonOpenAccount.setFont(new Font(null,Font.BOLD,25));
 		this.buttonOpenAccount.setFocusable(false);
 		this.buttonOpenAccount.addActionListener(this);
@@ -100,29 +86,16 @@ public class GUIMainMenu extends Frame implements GUIsetup, ActionListener
 		this.buttonCloseAccount.setFont(new Font(null,Font.BOLD,25));
 		this.buttonCloseAccount.setFocusable(false);
 		this.buttonCloseAccount.addActionListener(this);
+		
+		this.buttonLoan.setFont(new Font(null,Font.BOLD,25));
+		this.buttonLoan.setFocusable(false);
+		this.buttonLoan.addActionListener(this);
 	}
-	@Override
-	public void addPanel()
-	{
-		this.up.setBounds(0,0,600,200);
-		this.up.setLayout(null);
-		this.up.setBackground(new Color(241,247,255));
-		
-		
-		this.down.setBounds(0, 200, 600,800);
-		this.down.setLayout(new GridLayout(4,2,10,10));
-		this.down.setBackground(new Color(241,247,255));
-		
-		super.frame.add(up);
-		super.frame.add(down);
-	}
+
 	@Override
 	public void setPanel() 
 	{
-		this.up.add(this.labelTitle);
-		this.up.add(this.buttonGoBack);
-		
-		this.down.add(this.buttonOpenAccount);
+		super.down.add(this.buttonOpenAccount);
 		this.setButtonAppear();
 	}
 	public void setButtonAppear()
@@ -131,26 +104,27 @@ public class GUIMainMenu extends Frame implements GUIsetup, ActionListener
 		{
 			if(SavingAccountDao.getInstance().queryByUserId(uid) != null)
 			{
-				this.down.add(this.buttonSavingAccount);
+				super.down.add(this.buttonSavingAccount);
+				super.down.add(this.buttonLoan);
 			}
 			if(CheckingAccountDao.getInstance().queryByUserId(uid) != null)
 			{
-				this.down.add(this.buttonCheckingAccount);
+				super.down.add(this.buttonCheckingAccount);
 			}
 			if(StockAccountDao.getInstance().queryByUserId(uid) != null)
 			{
-				this.down.add(this.buttonStocks);
+				super.down.add(this.buttonStocks);
 			}
-			this.down.add(this.buttonCheckBalance);
-			this.down.add(this.buttonTransfer);
-			this.down.add(this.buttonCloseAccount);
+			super.down.add(this.buttonCheckBalance);
+			super.down.add(this.buttonTransfer);
+			super.down.add(this.buttonCloseAccount);
 		}
 	}
 	@Override
 	public void actionPerformed(ActionEvent e) 
 	{
 		super.frame.dispose();
-		if(e.getSource() == this.buttonGoBack)
+		if(e.getSource() == super.buttonGoBack)
 		{
 			new GUILoginPage();
 		}
@@ -187,6 +161,10 @@ public class GUIMainMenu extends Frame implements GUIsetup, ActionListener
 		{
 			//go to close account page
 			new GUICloseAccount(this.uid);
+		}
+		else if(e.getSource() == this.buttonLoan)
+		{
+			new GUILoan(this.uid);
 		}
 	}
 }

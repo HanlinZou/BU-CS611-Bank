@@ -73,8 +73,15 @@ public class GUIEditStock extends Frame
 					try
 					{
 						double price = Double.parseDouble(this.tfPrice.getText());
-						ManagerDao.getInstance().queryById(uid).adjustStockPriceByName((String)this.cbStockList.getSelectedItem(), price);
-						JOptionPane.showMessageDialog(null, "The new price has been registered into the system","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+						System.out.println(this.cbStockList.getSelectedItem());
+						if(ManagerDao.getInstance().queryById(uid).adjustStockPriceByName((String)this.cbStockList.getSelectedItem(), price))
+						{
+							JOptionPane.showMessageDialog(null, "The new price has been registered into the system","Confirmation",JOptionPane.INFORMATION_MESSAGE);
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "Please enter a value greater than 0 and less than 10000","Warning",JOptionPane.WARNING_MESSAGE);
+						}
 						this.tfPrice.setText("");
 					}
 					catch(NumberFormatException ex)

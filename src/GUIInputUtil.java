@@ -91,5 +91,23 @@ public class GUIInputUtil {
 		}
 		return result;
 	}
-
+	
+	public boolean inputStringSpaceCheck(String s)
+	{
+		if(s.equals("")||s == null)
+		{
+			return false;
+		}
+		else
+		{
+			for(int i = 0; i < s.length(); i++)
+			{
+				if(s.charAt(i) == ' ')
+				{
+					return false;
+				}
+			}
+			return true;
+		}
+	}
 }

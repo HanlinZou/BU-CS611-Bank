@@ -364,3 +364,6 @@ customer,362,1,2021-12-16 04:57:46,Stock: deposit 1000.0 CNY.
 customer,363,1,2021-12-16 04:57:46,Stock: withdraw 1000.0.
 customer,364,1,2021-12-16 04:57:46,Buy 100.0 share stock microsoft (id: 1; price: 10.2).
 customer,365,1,2021-12-16 04:57:46,Sell 50.5 share stock microsoft (id: 1; price: 80.2).
+manager,366,156,2021-12-16 07:28:45,Add a new loan ini loan:rate 5%/y
+manager,367,156,2021-12-16 07:42:08,Add a new loan second_loan (id: 3; interest rate: 0.6; value: 5000.0).
+manager,368,156,2021-12-16 07:53:17,Add a new loan new_loan (id: 4; interest rate: 0.33; value: 2222.0).

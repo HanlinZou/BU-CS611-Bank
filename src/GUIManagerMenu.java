@@ -122,7 +122,7 @@ public class GUIManagerMenu extends Frame
 		}
 		else if(e.getSource() == this.bAddLoan)
 		{
-			
+			new GUIAddLoan(this.uid);
 		}
 		else if(e.getSource() == this.bEditStock)
 		{
@@ -130,7 +130,7 @@ public class GUIManagerMenu extends Frame
 		}
 		else if(e.getSource() == this.bEditLoan)
 		{
-			
+			new GUIEditLoan(this.uid);
 		}
 	}
 
