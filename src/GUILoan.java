@@ -32,44 +32,50 @@ public class GUILoan extends Frame
 
 
 	@Override
-	public void actionPerformed(ActionEvent e)
-	{
+	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
-		if(e.getSource() == super.buttonGoBack)
-		{
+		if (e.getSource() == super.buttonGoBack) {
 			super.frame.dispose();
 			new GUIMainMenu(this.uid);
 		}
-		else if(e.getSource() == this.bApplyLoanl)
-		{
-			if(LoanDao.getInstance().getList() != null && LoanDao.getInstance().getList().size() > 0)
-			{
-				String[] loanList = new String[LoanDao.getInstance().getList().size()];
-				for(int i = 0; i < loanList.length; i++)
-				{
+
+		else if (e.getSource() == this.bApplyLoanl) {
+			if (LoanDao.getInstance().getList() != null && LoanDao.getInstance().getList().size() > 0) {
+				int numLoans = LoanDao.getInstance().getList().size();
+
+                String[] loanDisplayList = new String[numLoans];
+                String[] loanList = new String[numLoans];
+
+                for (int i = 0; i < loanList.length; i++) {
 					loanList[i] = LoanDao.getInstance().getList().get(i).getName();
+                    loanDisplayList[i] = LoanDao.getInstance().getList().get(i).displayString();
 				}
-				String select = (String)JOptionPane.showInputDialog(null,"Select a loan","loan",JOptionPane.QUESTION_MESSAGE,null,loanList,loanList[0]);
-				if(select != null && !select.equals(""))
-				{
+
+                String select = (String) JOptionPane.showInputDialog(null, "Select a loan", "loan", JOptionPane.QUESTION_MESSAGE, null, loanDisplayList, loanDisplayList[0]);
+
+                if (select != null && !select.equals("")) {
 					//proceed on grand the loan to customer
 					String collateral = JOptionPane.showInputDialog("Please provide a collateral");
-					if(collateral == null || collateral.equals(""))
-					{
+
+                    if (collateral == null || collateral.equals("")) {
 
 					}
-					else if(!GUIInputUtil.getInstance().inputStringSpaceCheck(collateral))
-					{
+
+                    else if(!GUIInputUtil.getInstance().inputStringSpaceCheck(collateral)) {
 						JOptionPane.showMessageDialog(null, "Please make sure it does not contain space", "Warning", JOptionPane.WARNING_MESSAGE);
 					}
-					else
-					{
-						CustomerDao.getInstance().queryById(this.uid).buyLoan(select, collateral);
-						JOptionPane.showMessageDialog(null, "Your loan request has been granded","Confirmation",JOptionPane.INFORMATION_MESSAGE);
-					}
 
+                    else {
+                        for (int i = 0; i < loanList.length; i++) {
+                            if (select.equals(loanDisplayList[i])) {
+                                CustomerDao.getInstance().queryById(this.uid).buyLoan(loanList[i], collateral);
+						        JOptionPane.showMessageDialog(null, "Your loan request has been granded", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                        }
+					}
 				}
 			}
+
 			else
 			{
 				JOptionPane.showMessageDialog(null, "Our bank does not offer any loan at this point","Warning",JOptionPane.WARNING_MESSAGE);
@@ -77,22 +83,31 @@ public class GUILoan extends Frame
 		}
 
 		else if (e.getSource() == this.bPayLoan) {
-			if (CustomerDao.getInstance().queryById(uid).getLoanNum() != 0) {
-				String[] loanList = new String[CustomerDao.getInstance().queryById(uid).getLoanList().size()];
+            Customer customer = CustomerDao.getInstance().queryById(uid);
 
-                for(int i = 0; i < loanList.length;i++) {
-					loanList[i] = CustomerDao.getInstance().queryById(uid).getLoanList().get(i).getName();
+			if (customer.getLoanNum() != 0) {
+				String[] loanList = new String[customer.getLoanNum()];
+                String[] loanDisplayList = new String[customer.getLoanNum()];
+
+                for (int i = 0; i < loanList.length; i++) {
+					loanList[i] = customer.getLoanList().get(i).getName();
+                    loanDisplayList[i] = customer.getLoanList().get(i).displayString();
 				}
 
-                String select = (String)JOptionPane.showInputDialog(null, "Select a loan", "loan", JOptionPane.QUESTION_MESSAGE, null, loanList, loanList[0]);
+                String select = (String) JOptionPane.showInputDialog(null, "Select a loan", "loan", JOptionPane.QUESTION_MESSAGE, null, loanDisplayList, loanDisplayList[0]);
 
                 if (select != null && !select.equals("")) {
-					if(CustomerDao.getInstance().queryById(this.uid).sellLoan(select)) {
-						JOptionPane.showMessageDialog(null, "You have paid off the loan", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
-					}
-					else {
-						JOptionPane.showMessageDialog(null, "Please make sure you have enough money in your account to pay off your loan", "Warning", JOptionPane.WARNING_MESSAGE);
-					}
+
+                    for (int i = 0; i < loanList.length; i++) {
+                        if (select.equals(loanDisplayList[i])) {
+                            if (customer.sellLoan(loanList[i])) {
+                                JOptionPane.showMessageDialog(null, "You have paid off the loan", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+                            }
+                            else {
+                                JOptionPane.showMessageDialog(null, "Please make sure you have enough money in your account to pay off your loan", "Warning", JOptionPane.WARNING_MESSAGE);
+                            }
+                        }
+                    }
 				}
 			} else {
 				JOptionPane.showMessageDialog(null, "You don't have loans", "Warning", JOptionPane.WARNING_MESSAGE);
@@ -108,8 +123,7 @@ public class GUILoan extends Frame
 
 
 	@Override
-	public void setButton()
-	{
+	public void setButton() {
 		// TODO Auto-generated method stub
 		this.bApplyLoanl.addActionListener(this);
 		this.bApplyLoanl.setFont(new Font(null,Font.BOLD,25));

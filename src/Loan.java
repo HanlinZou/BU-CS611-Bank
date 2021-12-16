@@ -54,6 +54,10 @@ public final class Loan extends BankObject {
         return "Loan: id='" + getID() + "', name='" + getName() + "', interest rate='" + interest + "', value='" + value + "'";
     }
 
+    public String displayString() {
+        return getName() + " (interest rate: " + interest + ", value: " + value + ")";
+    }
+
     @Override
     public String saveString() {
         return getID() + "," + getName() + "," + interest + "," + value;
