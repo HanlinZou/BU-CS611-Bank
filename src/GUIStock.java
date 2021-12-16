@@ -124,7 +124,7 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 		else if(e.getSource() == this.buttonCheckStock)
 		{
 			//view stock info
-			if(c.getStockAccount().getDao().getList().size() > 0)
+			if(c.getStockAccount().getDao().getList().size() > 0 && !c.getStockAccount().displayStocks().equals(""))
 			{
 				JOptionPane.showMessageDialog(null, c.getStockAccount().displayStocks(),"Information",JOptionPane.INFORMATION_MESSAGE);
 				JOptionPane.showMessageDialog(null, "<html>Accumulated profit: " + c.getStockAccount().getAccumulatedProfit()+"<br>Estimated profit: " + c.getStockAccount().calculateEstimatedProfit() + "</html>","Profit",JOptionPane.INFORMATION_MESSAGE);
@@ -137,21 +137,28 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 		else if(e.getSource() == this.buttonSell)
 		{
 			//go to sell stock
-			String stockToSell = GUIInputUtil.getInstance().customerStockSelect("Please select a Stock to sell", uid);
-			if(stockToSell != null)
+			if(c.getStockAccount().getDao().getList().size() > 0 && !c.getStockAccount().displayStocks().equals(""))
 			{
-				double numOfShare = GUIInputUtil.getInstance().moneyAmount("How many share do you wish to sell?");
-				if(numOfShare > 0)
+				String stockToSell = GUIInputUtil.getInstance().customerStockSelect("Please select a Stock to sell", uid);
+				if(stockToSell != null)
 				{
-					if(c.getStockAccount().sellStock(StockDao.getInstance().queryByName(stockToSell).getID(),numOfShare))
+					double numOfShare = GUIInputUtil.getInstance().moneyAmount("How many share do you wish to sell?");
+					if(numOfShare > 0)
 					{
-						JOptionPane.showMessageDialog(null, "Confirmation! " + numOfShare + " shares of " + stockToSell + " has sold","Sold Successfully",JOptionPane.INFORMATION_MESSAGE);
-					}
-					else
-					{
-						JOptionPane.showMessageDialog(null, "Failed, make sure you have these shares","Warning",JOptionPane.WARNING_MESSAGE);
+						if(c.getStockAccount().sellStock(StockDao.getInstance().queryByName(stockToSell).getID(),numOfShare))
+						{
+							JOptionPane.showMessageDialog(null, "Confirmation! " + numOfShare + " shares of " + stockToSell + " has sold","Sold Successfully",JOptionPane.INFORMATION_MESSAGE);
+						}
+						else
+						{
+							JOptionPane.showMessageDialog(null, "Failed, make sure you have these shares","Warning",JOptionPane.WARNING_MESSAGE);
+						}
 					}
 				}
+			}
+			else
+			{
+				JOptionPane.showMessageDialog(null, "You don't own any stock","Warning",JOptionPane.WARNING_MESSAGE);
 			}
 		}
 		else if(e.getSource() == this.buttonDeposit)
