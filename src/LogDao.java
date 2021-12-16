@@ -38,7 +38,7 @@ public final class LogDao extends Dao<Log> {
     }
 
     /**
-     * Given an user ID, returns all logs related to it.
+     * Given an user ID and type, returns all logs related to it.
      *
      * @param userType User type.
      * @param userId User ID.

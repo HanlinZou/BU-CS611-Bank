@@ -422,3 +422,6 @@ customer,420,14,2021-12-17 02:09:49,Saving: deposit 100.0 USD.
 customer,421,14,2021-12-17 02:09:59,Checking: deposit 100.0 USD (get 97.0 after fee).
 customer,422,14,2021-12-17 02:11:34,Close a saving account.
 customer,423,14,2021-12-17 02:12:10,Close a checking account.
+customer,424,13,2021-12-17 05:50:08,Sell 90.45 share stock microsoft (id: 1; price: 100.42).
+customer,425,13,2021-12-17 05:50:42,Buy 10.0 share stock microsoft (id: 1; price: 100.42).
+customer,426,13,2021-12-17 05:50:51,Sell 10.0 share stock microsoft (id: 1; price: 100.42).

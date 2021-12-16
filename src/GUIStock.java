@@ -121,18 +121,13 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 			}
 
 		}
-		else if(e.getSource() == this.buttonCheckStock)
-		{
-			//view stock info
-			if(c.getStockAccount().getDao().getList().size() > 0 && !c.getStockAccount().displayStocks().equals(""))
-			{
+		else if (e.getSource() == this.buttonCheckStock) {
+			// view stock info
+			if (c.getStockAccount().getDao().getList().size() > 0 && !c.getStockAccount().displayStocks().equals("")) {
 				JOptionPane.showMessageDialog(null, c.getStockAccount().displayStocks(),"Information",JOptionPane.INFORMATION_MESSAGE);
-				JOptionPane.showMessageDialog(null, "<html>Accumulated profit: " + c.getStockAccount().getAccumulatedProfit()+"<br>Estimated profit: " + c.getStockAccount().calculateEstimatedProfit() + "</html>","Profit",JOptionPane.INFORMATION_MESSAGE);
 			}
-			else
-			{
-				JOptionPane.showMessageDialog(null, "You don't own any stock","Warning",JOptionPane.WARNING_MESSAGE);
-			}
+
+            JOptionPane.showMessageDialog(null, "<html>Accumulated profit: " + c.getStockAccount().getAccumulatedProfit()+"<br>Estimated profit: " + c.getStockAccount().calculateEstimatedProfit() + "</html>","Profit",JOptionPane.INFORMATION_MESSAGE);
 		}
 		else if(e.getSource() == this.buttonSell)
 		{
