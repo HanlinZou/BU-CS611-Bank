@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 public final class StockAccount extends Account {
     public double balance;
@@ -241,6 +243,17 @@ public final class StockAccount extends Account {
         }
 
         return estimatedProfit;
+    }
+
+    /**
+     * Returns a list of stock objects.
+     *
+     * @return A list of loans.
+     */
+    public List<Stock> getLoanList() {
+        List<Stock> list = new ArrayList<>();
+        for (Stock stock : stock2share.keySet()) list.add(stock);
+        return list;
     }
 
     /**

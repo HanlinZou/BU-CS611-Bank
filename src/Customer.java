@@ -1,5 +1,7 @@
 import java.util.HashMap;
 import java.util.Map;
+import java.util.List;
+import java.util.ArrayList;
 
 public final class Customer extends User {
     private Map<Loan, String> loan2collateral;
@@ -293,6 +295,11 @@ public final class Customer extends User {
         return false;
     }
 
+    /**
+     * Returns a list of loans this account owns to be displayed on UI.
+     *
+     * @return A string containing loan information
+     */
     public String displayLoans() {
         String str = "";
 
@@ -306,6 +313,26 @@ public final class Customer extends User {
         }
 
         return str;
+    }
+
+    /**
+     * Returns a list of loan objects.
+     *
+     * @return A list of loans.
+     */
+    public List<Loan> getLoanList() {
+        List<Loan> list = new ArrayList<>();
+        for (Loan loan : loan2collateral.keySet()) list.add(loan);
+        return list;
+    }
+
+    /**
+     * Returns the number of loans this account owns.
+     *
+     * @return Loan number.
+     */
+    public int getLoanNum() {
+        return loan2collateral.keySet().size();
     }
 
     @Override
