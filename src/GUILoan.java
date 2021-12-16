@@ -67,7 +67,7 @@ public class GUILoan extends Frame {
                         for (int i = 0; i < loanList.length; i++) {
                             if (select.equals(loanDisplayList[i])) {
                                 CustomerDao.getInstance().queryById(this.uid).buyLoan(loanList[i], collateral);
-						        JOptionPane.showMessageDialog(null, "Your loan request has been granded", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
+						        JOptionPane.showMessageDialog(null, "Your loan request has been granted", "Confirmation", JOptionPane.INFORMATION_MESSAGE);
                             }
                         }
 					}
