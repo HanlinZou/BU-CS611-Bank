@@ -89,11 +89,11 @@ public final class Manager extends User {
      * @return true: success / false: failed
      */
     public boolean adjustStockPrice(Stock stock, double price) {
-        if (stock == null) return false;  // dublicate name
+        if (stock == null) return false;  // stock isn't exist
         if (price < 0 || price > 10000) return false;  // invalid price
+        new Log("manager", getID(), timer.getTimeStr(), "Stock " + stock.getName() + " (id: " + stock.getID() + ")'s price: " + stock.getPrice() + " -> " + price + ".");  // log
         stock.setPrice(price);
         stockDao.saveToDatabase();  // update database
-        new Log("manager", getID(), timer.getTimeStr(), "Stock " + stock.getName() + " (id: " + stock.getID() + ")'s price: " + stock.getPrice() + " -> " + price + ".");  // log
         return true;
     }
 
@@ -131,11 +131,47 @@ public final class Manager extends User {
      * @return true: success / false: failed
      */
     public boolean addLoan(String name, double interest, double value) {
-        if (loanDao.queryByName(name) != null) return false;  // dublicate name
+        if (loanDao.queryByName(name) != null) return false;  // duplicate name
         if (interest < 0 || interest > 1) return false;  // invalid interest
         if (value < 0 || value > 100000000) return false;  // invalid value
         Loan loan = new Loan(name, interest, value);
         new Log("manager", getID(), timer.getTimeStr(), "Add a new loan " + name + " (id: " + loan.getID() + "; interest rate: " + loan.getInterest() + "; value: " + loan.getValue() + ").");  // log
+        return true;
+    }
+
+    /**
+     * Adjusts a loan's interest rate.
+     *
+     * @param name Loan name.
+     * @param interest Loan's interest rate.
+     *
+     * @return true: success / false: failed
+     */
+    public boolean adjustLoanInterest(String name, double interest) {
+        Loan loan = loanDao.queryByName(name);  // loan isn't exist
+        if (loan == null) return false;
+        if (interest < 0 || interest > 1) return false;  // invalid interest
+        new Log("manager", getID(), timer.getTimeStr(), "Loan " + name + " (id: " + loan.getID() + ")'s interest: " + loan.getInterest() + " -> " + interest + ".");  // log
+        loan.setInterest(interest);
+        loanDao.saveToDatabase();  // update database
+        return true;
+    }
+
+    /**
+     * Adjusts a loan's value.
+     *
+     * @param name Loan name.
+     * @param value Loan's value.
+     *
+     * @return true: success / false: failed
+     */
+    public boolean adjustLoanValue(String name, double value) {
+        Loan loan = loanDao.queryByName(name);  // loan isn't exist
+        if (loan == null) return false;
+        if (value < 0 || value > 100000000) return false;  // invalid value
+        new Log("manager", getID(), timer.getTimeStr(), "Loan " + name + " (id: " + loan.getID() + ")'s value: " + loan.getValue() + " -> " + value + ".");  // log
+        loan.setValue(value);
+        loanDao.saveToDatabase();  // update database
         return true;
     }
 }

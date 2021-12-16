@@ -9,37 +9,37 @@ import javax.swing.JOptionPane;
 public class GUIStock extends Frame implements GUIsetup, ActionListener
 {
 	private String uid;
-	
+
 	private JButton buttonGoBack;
 	private JButton buttonPurchase;
 	private JButton buttonSell;
 	private JButton buttonCheckStock;
 	private JButton buttonDeposit;
-	
+
 	private JLabel labelTitle;
-	
+
 	public GUIStock(String uid)
 	{
 		super();
 		super.addPanel();
 		super.frame.setVisible(true);
-		
+
 		this.uid = uid;
-		
+
 		this.labelTitle = new JLabel();
-		
+
 		this.buttonGoBack = new JButton("Back");
 		this.buttonPurchase = new JButton("Purchase Stock Share");
 		this.buttonSell = new JButton("Sell Stock Share");
 		this.buttonCheckStock = new JButton("Check Stock/Profit");
 		this.buttonDeposit = new JButton("Deposit");
-		
+
 		this.setLabel();
 		this.setButton();
 		this.setPanel();
 	}
 	@Override
-	public void setLabel() 
+	public void setLabel()
 	{
 		this.labelTitle.setText("Stock Account");
 		this.labelTitle.setFont(new Font(null, Font.BOLD, 50));
@@ -47,29 +47,29 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 	}
 
 	@Override
-	public void setButton() 
+	public void setButton()
 	{
 		// TODO Auto-generated method stub
 		this.buttonGoBack.addActionListener(this);
 		this.buttonGoBack.setFont(new Font(null, Font.BOLD, 25));
 		this.buttonGoBack.setBounds(0, 0, 100, 100);
 		this.buttonGoBack.setFocusable(false);
-		
+
 		this.buttonPurchase.addActionListener(this);
 		this.buttonPurchase.setFont(new Font(null,Font.BOLD,25));
 		this.buttonPurchase.setBounds(150,250,300,100);
 		this.buttonPurchase.setFocusable(false);
-		
+
 		this.buttonCheckStock.addActionListener(this);
 		this.buttonCheckStock.setFont(new Font(null,Font.BOLD,25));
 		this.buttonCheckStock.setBounds(150, 550, 300, 100);
 		this.buttonCheckStock.setFocusable(false);
-		
+
 		this.buttonSell.addActionListener(this);
 		this.buttonSell.setFont(new Font(null,Font.BOLD,25));
 		this.buttonSell.setBounds(150, 400, 300, 100);
 		this.buttonSell.setFocusable(false);
-		
+
 		this.buttonDeposit.addActionListener(this);
 		this.buttonDeposit.setFont(new Font(null,Font.BOLD,25));
 		this.buttonDeposit.setBounds(150, 700, 300, 100);
@@ -77,7 +77,7 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 	}
 
 	@Override
-	public void setPanel() 
+	public void setPanel()
 	{
 		// TODO Auto-generated method stub
 		super.panel.add(this.labelTitle);
@@ -89,16 +89,16 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void actionPerformed(ActionEvent e)
 	{
-		
+
 		if(e.getSource() == this.buttonGoBack)
 		{
 			super.frame.dispose();
 			new GUIMainMenu(this.uid);
 		}
 		Customer c = CustomerDao.getInstance().queryById(uid);
-		
+
 		if(e.getSource() == this.buttonPurchase)
 		{
 			//go to deposit
@@ -108,8 +108,8 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 				double numOfShare = GUIInputUtil.getInstance().moneyAmount("How many share do you wish to buy?");
 				if(numOfShare > 0)
 				{
-					
-					if(c.getStockAccount().buyStock(StockDao.getInstance().queryByName(stockToPurchase).getID(),numOfShare))
+
+					if(c.getStockAccount().buyStock(stockToPurchase, numOfShare))
 					{
 						JOptionPane.showMessageDialog(null, "Confirmation! you have bought " + numOfShare + " shares of " + stockToPurchase + " stock","Purchase Successfully",JOptionPane.WARNING_MESSAGE);
 					}
@@ -119,7 +119,7 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 					}
 				}
 			}
-			
+
 		}
 		else if(e.getSource() == this.buttonCheckStock)
 		{
@@ -145,7 +145,7 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 					double numOfShare = GUIInputUtil.getInstance().moneyAmount("How many share do you wish to sell?");
 					if(numOfShare > 0)
 					{
-						if(c.getStockAccount().sellStock(StockDao.getInstance().queryByName(stockToSell).getID(),numOfShare))
+						if(c.getStockAccount().sellStock(stockToSell, numOfShare))
 						{
 							JOptionPane.showMessageDialog(null, "Confirmation! " + numOfShare + " shares of " + stockToSell + " has sold","Sold Successfully",JOptionPane.INFORMATION_MESSAGE);
 						}
@@ -179,6 +179,6 @@ public class GUIStock extends Frame implements GUIsetup, ActionListener
 			}
 		}
 	}
-	
-	
+
+
 }

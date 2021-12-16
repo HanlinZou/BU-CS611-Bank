@@ -140,13 +140,13 @@ public final class StockAccount extends Account {
     /**
      * Buys a stock.
      *
-     * @param stockId ID of the stock to be bought.
+     * @param name Name of the stock to be bought.
      * @param share How many share the account wants to buy.
      *
      * @return true: successful / false: fail
      */
-    public boolean buyStock(String stockId, double share) {
-        Stock stock = stockDao.queryById(stockId);
+    public boolean buyStock(String name, double share) {
+        Stock stock = stockDao.queryByName(name);
 
         if (stock == null) return false;  // wrong stockId
 
@@ -163,7 +163,7 @@ public final class StockAccount extends Account {
         this.balance -= spentMoney;
 
         getDao().saveToDatabase();  // update stock account database
-        new Log("customer", getUserId(), timer.getTimeStr(), "Buy " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Buy " + share + " share stock " + name + " (id: " + stock.getID() + "; price: " + stock.getPrice() + ").");  // log
 
         return true;
     }
@@ -171,13 +171,13 @@ public final class StockAccount extends Account {
     /**
      * Sells a stock.
      *
-     * @param stockId ID of the stock to sell.
+     * @param name Name of the stock to sell.
      * @param share How many share the account wants to sell.
      *
      * @return true: successful / false: fail
      */
-    public boolean sellStock(String stockId, double share) {
-        Stock stock = stockDao.queryById(stockId);
+    public boolean sellStock(String name, double share) {
+        Stock stock = stockDao.queryById(name);
 
         if (stock == null) return false;  // wrong stockId
 
@@ -202,7 +202,7 @@ public final class StockAccount extends Account {
         }
 
         getDao().saveToDatabase();  // update stock account database
-        new Log("customer", getUserId(), timer.getTimeStr(), "Sell " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Sell " + share + " share stock " + name + " (id: " + stock.getID() + "; price: " + stock.getPrice() + ").");  // log
 
         return true;
     }

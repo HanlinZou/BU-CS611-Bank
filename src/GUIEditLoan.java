@@ -13,36 +13,36 @@ public class GUIEditLoan extends Frame
 	private JComboBox cbLoanList;
 	private JTextField tfInterest;
 	private JTextField tfAmount;
-	
+
 	private JLabel lInterest;
 	private JLabel lAmount;
-	
+
 	private JButton bSubmit;
-	
+
 	public GUIEditLoan(String uid)
 	{
 		super();
 		super.addPanelResize(7, 1, 10, 10);
-		
+
 		this.uid = uid;
-		
+
 		this.cbLoanList = new JComboBox(this.getLoanList());
 		this.cbLoanList.setFont(new Font(null, Font.BOLD, 25));
 		this.cbLoanList.addActionListener(this);
 		this.cbLoanList.setPreferredSize(new Dimension(50,50));
-		
+
 		this.tfAmount = new JTextField();
 		this.tfInterest = new JTextField();
-		
+
 		this.lAmount = new JLabel();
 		this.lInterest = new JLabel();
-		
+
 		this.bSubmit = new JButton("Submit");
-		
+
 		this.setLabel();
 		this.setButton();
 		this.setPanel();
-		
+
 		super.frame.setVisible(true);
 	}
 	public String[] getLoanList()
@@ -54,6 +54,7 @@ public class GUIEditLoan extends Frame
 		}
 		return loanList;
 	}
+
 	@Override
 	public void actionPerformed(ActionEvent e) {
 		// TODO Auto-generated method stub
@@ -68,10 +69,10 @@ public class GUIEditLoan extends Frame
 	public void setLabel() {
 		// TODO Auto-generated method stub
 		super.lTitle.setText("          Edit Loan");
-		
+
 		this.lInterest.setText("Set a new interest");
 		this.lInterest.setFont(new Font(null, Font.BOLD, 25));
-		
+
 		this.lAmount.setText("Set new amount");
 		this.lAmount.setFont(new Font(null, Font.BOLD, 25));
 	}
