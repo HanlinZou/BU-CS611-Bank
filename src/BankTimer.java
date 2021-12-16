@@ -43,24 +43,46 @@ public class BankTimer implements Runnable {
         return ft.format(date);
     }
 
+    public int getYear() {
+        SimpleDateFormat ft = new SimpleDateFormat ("yyyy");
+        return Integer.parseInt(ft.format(date));
+    }
+
+    public int getMonth() {
+        SimpleDateFormat ft = new SimpleDateFormat ("MM");
+        return Integer.parseInt(ft.format(date));
+    }
+
+    public int getDay() {
+        SimpleDateFormat ft = new SimpleDateFormat ("dd");
+        return Integer.parseInt(ft.format(date));
+    }
+
     public void addObserver(TimerObserver timerObserver){
         observers.add(timerObserver);
     }
 
     @Override
     public void run() {
-        while(true){
+        while(true) {
             try {
-                Thread.sleep(configDao.getConfigInt("INTERVAL", 10) * 1000);  // update every 1 seconds
+                Thread.sleep(configDao.getConfigInt("INTERVAL", 1) * 1000);  // update every 1 seconds
             } catch (InterruptedException e) {
                 e.printStackTrace();
             }
 
+            int oldYear = getYear();
+            int oldMonth = getMonth();
+            int oldDay = getDay();
+
             date = new Date();
             System.out.println(getTimeStr() + " " + getTimeStamp());
 
-            for(TimerObserver observer : observers){
+            for (TimerObserver observer : observers) {
                 observer.onTimeChange();
+                if (getYear() != oldYear) observer.onYearChange();
+                if (getMonth() != oldMonth) observer.onMonthChange();
+                if (getDay() != oldDay) observer.onDayChange();
             }
         }
     }

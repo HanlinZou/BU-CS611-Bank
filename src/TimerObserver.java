@@ -5,4 +5,7 @@
  */
 public interface TimerObserver {
     void onTimeChange();
+    void onDayChange();
+    void onMonthChange();
+    void onYearChange();
 }

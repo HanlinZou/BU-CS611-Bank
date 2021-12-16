@@ -273,3 +273,31 @@ customer,271,15,2021-12-16 03:13:09,Close a checking account.
 manager,272,156,2021-12-16 03:52:53,Stock microsoft (id: 1)'s price: 10.2 -> 20.0.
 manager,273,156,2021-12-16 03:54:16,Stock microsoft (id: 1)'s price: 50.0 -> 50.0.
 manager,274,156,2021-12-16 03:54:16,Stock microsoft (id: 1)'s price: 10.2 -> 10.2.
+customer,275,13,2021-12-16 04:27:14,Saving: deposit 1000.0 HKD.
+customer,276,13,2021-12-16 04:27:14,Saving: deposit 1.0 USD.
+customer,277,13,2021-12-16 04:30:47,Saving: deposit 100.0 CNY.
+customer,278,13,2021-12-16 04:30:56,saving: withdraw 100.0 USD (cost 103.0 with fee).
+customer,279,1,2023-01-29 04:31:42,Saving: get interest: 1839.8774999999998 CNY; 3677.4123 USD; 5508.5241 HKD.
+customer,280,1,2023-01-29 04:31:42,Saving: get interest: 1839.8774999999998 CNY; 3677.4123 USD; 5508.5241 HKD.
+customer,281,8,2023-01-29 04:31:42,Saving: get interest: 0.0 CNY; 0.0 USD; 0.0 HKD.
+customer,282,9,2023-01-29 04:31:42,Saving: get interest: 0.0 CNY; 0.0 USD; 0.0 HKD.
+customer,283,10,2023-01-29 04:31:42,Saving: get interest: 0.0 CNY; 26730.0 USD; 0.0 HKD.
+customer,284,7,2023-01-29 04:31:42,Saving: get interest: 0.0 CNY; 0.0 USD; 0.0 HKD.
+customer,285,13,2023-01-29 04:31:42,Saving: get interest: 24.0 CNY; 2963.1648 USD; 30.0 HKD.
+customer,286,4,2023-01-29 04:31:42,Saving: get interest: 0.0 CNY; 149834.69999999998 USD; 0.0 HKD.
+customer,287,1,2024-02-29 04:31:55,Saving: get interest: 1895.0738999999999 CNY; 3787.7346000000002 USD; 5673.779699999999 HKD.
+customer,288,1,2024-02-29 04:31:55,Saving: get interest: 1895.0738999999999 CNY; 3787.7346000000002 USD; 5673.779699999999 HKD.
+customer,289,8,2024-02-29 04:31:55,Saving: get interest: 0.0 CNY; 0.0 USD; 0.0 HKD.
+customer,290,9,2024-02-29 04:31:55,Saving: get interest: 0.0 CNY; 0.0 USD; 0.0 HKD.
+customer,291,10,2024-02-29 04:31:55,Saving: get interest: 0.0 CNY; 27531.899999999998 USD; 0.0 HKD.
+customer,292,7,2024-02-29 04:31:55,Saving: get interest: 0.0 CNY; 0.0 USD; 0.0 HKD.
+customer,293,13,2024-02-29 04:31:55,Saving: get interest: 24.72 CNY; 3052.0596 USD; 30.9 HKD.
+customer,294,4,2024-02-29 04:31:55,Saving: get interest: 0.0 CNY; 154329.741 USD; 0.0 HKD.
+customer,295,1,2021-12-16 04:32:18,Saving: get interest: 1951.926 CNY; 3901.3665 USD; 5843.9931 HKD.
+customer,296,1,2021-12-16 04:32:18,Saving: get interest: 1951.926 CNY; 3901.3665 USD; 5843.9931 HKD.
+customer,297,8,2021-12-16 04:32:18,Saving: get interest: 0.0 CNY; 0.0 USD; 0.0 HKD.
+customer,298,9,2021-12-16 04:32:18,Saving: get interest: 0.0 CNY; 0.0 USD; 0.0 HKD.
+customer,299,10,2021-12-16 04:32:18,Saving: get interest: 0.0 CNY; 28357.857 USD; 0.0 HKD.
+customer,300,7,2021-12-16 04:32:18,Saving: get interest: 0.0 CNY; 0.0 USD; 0.0 HKD.
+customer,301,13,2021-12-16 04:32:18,Saving: get interest: 25.4616 CNY; 3143.6214 USD; 31.827 HKD.
+customer,302,4,2021-12-16 04:32:18,Saving: get interest: 0.0 CNY; 158959.6332 USD; 0.0 HKD.

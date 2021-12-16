@@ -3,7 +3,7 @@ import java.util.Map;
 import java.util.List;
 import java.util.ArrayList;
 
-public final class Customer extends User {
+public final class Customer extends User implements TimerObserver {
     private Map<Loan, String> loan2collateral;
 
     private SavingAccount savingAccount;
@@ -333,6 +333,29 @@ public final class Customer extends User {
      */
     public int getLoanNum() {
         return loan2collateral.keySet().size();
+    }
+
+    @Override
+    public void onTimeChange() {
+        // pass
+    }
+
+    @Override
+    public void onDayChange() {
+        // pass
+    }
+
+    @Override
+    public void onMonthChange() {
+        // pass
+    }
+
+    /**
+     * Sells loans automatically.
+     */
+    @Override
+    public void onYearChange() {
+        for (Loan loan : loan2collateral.keySet()) sellLoan(loan.getName());
     }
 
     @Override

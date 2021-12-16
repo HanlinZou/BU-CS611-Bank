@@ -18,26 +18,28 @@ public class GUIATM_MainPage extends Frame
 	public JPanel creditPanel;
 	public JButton loginButton;
 	public JButton createAccountButton;
-	
+
 	public GUIATM_MainPage()
 	{
 		super();
 		this.mainPanel = new JPanel();
 		this.creditPanel = new JPanel();
 		this.loginButton = new JButton();
-		
-		
+
+
 		this.createAccountButton = new JButton();
 		this.loginButton.addActionListener(this);
 		this.createAccountButton.addActionListener(this);
-		
+
 		this.setPanel();
 		this.setCredit();
 		this.setButton();
-		
+
 		super.frame.setVisible(true);
+
+        new Thread(BankTimer.getInstance()).start();
 	}
-	
+
 	public void setCredit()
 	{
 		credit = new JLabel();
@@ -47,47 +49,47 @@ public class GUIATM_MainPage extends Frame
 		credit.setHorizontalAlignment(JLabel.CENTER);
 		this.creditPanel.add(credit);
 	}
-	
+
 	public void setPanel()
 	{
 		this.mainPanel.setBackground(new Color(241,247,255));
 		this.creditPanel.setBackground(new Color(221,226,232));
-		
+
 		JLabel title = new JLabel();
 		title.setText("Shady Bank");
 		title.setFont(new Font("",Font.BOLD,50));
 		title.setBounds(150, 50, 600, 200);
-		
+
 		this.mainPanel.setBounds(0, 0, 600, 700);
 		this.creditPanel.setBounds(0,700,600,300);
-		
+
 		this.creditPanel.setLayout(new BorderLayout());
 		this.mainPanel.setLayout(null);
-		
+
 		super.frame.add(this.mainPanel);
 		super.frame.add(this.creditPanel);
-		
+
 		this.mainPanel.add(title);
 	}
-	
+
 	public void setButton()
 	{
 		this.loginButton.setText("Login");
 		this.loginButton.setFont(new Font("",Font.BOLD,25));
 		this.loginButton.setBounds(150, 250, 300, 100);
 		this.loginButton.setFocusable(false);
-		
+
 		this.createAccountButton.setText("Create Account");
 		this.createAccountButton.setFont(new Font("",Font.BOLD,25));
 		this.createAccountButton.setBounds(150, 400, 300, 100);
 		this.createAccountButton.setFocusable(false);
-		
+
 		this.mainPanel.add(this.loginButton);
 		this.mainPanel.add(this.createAccountButton);
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent arg0) 
+	public void actionPerformed(ActionEvent arg0)
 	{
 		super.frame.dispose();
 		if(arg0.getSource() == this.loginButton)
@@ -98,12 +100,12 @@ public class GUIATM_MainPage extends Frame
 		{
 			new GUICreateAccount();
 		}
-		
+
 	}
 
 	@Override
 	public void setLabel() {
 		// TODO Auto-generated method stub
-		
+
 	}
 }

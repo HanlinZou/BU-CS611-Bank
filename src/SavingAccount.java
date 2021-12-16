@@ -73,11 +73,21 @@ public final class SavingAccount extends BasicAccount implements TimerObserver {
         return false;
     }
 
+    @Override
+    public void onTimeChange() {
+        // pass
+    }
+
+    @Override
+    public void onDayChange() {
+        // pass
+    }
+
     /**
      * Adds interest to this account every config.INTERVAL seconds.
      */
     @Override
-    public void onTimeChange() {
+    public void onMonthChange() {
         double rate = configDao.getConfigDouble("RATE", 0.003);
 
         double cny = rate * getCNYBalance();
@@ -90,6 +100,11 @@ public final class SavingAccount extends BasicAccount implements TimerObserver {
 
         getDao().saveToDatabase();  // update database for this acount
         new Log("customer", getUserId(), timer.getTimeStr(), "Saving: get interest: " + cny + " CNY; " + usd + " USD; " + hkd + " HKD.");  // log
+    }
+
+    @Override
+    public void onYearChange() {
+        // pass
     }
 
     @Override
