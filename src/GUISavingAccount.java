@@ -143,7 +143,7 @@ public class GUISavingAccount extends Frame implements GUIsetup, ActionListener
 		else if(e.getSource() == this.buttonTransaction)
 		{
 			String result = "<html>";
-			for (Log s : LogDao.getInstance().queryByUserTypeAndId("customer", uid)) {
+			for (Log s : LogDao.getInstance().queryByAccount(uid, "saving")) {
 				result += s.displayString() + "<br>";
 			}
 			result += "</html>";

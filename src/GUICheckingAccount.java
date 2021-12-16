@@ -145,11 +145,10 @@ public class GUICheckingAccount extends Frame implements GUIsetup, ActionListene
 				}
 			}
 		}
-		else if(e.getSource() == this.buttonTransaction)
-		{
+		else if(e.getSource() == this.buttonTransaction) {
 			//view transaction
 			String result = "<html>";
-			for (Log s : LogDao.getInstance().queryByUserTypeAndId("customer", uid)) {
+			for (Log s : LogDao.getInstance().queryByAccount(uid, "checking")) {
 				result += s.displayString() + "<br>";
 			}
 			result += "</html>";

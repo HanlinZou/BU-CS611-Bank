@@ -169,7 +169,7 @@ public final class StockAccount extends Account {
         this.balance = Double.parseDouble(String.format("%.2f", this.balance));
 
         getDao().saveToDatabase();  // update stock account database
-        new Log("customer", getUserId(), timer.getTimeStr(), "Buy " + share + " share stock " + name + " (id: " + stock.getID() + "; price: " + stock.getPrice() + ").");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Stock: buy " + share + " share stock " + name + " (id: " + stock.getID() + "; price: " + stock.getPrice() + ").");  // log
 
         return true;
     }
@@ -210,7 +210,7 @@ public final class StockAccount extends Account {
         }
 
         getDao().saveToDatabase();  // update stock account database
-        new Log("customer", getUserId(), timer.getTimeStr(), "Sell " + share + " share stock " + name + " (id: " + stock.getID() + "; price: " + stock.getPrice() + ").");  // log
+        new Log("customer", getUserId(), timer.getTimeStr(), "Stock: sell " + share + " share stock " + name + " (id: " + stock.getID() + "; price: " + stock.getPrice() + ").");  // log
 
         return true;
     }

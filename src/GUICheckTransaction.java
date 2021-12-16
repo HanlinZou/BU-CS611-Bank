@@ -18,7 +18,7 @@ public class GUICheckTransaction extends Frame
 	{
 		super();
 		super.addPanelResize(6, 1, 20, 20);
-		
+
 		this.c = null;
 		this.uid = uid;
 		this.lcustomerInfo = new JLabel();
@@ -29,7 +29,7 @@ public class GUICheckTransaction extends Frame
 		this.setLabel();
 		this.setButton();
 		this.setPanel();
-		
+
 		super.frame.setVisible(true);
 	}
 	public String[] getCustomerList()
@@ -42,7 +42,7 @@ public class GUICheckTransaction extends Frame
 		return this.customerList;
 	}
 	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void actionPerformed(ActionEvent e)
 	{
 		if(e.getSource() == super.buttonGoBack)
 		{
@@ -65,23 +65,23 @@ public class GUICheckTransaction extends Frame
 			{
 				JOptionPane.showMessageDialog(null, result,"Information",JOptionPane.INFORMATION_MESSAGE);
 			}
-			
-			
+
+
 		}
 	}
 
 	@Override
-	public void setLabel() 
+	public void setLabel()
 	{
 		// TODO Auto-generated method stub
 		super.lTitle.setText("  Check Transaction");
-		
+
 		this.lcustomerInfo.setFont(new Font(null, Font.BOLD, 50));
 		this.lcustomerInfo.setPreferredSize(new Dimension(600,750));
 	}
 
 	@Override
-	public void setButton() 
+	public void setButton()
 	{
 		// TODO Auto-generated method stub
 	}

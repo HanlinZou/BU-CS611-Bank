@@ -57,6 +57,28 @@ public final class LogDao extends Dao<Log> {
     }
 
     /**
+     * Given an user ID and type, returns all logs related to it.
+     *
+     * @param userId User ID.
+     * @param accountType Account type.
+     *
+     * @return A list of Log objects.
+     */
+    public List<Log> queryByAccount(String userId, String accountType) {
+        List<Log> allLogList = getList();
+        List<Log> logList = new ArrayList<>();
+
+        for (Log log : allLogList) {
+            if (log.getUserId().equals(userId) && log.getLogType().equals("customer")) {
+                String[] parsedLog = log.getLog().split(":");
+                if (parsedLog.length > 0 && parsedLog[0].equalsIgnoreCase(accountType)) logList.add(log);
+            }
+        }
+
+        return logList;
+    }
+
+    /**
      * Returns all logs generated in today.
      *
      * @return A list of Log objects.
