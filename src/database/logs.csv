@@ -66,3 +66,16 @@ customer,64,4,2021-12-16 03:05:13,Stock: deposit 500.0 USD.
 customer,65,4,2021-12-16 03:05:13,Saving: transfer 500.0 USD from saving to stock.
 customer,66,4,2021-12-16 03:05:13,But 1.0 share stock microsoft (id: 1; price: 10.2).
 customer,67,4,2021-12-16 03:05:13,Sell 1.0 share stock microsoft (id: 1; price: 10.2).
+manager,68,156,2021-12-16 10:40:47,Stock tencent (id: 5)'s price: 50.0 -> 100.0.
+customer,69,13,2021-12-16 10:47:43,Open a stock account and deposit 1000.0 USD.
+customer,70,13,2021-12-16 10:47:43,But 50.0 share stock microsoft (id: 1; price: 10.2).
+customer,71,13,2021-12-16 10:47:43,Sell 50.0 share stock microsoft (id: 1; price: 10.2).
+customer,72,13,2021-12-16 11:14:25,But 50.0 share stock microsoft (id: 1; price: 10.2).
+customer,73,13,2021-12-16 11:14:25,Sell 50.0 share stock microsoft (id: 1; price: 10.2).
+customer,74,13,2021-12-16 11:15:53,But 10.0 share stock microsoft (id: 1; price: 10.2).
+customer,75,13,2021-12-16 11:15:53,Sell 10.0 share stock microsoft (id: 1; price: 10.2).
+customer,76,13,2021-12-16 11:16:42,But 10.0 share stock microsoft (id: 1; price: 10.2).
+customer,77,13,2021-12-16 11:16:42,Sell 10.0 share stock microsoft (id: 1; price: 10.2).
+customer,78,13,2021-12-16 11:16:42,But 40.0 share stock microsoft (id: 1; price: 10.2).
+customer,79,13,2021-12-16 11:16:42,Sell 20.0 share stock microsoft (id: 1; price: 10.2).
+customer,80,13,2021-12-16 11:16:42,Sell 20.0 share stock microsoft (id: 1; price: 10.2).

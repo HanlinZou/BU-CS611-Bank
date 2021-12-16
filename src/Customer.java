@@ -78,7 +78,8 @@ public final class Customer extends User {
             new Log("customer", getID(), timer.getTimeStr(), "Open a saving account; cost 10.0 USD as fee.");  // log
             return true;
         }
-        else System.out.println("You already have a saving account.");return false;
+        else System.out.println("You already have a saving account.");
+        return false;
     }
 
     /**
@@ -106,7 +107,7 @@ public final class Customer extends User {
         	System.out.println("You need to close your stock account first");
          	return -1;
         }
-           
+
     }
 
     /**
@@ -144,7 +145,7 @@ public final class Customer extends User {
             new Log("customer", getID(), timer.getTimeStr(), "Close a checking account.");  // log
             return 1;
         }
-        else 
+        else
         {
         	System.out.println("You idiot owe me money. I can't let you close your account.");
         	return 0;

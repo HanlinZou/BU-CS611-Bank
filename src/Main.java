@@ -8,7 +8,7 @@ public class Main  {
 	public static void main(String[] args) {
         // Test test = new Test();
         // test.testAll();
-      //  new GUIATM_MainPage();
-		new GUIEditStock("156");
+        new GUIATM_MainPage();
+		// new GUIEditStock("156");
 	}
 }

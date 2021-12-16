@@ -6,36 +6,37 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
 
-public class GUITransfer extends Frame implements GUIsetup, ActionListener 
+public class GUITransfer extends Frame implements GUIsetup, ActionListener
 {
 	private String uid;
-	
+
 	private JLabel labelTitle;
-	
+
 	private JButton buttonGoBack;
 	private JButton bSaving2Checking;
 	private JButton bChecking2Saving;
-	
+
 	public GUITransfer(String uid)
 	{
 		super();
 		super.addPanel();
 		super.frame.setVisible(true);
-		
+
 		this.uid = uid;
-		
+
 		this.labelTitle = new JLabel();
-		
+
 		this.buttonGoBack = new JButton("Back");
 		this.bSaving2Checking = new JButton("Saving to Checking");
 		this.bChecking2Saving = new JButton("Checking to Saving");
-		
+
 		this.setButton();
 		this.setLabel();
 		this.setPanel();
 	}
+
 	@Override
-	public void setLabel() 
+	public void setLabel()
 	{
 		// TODO Auto-generated method stub
 		this.labelTitle.setText("Transfer");
@@ -44,14 +45,14 @@ public class GUITransfer extends Frame implements GUIsetup, ActionListener
 	}
 
 	@Override
-	public void setButton() 
+	public void setButton()
 	{
 		// TODO Auto-generated method stub
 		this.buttonGoBack.addActionListener(this);
 		this.buttonGoBack.setFont(new Font(null, Font.BOLD, 25));
 		this.buttonGoBack.setBounds(0, 0, 100, 100);
 		this.buttonGoBack.setFocusable(false);
-		
+
 		this.bSaving2Checking.addActionListener(this);
 		this.bSaving2Checking.setFont(new Font(null,Font.BOLD,25));
 		this.bSaving2Checking.setBounds(150,250,300,100);
@@ -74,10 +75,10 @@ public class GUITransfer extends Frame implements GUIsetup, ActionListener
 	}
 
 	@Override
-	public void actionPerformed(ActionEvent e) 
+	public void actionPerformed(ActionEvent e)
 	{
 		// TODO Auto-generated method stub
-		
+
 		if(e.getSource() == this.buttonGoBack)
 		{
 			super.frame.dispose();
@@ -113,7 +114,7 @@ public class GUITransfer extends Frame implements GUIsetup, ActionListener
 					if(type != null)
 					{
 						double amount = GUIInputUtil.getInstance().moneyAmount("How much do you wish to transfer?");
-						
+
 						if(amount > 0)
 						{
 							if(c.getCheckingAccount().transfer(c.getSavingAccount(), amount, type))
@@ -133,7 +134,7 @@ public class GUITransfer extends Frame implements GUIsetup, ActionListener
 				JOptionPane.showMessageDialog(null, "Please make sure you have both saving and checking account open","Causion",JOptionPane.INFORMATION_MESSAGE);
 			}
 		}
-		
+
 	}
 
 }

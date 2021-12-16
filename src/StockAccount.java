@@ -182,16 +182,22 @@ public final class StockAccount extends Account {
         double oldShare = stock2share.getOrDefault(stock, 0.0);
         double oldMoney = stock2money.getOrDefault(stock, 0.0);
 
-        if(oldShare < share) return false;  // no enough share
+        if (oldShare < share) return false;  // no enough share
 
+        double newShare = oldShare - share;
         double gainMoney = share * stock.getPrice();
 
-        stock2share.put(stock, oldShare - share);  // update current share
+        stock2share.put(stock, newShare);  // update current share
         stock2money.put(stock, oldMoney - gainMoney);  // update spent money
         this.balance += gainMoney;  // update current balance
 
         double pricePerShare = oldShare == 0 ? 0 : oldMoney / oldShare;
         this.accumulatedProfit += share * (stock.getPrice() - pricePerShare); // update accumulated profit
+
+        if (newShare == 0) { // remove stock if sell out
+            stock2share.remove(stock);
+            stock2money.remove(stock);
+        }
 
         getDao().saveToDatabase();  // update stock account database
         new Log("customer", getUserId(), timer.getTimeStr(), "Sell " + share + " share stock " + stock.getName() + " (id: " + stockId + "; price: " + stock.getPrice() + ").");  // log
@@ -205,7 +211,7 @@ public final class StockAccount extends Account {
     public String displayStocks() {
         String str = "";
 
-        for (Stock stock : stock2share.keySet()) 
+        for (Stock stock : stock2share.keySet())
         {
             double share = stock2share.get(stock);
             double money = stock2money.get(stock);
@@ -250,7 +256,7 @@ public final class StockAccount extends Account {
         return num;
     }
 
-    public String toString(){
+    public String toString() {
         return "Stock Account: \nBalance: $" + balance + "\nNum of stocks: " + getStockNum() +
             "\nEstimated Profit: $" + calculateEstimatedProfit() + "\nAccumulated Profit: $" + accumulatedProfit;
     }
