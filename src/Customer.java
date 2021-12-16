@@ -29,9 +29,9 @@ public final class Customer extends User implements TimerObserver {
      */
     public Customer(String name, String password) {
         super("customer", name, password);
-        setID(customerDao.getNewId());  // generates a new id
+        setID(getDao().getNewId());  // generates a new id
         loan2collateral = new HashMap<>();  // creates a new loan map
-        customerDao.addToDatabase(this);   // add to database
+        getDao().addToDatabase(this);   // add to database
 
         savingAccount = null;
         checkingAccount = null;
