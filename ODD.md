@@ -6,7 +6,7 @@
 
 - **Hanlin Zou** (hzou7@bu.edu, U96634471)
 - **Xiansong Li** (xiansong@bu.edu, U55619815)
-- **Xiaohan Zou** (zxh@bu.edum, U18269004)
+- **Xiaohan Zou** (zxh@bu.edu, U18269004)
 
 
 
@@ -102,10 +102,16 @@ We furthur explain the mechanism and details of these classes in Section 4.
   <img src="./images/timer.jpg" alt="object" style="zoom:67%;" />
 
 - **TimeObserver:** Observer Pattern: Objects that require time (for example, objects which handle interest) should implement TimeObserver interface to receive notice when time changes.
+
 - **DatabaseFile:** The class create a database file.
+
 - **DatabaseFileProxy:** Uses Proxy Pattern to handle the real DatabaseFile object for avoiding creating File instance duplicate.
+
 - **FileInterface:** Interface of DatabaseFile IO.
+
 - **FileIo:** A static utility class for handling file IO.
+
+<img src="./images/fileio.jpg" alt="object" style="zoom:67%;" />
 
 
 
@@ -129,6 +135,8 @@ Data Access Object (DAO) classes serve as the backend of the software. They hand
 - **StockAccountDao:** StockAccountDao class use Data Access Object Pattern to provide a data accessing API for saving and loading stock account data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of stock account related DAO class.
 - **StockDao:** StockDao class use Data Access Object Pattern to provide a data accessing API for saving and loading stock data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of stock related DAO class.
 - **UserDao:** UserDao class use Data Access Object Pattern to provide a data accessing API for saving and loading user data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of user related DAO class.
+
+
 
 
 ### 3.5 GUI
