@@ -108,3 +108,11 @@ GUI Files:
 20. GUIsetup: Interface file for GUI labels, buttons and panels.
 21. GUIStock: GUI of stock account pages.
 22. GUITransfer: GUI of transfer between saving and checking
+
+Bonus
+================================
+1. We designed and implemented a colorful and fancy UI.
+2. We provided a natural and smooth user experience.
+3. We used meaningful and suitable design patterns in this project to improve the OOD.
+4. The input is getting parsed from the input files and is not hard coded.
+5. We wrote detailed comments following the practice of Javadoc.
