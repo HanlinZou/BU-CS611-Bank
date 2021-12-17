@@ -66,6 +66,10 @@ We draw show the relationships between entity objects by brief description and s
 
 
 
+![object](./images/user-account.jpg)
+
+
+
 
 
 - **Others**
@@ -90,6 +94,10 @@ We draw show the relationships between entity objects by brief description and s
   - **USD:** One instance of currency. Stands for US Dollar.
 
   - **HKD:** One instance of currency. Stands for Hong Kong Dollar.
+  
+    
+
+<img src="./images/currency.jpg" alt="object" style="zoom:67%;" />
 
 
 

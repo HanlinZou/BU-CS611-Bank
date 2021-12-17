@@ -19,10 +19,15 @@ Tested on Windows Intelli J. After running Main, Bank GUI will show up.
 
 Class Description
 ================================
+
 Config files:
+
 1. config.csv: Stores the exchange rate between three currencies and interest rate of loans.
+
 -----------------------------------------------------
+
 Database CSV files:
+
 1. checking_accounts.csv: Stores all data of checking_accounts created by customers. Including checking account id, owner id, and balance of three currencies.
 2. customers.csv: Stores all data of all customers. Including user id, login name, login password, and loans
 3. loans.csv: Stores all data of all loans created by manager. Including loan id, loan name, loan interest rate, and the value that customer can get.
@@ -31,8 +36,11 @@ Database CSV files:
 6. saving_accounts.csv: Stores all data of saving_accounts created by customers. Including saving account id, owner id, and balance of three currencies.
 7. stock_accounts.csv: Stores all data of stock accounts created by customers. Including stock account id, owner id, balance of US Dollar, and realized and unrealized profit.
 8. stocks.csv: Stores all data of stocks created by managers. Including stock id, name, and current price
+
 ------------------------------------------------------
+
 Java Files:
+
 1. Account: An abstract class of accounts in this project. Abstract of saving, checking and stock account.
 2. BankObject: An abstract class of objects that provided by bank, such as loans and stocks.
 3. BankTimer: It helps access current time.
@@ -46,18 +54,21 @@ Java Files:
 11. FileInterface: Interface of DatabaseFile IO.
 12. FileIo: A static utility class for handling file IO.
 13. HKD: One instance of currency. Stands for Hong Kong Dollar.
-14. Loan: Class of loans. A BankObject class. Includes all features of loans.
-15. Log: Class to acess and update log files in database.
+14. Loan: Includes all features of a loan, inherits from BankObject class.
+15. Log: Serves as transaction object, contains transaction ID, transaction time, transaction details, etc.
 16. Main: main class to initiate the program.
 17. Manager: The class that stands for manager of this project. Including all features that a manager can do in a bank.
 18. SavingAccount: The class of saving accounts. Includes all features that a saving account can do. Includes but no limited: deposit, withdraw, transfer, currency exchange.
-19. Stock: Instance class of a stock. Includes all features of a stock.
+19. Stock: Includes all features of a stock, inherits from BankObject class.
 20. StockAccount: The class of stock accounts. Includes all features that a saving account can do. Includes but no limited: buy stock, sell stock and check profit.
 21. TimeObserver: Observer Pattern: Objects that require time (for example, objects which handle interest) should implement TimeObserver interface to receive notice when time changes.
 22. USD: One instance of currency. Stands for US Dollar.
-23. User: An abstract class of cutomer and manager.
+23. User: An abstract class of cutomer and manager, should be extended bu Customer and Manager class.
+
 ------------------------------------------------------
+
 Database Java Files:
+
 1. AccountDao: AccountDao class use Data Access Object Pattern to provide a data accessing API for saving and loading account data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of account related DAO class.
 2. CheckingAccountDao: CheckingAccountDao class use Data Access Object Pattern to provide a data accessing API for saving and loading checking account data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of checking account related DAO class.
 3. ConfigDao: ConfigDao class use Data Access Object Pattern to provide a data accessing API for saving and loading Config data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of Config related DAO class.
@@ -70,8 +81,11 @@ Database Java Files:
 10. StockAccountDao: StockAccountDao class use Data Access Object Pattern to provide a data accessing API for saving and loading stock account data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of stock account related DAO class.
 11. StockDao: StockDao class use Data Access Object Pattern to provide a data accessing API for saving and loading stock data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of stock related DAO class.
 12. UserDao: UserDao class use Data Access Object Pattern to provide a data accessing API for saving and loading user data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of user related DAO class.
+
 -------------------------------------------------------
+
 GUI Files:
+
 1. Frame: Frame of the GUI. Size, color buttons etc.
 2. GUIAddLoan: GUI of process of manager adding a loan into database.
 3. GUIAddStock: GUI of process of manager adding a stock into database.

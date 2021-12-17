@@ -1,3 +1,7 @@
+/**
+ * An abstract class of accounts in this project. Abstract of saving, checking and stock account.
+ */
+
 public abstract class Account extends BankObject {
     private String type;
     private String userId;

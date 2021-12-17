@@ -1,4 +1,8 @@
-public abstract class BankObject {
+/**
+ * An abstract class of objects that provided by bank, such as loans and stocks.
+ */
+
+ public abstract class BankObject {
     private String id;
     private String name;
 
