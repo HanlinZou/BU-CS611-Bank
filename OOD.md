@@ -10,77 +10,76 @@
 
 
 
-## 2. Class Description and Diagrams
+## 2. Overview
 
-We draw some simple class diagrams to show the relationships between entity objects. For simplicity, we emit some of the attributes and operations of the classes.
+This software serves as a bank and offers options for users to create or login a customer or manager account. Customers can deposit and withdraw money, transfer money to one account from another, buy and sell stocks, see the transactions, etc. Managers are able to add and edit stocks and loans, check details of all users, etc.
+
+Our persistence mechanism is implemented by storing data in CSV files. The GUI is built with java swing.
 
 
 
-### 2.1 Main
+## 3. Class Description and Diagrams
+
+We draw show the relationships between entity objects by brief description and simple class diagrams. For simplicity, we omit some of the attributes and operations of the classes.
+
+
+
+
+### 3.1 Main
 
 - **Main:** main class to initiate the program.
 
 
 
-### 2.2 Entities
+### 3.2 Entities
 
-- **BankObject:** An abstract class of objects that provided by bank, such as loans and stocks.
+- **BankObject:** An abstract class of all objects which need to be stored in database that provided by bank, such as users, accounts, loans, stocks, etc.
 
   
-
+  
   ![object](./images/object.svg)
-
   
-
+  
+  
 - **Accounts**
 
   - **Account:** An abstract class of accounts in this project. Abstract of saving, checking and stock account.
-
   - **BasicAccount:** An abstract class of saving and checking accounts.
-
   - **CheckingAccount:** The class of checking accounts. Includes all features that a checking account can do. Includes but no limited: deposit, withdraw, transfer, currency exchange.
-
   - **StockAccount:** The class of stock accounts. Includes all features that a saving account can do. Includes but no limited: buy stock, sell stock and check profit.
-
   - **SavingAccount:** The class of saving accounts. Includes all features that a saving account can do. Includes but no limited: deposit, withdraw, transfer, currency exchange.
 
-    
+  
 
-    ![object](./images/account.svg)
+  
+  ![object](./images/account.svg)
 
 
 
 - **User**
 
-  - **User:** An abstract class of cutomer and manager.
+  - **User:** An abstract class of cutomer and manager, should be extended bu Customer and Manager class.
 
   - **Manager:** The class that stands for manager of this project. Including all features that a manager can do in a bank.
 
   - **Customer:** The class that stands for customer of this project. Including all features that a customer can do in a bank ATM and accounts variables.
 
-  
 
-  ![object](./images/user.svg)
-
-​	
-
-![object](./images/customer.svg)
 
 
 
 - **Others**
 
-  - **Log:** Class to acess and update log files in database.
+  - **Log:** Serves as transaction object, contains transaction ID, transaction time, transaction details, etc.
+  - **Loan:** Includes all features of a loan, inherits from BankObject class.
+  - **Stock:** Includes all features of a stock, inherits from BankObject class.
 
-  - **Loan:** Class of loans. A BankObject class. Includes all features of loans.
 
-  - **Stock:** Instance class of a stock. Includes all features of a stock.
 
-    
 
-    ![object](./images/stock.svg)
+![object](./images/stock.svg)
 
-    
+
 
 - **Currency**
 
@@ -94,13 +93,15 @@ We draw some simple class diagrams to show the relationships between entity obje
 
 
 
-### 2.3 Helpers
+### 3.3 Helpers
 
-We furthur explain the details of these classes in Section 4.
+We furthur explain the mechanism and details of these classes in Section 4.
 
 - **BankTimer:** Implements the Runnable interface, uses Singleton Pattern and Observer Pattern to help access current time.
-- **TimeObserver:** Observer Pattern: Objects that require time (for example, objects which handle interest) should implement TimeObserver interface to receive notice when time changes.
 
+  <img src="./images/timer.jpg" alt="object" style="zoom:67%;" />
+
+- **TimeObserver:** Observer Pattern: Objects that require time (for example, objects which handle interest) should implement TimeObserver interface to receive notice when time changes.
 - **DatabaseFile:** The class create a database file.
 - **DatabaseFileProxy:** Uses Proxy Pattern to handle the real DatabaseFile object for avoiding creating File instance duplicate.
 - **FileInterface:** Interface of DatabaseFile IO.
@@ -108,12 +109,15 @@ We furthur explain the details of these classes in Section 4.
 
 
 
-### 2.4 Database
+### 3.4 Data Access Objects
 
-We furthur explain the details of classes related database in Section 4.
+Data Access Object (DAO) classes serve as the backend of the software. They handles all database IO operations so that other objects can access data source easily without knowing the low level details. We furthur explain the mechanism and details of classes related to database in Section 4.
+
+  ![object](./images/dao.jpg)
+
+
 
 - **Dao:** Abstract class of all other Dao classes.
-
 - **AccountDao:** AccountDao class use Data Access Object Pattern to provide a data accessing API for saving and loading account data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of account related DAO class.
 - **CheckingAccountDao:** CheckingAccountDao class use Data Access Object Pattern to provide a data accessing API for saving and loading checking account data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of checking account related DAO class.
 - **ConfigDao:** ConfigDao class use Data Access Object Pattern to provide a data accessing API for saving and loading Config data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of Config related DAO class.
@@ -127,37 +131,70 @@ We furthur explain the details of classes related database in Section 4.
 - **UserDao:** UserDao class use Data Access Object Pattern to provide a data accessing API for saving and loading user data. It also uses Singleton Pattern to ensure it has only one instance. It's the super class of all instances of user related DAO class.
 
 
-
-### 2.5 GUI
+### 3.5 GUI
 
 - **Frame:** Frame of the GUI. Size, color buttons etc.
+
+  <img src="./images/gui4.jpg" alt="object" style="zoom:67%;" />
+
+
 - **GUIAddLoan:** GUI of process of manager adding a loan into database.
+
 - **GUIAddStock:** GUI of process of manager adding a stock into database.
+
 - **GUIATM_MainPage:** GUI of Main page when project initially launches.
+
 - **GUIBalance:** GUI of balance page showing balance of all accounts of a customer.
+
 - **GUICheckCustomer:** GUI of process of manager checking a specific customer's information.
+
 - **GUICheckingAccount:** GUI of checking account with its features.
+
 - **GUICheckTransaction:** GUI of process of manager checking a specific customer's transaction history.
+
 - **GUICloseAccount:** GUI of process of customer close his/her account.
+
 - **GUICreateAccount:** GUI of process of customer create a new account.
+
 - **GUIEditLoan:** GUI of process of manager editting an existed loan.
+
 - **GUIEditStock:** GUI of process of manager ediiting an existed stock.
+
 - **GUIInputUtil:** GUI of pop-up windows that asks for users' inputs.
+
 - **GUILoan:** GUI of loans.
+
 - **GUILoginPage:** GUI of login page for user to login as customer or staff.
+
 - **GUIMainMenu:** GUI of Main menu that displays after successful login.
+
 - **GUIManagerMenu:** GUI of Main menu that displays after manager successful login.
+
 - **GUIOpenAccount:** GUI of process of customer creating an account.
+
 - **GUISavingAccount:** GUI of saving account with its features.
+
 - **GUIsetup:** Interface file for GUI labels, buttons and panels.
+
 - **GUIStock:** GUI of stock account pages.
+
 - **GUITransfer:** GUI of transfer between saving and checking
 
+  ![object](./images/gui1.jpg)
+  
+  
+  
+  <img src="./images/gui2.jpg" alt="object" style="zoom:67%;" />
+  
+  
+  
+  <img src="./images/gui3.jpg" alt="object" style="zoom:67%;" />
 
 
-## 3. Database and Configuration Files
 
-### 3.1 Database
+## 4. Database and Configuration Files
+
+### 4.1 Database
 
 We make our data persistent by storing them in `csv` files (see `src/database/` folder):
 
@@ -187,15 +224,15 @@ For each account, we save it with the ID of user which it belongs to. In this wa
 
 
 
-### 3.2 Configuration File
+### 4.2 Configuration File
 
 We make options like exchange rate and interest rate configurable by storing them in a `csv` file (see `src/configs/config.csv`). Our code will load options from configuration file automatically. In this way, people can edit these options in the configuration file easily.
 
 
 
-## 4. Some of the Design Patterns
+## 5. Some of the Design Patterns
 
-### 4.1 Proxy Pattern
+### 5.1 Proxy Pattern
 
 Class `DatabaseFile` handles file creating and fetching. While `DatabaseFileProxy` is a wrapper of the real  `DatabaseFile` object which implements additional functionality to check if the file has already been created and fetched. In this way, a client (a Data Access Object class) can can elegantly avoid creating file instance duplicately when accessing `DatabaseFile`.
 
@@ -205,7 +242,7 @@ Class `DatabaseFile` handles file creating and fetching. While `DatabaseFileProx
 
 
 
-### 4.2 Data Access Object Pattern
+### 5.2 Data Access Object Pattern
 
 To handle database file (`csv`) IO elegantly, we uses Data Access Object pattern to provide data accessing APIs for saving and loading data without exposing details of the database. We implements a Data Access Object (DAO) class for each entity that should be saved into the database, including Stock class, Log class, Config class, Loan class, all types of User classes and all types of Account classes.
 
@@ -236,7 +273,7 @@ All IO operations have been encapsulated into `StockDao` class, so `Manager` doe
 
 
 
-### 4.3 Observer Pattern
+### 5.3 Observer Pattern
 
 We add interest to customers' saving accounts every month and prompt customers to pay off their loans after one year. So we need a way to computing time and notice related objects (like `SavingAccount`) continually.
 
@@ -286,7 +323,7 @@ public class BankTimer implements Runnable {
 
 
 
-### 4.4 Singleton Pattern
+### 5.4 Singleton Pattern
 
 Every DAO class also uses Singleton Pattern to ensure it has only one instance. Here we also take `StockDao` as an example. We hide the contructor of the `StockDao` class by:
 
@@ -313,8 +350,3 @@ private StockDao stockDao = StockDao.getInstance();
 ```
 
 `BankTimer` (a class for handling time continually) also uses Singleton Pattern, because only one `BankTimer` object is required in the whole system, of course.
-
-
-
-
-
